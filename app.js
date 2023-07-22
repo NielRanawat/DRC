@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
-
+// me kala
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 const path = require('path')
