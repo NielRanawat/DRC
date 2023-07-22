@@ -1,6 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #F8F9FA;
+
 }
 
 .bg-color
@@ -92,4 +93,51 @@ h4
 .card{
     width: 25rem;
     margin-right: 2rem;
+}
+
+
+/* footer  */
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+  }
+  .footer h5 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .footer li {
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+  }
+  .footer li:last-child {
+    margin-right: 0;
+  }
+  .footer li:hover {
+    transform: translateY(-5px);
+  }
+  .footer a {
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  .footer a:hover {
+    color: #ff3366;
+  }
+
+#cards{
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+#carousel{
+    padding-left: 4%;
+    padding-right: 4%;
 }

@@ -1,61 +1,64 @@
 <%- include("partial/header") -%>
 
 <%- include("partial/navbar") -%>
-
   <!-- Carousel -->
 <body>
 
-  <div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <!-- <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-        aria-label="Slide 3"></button> -->
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img
-          src="https://substackcdn.com/image/fetch/w_1280,h_720,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8e403da-6c22-4cda-8171-ee7577710891_4096x2731.jpeg"
-          class="carousel-img" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="font-weight: 800;" class="carouselH">F1's Track Limit saga</h5>
-          <p style="font-weight: 200;" class="carouselP">Where did F1 go wrong with Track Limits in Austria and how can it take Inspiration from MotoGP and develop a solution to the track limit policing issues it faced.</p>
-        </div>
+  <section id="carousel">
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <!-- <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button> -->
       </div>
-      <div class="carousel-item">
-        <img
-          src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F282d3208-0840-4c3c-a6d2-62e2103e6240_1125x633.png"
-          class="carousel-img" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 class="carouselH">DRC's Hungarian GP Preview</h5>
-          <p style="width: fit-content;" class="carouselP">F1 heads to Hungaroring, the track reputed as "Monaco without walls". From Ricciardo's return, Red Bull upgrades, the fight for P2 and cost cop rumours here's Desi Racing Co's preview for Hungarian GP</p>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            src="https://substackcdn.com/image/fetch/w_1280,h_720,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8e403da-6c22-4cda-8171-ee7577710891_4096x2731.jpeg"
+            class="carousel-img" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 style="font-weight: 800;" class="carouselH">F1's Track Limit saga</h5>
+            <p style="font-weight: 200;" class="carouselP">Where did F1 go wrong with Track Limits in Austria and how can it take Inspiration from MotoGP and develop a solution to the track limit policing issues it faced.</p>
+          </div>
         </div>
+        <div class="carousel-item">
+          <img
+            src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F282d3208-0840-4c3c-a6d2-62e2103e6240_1125x633.png"
+            class="carousel-img" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="carouselH">DRC's Hungarian GP Preview</h5>
+            <p style="width: fit-content;" class="carouselP">F1 heads to Hungaroring, the track reputed as "Monaco without walls". From Ricciardo's return, Red Bull upgrades, the fight for P2 and cost cop rumours here's Desi Racing Co's preview for Hungarian GP</p>
+          </div>
+        </div>
+        <!-- <div class="carousel-item">
+          <img
+            src="https://substackcdn.com/image/fetch/w_320,h_213,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58905004-3692-4308-b42a-2dca9f080c04_781x370.png"
+            class="carousel-img" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="carouselH">Third slide label</h5>
+            <p class="carouselP">Some representative placeholder content for the third slide.</p>
+          </div>
+        </div> -->
       </div>
-      <!-- <div class="carousel-item">
-        <img
-          src="https://substackcdn.com/image/fetch/w_320,h_213,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58905004-3692-4308-b42a-2dca9f080c04_781x370.png"
-          class="carousel-img" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 class="carouselH">Third slide label</h5>
-          <p class="carouselP">Some representative placeholder content for the third slide.</p>
-        </div>
-      </div> -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+  
+  </section>
 
+  
   <!-- Cards -->
-
-  <h4>Also Explore</h4>
+<section id="cards">
+  <h4 style="margin-bottom: 2rem; margin-top: 4rem;">Also Explore</h4>
   
   <div class="row justify-content-center">
     <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
@@ -143,4 +146,6 @@
     </div>
   </div>
 </div>
+</section>
+  
   <%- include("partial/footer") -%>
