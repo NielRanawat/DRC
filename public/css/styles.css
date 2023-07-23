@@ -69,6 +69,13 @@ h4
     {
         width: 100%;
     }
+
+    .carousel-caption
+    {
+        color:white;
+        line-height: 2vw;
+        text-shadow: 0px 0px 15px black;
+    }
 }
 
 .carouselH
