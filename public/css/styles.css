@@ -10,16 +10,6 @@ body {
     
 }
 
-.carousel-img
-{
-    /* position: relative; */
-    /* left: 24%; */
-    /* width: 48rem; */
-    height: 40rem;
-    width: 100%;
-    /* text-align: center; */
-}
-
 .give-border
 {
     border-top: 0.2rem;
@@ -67,34 +57,34 @@ h4
     }
 }
 
-.carousel-img {
-    /* position: relative; */
-    /* left: 24%; */
-    /* width: 48rem; */
+.carousel-img 
+{
     height: 36%;
     width: 64%;
-    /* text-align: center; */
 }
 
-
+@media (max-width : 768px)
+{
+    .carousel-img
+    {
+        width: 100%;
+    }
+}
 
 .carouselH
 {
-    font-size: 4rem;
+    font-size: 4vw;
 }
-
-
 
 .carouselP
 {
-    font-size: 2rem;
+    font-size: 2vw;
 }
 
 .card{
     width: 25rem;
     margin-right: 2rem;
 }
-
 
 /* footer  */
 
