@@ -93,6 +93,14 @@ h4
     margin-right: 2rem;
 }
 
+.card-date{
+    font-size: 10px;
+}
+.card-img{
+    width: 310px;
+    height: 180px;
+}
+
 /* footer  */
 
 .footer {
@@ -107,11 +115,10 @@ h4
   .footer ul {
     list-style: none;
     padding: 0;
-    display: flex;
+
     justify-content: center;
   }
   .footer li {
-    margin-right: 15px;
     transition: transform 0.3s ease;
   }
   .footer li:last-child {
