@@ -52,11 +52,15 @@ h4
         padding-left: 1.25rem;
         padding-right: 1.25rem;
         color: black;
-        background-color:#c0c0c0;
+        background-color:#eeeeee;
         text-align: right;
     }
 }
 
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
 .carousel-img 
 {
     height: 36%;
