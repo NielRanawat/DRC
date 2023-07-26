@@ -39,28 +39,7 @@ h4
     padding: 2rem;
 }
 
-@media (min-width : 768px)
-{
-    .carousel-caption {
-        position: absolute;
-        right: 0px;
-        bottom: 0%;
-        top: 0;
-        left: 64%;
-        padding-top: 1.25rem;
-        padding-bottom: 1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        color: black;
-        background-color:#eeeeee;
-        text-align: right;
-    }
-}
 
-.carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
-}
 .carousel-img 
 {
     height: 36%;
@@ -91,6 +70,13 @@ h4
 {
     font-size: 2vw;
 }
+
+.carouselLink{
+  color: white;
+  text-decoration: none;
+}
+
+
 
 .card{
     width: 25rem;
@@ -158,4 +144,29 @@ h4
 #carousel{
     padding-left: 4%;
     padding-right: 4%;
+}
+
+@media (min-width : 768px)
+{
+    .carousel-caption {
+        position: absolute;
+        right: 0px;
+        bottom: 0%;
+        top: 0;
+        left: 64%;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        color: black;
+        background-color:#eeeeee;
+        text-align: right;
+    }
+    .carouselLink{
+      text-decoration: none;
+      color: black;
+    }
+    .carouselLink:hover{
+      color: #0008C1;
+    }
 }
