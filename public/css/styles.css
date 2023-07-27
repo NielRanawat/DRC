@@ -146,6 +146,12 @@ h4
     padding-right: 4%;
 }
 
+/* Login */
+.whiteBG
+{
+  background-color: white;
+}
+
 @media (min-width : 768px)
 {
     .carousel-caption {
