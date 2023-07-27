@@ -170,3 +170,28 @@ h4
       color: #0008C1;
     }
 }
+
+/* article-page styling */
+
+.articleContent{
+  margin-top: 2rem;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.s-twitter,.s-wtp,.s-linkd{
+  color: black;
+  margin-right: 7px;
+}
+
+.s-twitter:hover {
+  color: #00acee;
+}
+
+.s-wtp:hover {
+  color: #25D366;
+}
+.s-linkd:hover {
+  color: #0A66C2;
+}
+
