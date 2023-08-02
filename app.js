@@ -53,6 +53,14 @@ app.get('/register' , (req,res) => {
     res.render('register');
 });
 
+app.get('/admin' , (req,res) => {
+    res.render('admin');
+});
+
+app.post("/" , (req , res) => {
+    console.log(req.body);
+})
+
 app.post("/addpost" , (req , res) => {
     const newPost = new Post({
         title : req.body.title,

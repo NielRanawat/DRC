@@ -152,6 +152,12 @@ h4
   background-color: white;
 }
 
+/* Admin */
+.givePadding
+{
+  padding: 5rem;
+}
+
 @media (min-width : 768px)
 {
     .carousel-caption {
