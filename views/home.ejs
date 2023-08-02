@@ -62,80 +62,26 @@
   <h4 style="margin-bottom: 2rem; margin-top: 4rem;">Also Explore</h4>
   
   <div class="row justify-content-center">
-    <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
-      <div class="card shadow h-100 mx-auto" style="width: 20rem;">
-        <div class="p-1">
-          <img alt="..." src="https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2022/06/16130514/Daniel-Ricciardo-and-Zak-Brown-shake-hands-planetF1.jpg" class="card-img">
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <!-- Title -->
-          <h3 class="h4">McLaren clarify Daniel Ricciardo contract situation after Red Bull trigger sudden F1 return</h3>
-          <!-- Subtitle -->
-          <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
-          <!-- <p class="mt-4 mb-6">
-            McLaren boss Zak Brown confirmed that the team are not, as Sky F1’s Martin Brundle put it...
-          </p> -->
-          <a style="margin-top: 1rem;" href="/get-arcticles/" class="btn btn-sm btn-dark">
-            Read more
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
-      <div class="card shadow h-100 mx-auto" style="width: 20rem;">
-        <div class="p-1">
-          <img alt="..." src="https://media.formula1.com/image/upload/f_auto/q_auto/v1690125119/fom-website/2023/Hungary/verstappen-win-hungary-2023-1.png.transform/6col-retina/image.png" class="card-img">
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <!-- Title -->
-          <h3 class="h4">Verstappen dominates Hungarian GP to give Red Bull a record 12th successive win</h3>
-          <!-- Subtitle -->
-          <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
-          <a style="margin-top: 1rem;" href="#" class="btn btn-sm btn-dark">
-            Read more
-          </a>
+    <% foundPost.forEach((post) => { %>
+      <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
+        <div class="card shadow h-100 mx-auto" style="width: 20rem;">
+          <div class="p-1">
+            <img alt="..." src="https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2022/06/16130514/Daniel-Ricciardo-and-Zak-Brown-shake-hands-planetF1.jpg" class="card-img">
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <!-- Title -->
+            <h3 class="h4"><%= post.title %></h3>
+            <!-- Subtitle -->
+            <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
+            <a style="margin-top: 1rem;" href="/get-arcticles/" class="btn btn-sm btn-dark">
+              Read more
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
-      <div class="card shadow h-100 mx-auto" style="width: 20rem;">
-        <div class="p-1">
-          <img alt="..." src="https://cdn-4.motorsport.com/images/amp/6zQdGx7Y/s1200/winner-max-verstappen-red-bull.webp" class="card-img">
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <!-- Title -->
-          <h3 class="h4">Norris blames Verstappen over $45,000 F1 winner’s trophy breakage</h3>
-          <!-- Subtitle -->
-          <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
-          <a style="margin-top: 1rem;" href="#" class="btn btn-sm btn-dark">
-            Read more
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
-      <div class="card shadow h-100 mx-auto" style="width: 20rem;">
-        <div class="p-1">
-          <img alt="..." src="https://cdn.crash.net/styles/large_article/s3/pa/3315489.0008.jpg" class="card-img">
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <!-- Title -->
-          <h3 class="h4">Honda admit: “Alex Rins considering an offer to join Yamaha”</h3>
-          <!-- Subtitle -->
-          <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
-          <a style="margin-top: 1rem;" href="#" class="btn btn-sm btn-dark">
-            Read more
-          </a>
-        </div>
-      </div>
-    </div>
+    <% }) %>
+   
   </div>
 </div>
 </section>
