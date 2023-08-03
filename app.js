@@ -5,9 +5,11 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
+const lodash = require("lodash");
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-const path = require('path')
+const path = require('path');
+const { url } = require("inspector");
 app.use(express.static(path.join(__dirname, 'public')))
 
 // MongoDB
@@ -26,7 +28,7 @@ const connectDB = async () => {
 const postSchema = new mongoose.Schema({
     title : {type : String , require : true},
     content : {type : String , require : true},
-    tags : []
+    // img : {type : String , require : true}
 });
 
 const Post = new mongoose.model("Post" , postSchema);
@@ -41,9 +43,19 @@ app.get("/" , function(req , res){
     })
 });
 
-app.get('/article' , (req,res) => {
-    res.render('article');
-});
+app.get('/get-arcticles/:title' , (req,res) => {
+    Post.find((err , foundPost) => {
+        if(err){
+            console.log(err);
+        }else{
+            foundPost.forEach((post) => {
+                if(lodash.lowerCase(post.title) == lodash.lowerCase(req.params.title)){
+                    res.render("article" , {title : post.title , content : post.content});
+                }
+            });
+        }
+    });
+})
 
 app.get('/login' , (req,res) => {
     res.render('login');
@@ -57,26 +69,20 @@ app.get('/admin' , (req,res) => {
     res.render('admin');
 });
 
-app.post("/" , (req , res) => {
-    console.log(req.body);
-})
-
 app.post("/addpost" , (req , res) => {
     const newPost = new Post({
         title : req.body.title,
         content : req.body.content,
-        tags : ["Kewis hamilton" , "kakaka"]
+        // img : req.body.image
     })
     newPost.save((err) => {
-        if(err)
-        {
+        if(err){
             console.log(err);
-        }
-        else
-        {
+        }else{
             console.log("Saved");
         }
     });
+    res.redirect("/");
 });
 
 connectDB().then(() => {
