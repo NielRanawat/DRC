@@ -36,6 +36,7 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuAvatar"
             >
+            <% if(loggedIn){ %>              
               <li>
                 <a class="dropdown-item" href="/account">My profile</a>
               </li>
@@ -45,6 +46,11 @@
               <li>
                 <a class="dropdown-item" href="/logout">Logout</a>
               </li>
+            <% }else{ %>
+              <li>
+                <a class="dropdown-item" href="/login">Login/Sign-up</a>
+              </li>
+            <% } %>
             </ul>
           </div>
         </div>
