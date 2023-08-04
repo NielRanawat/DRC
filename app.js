@@ -43,19 +43,13 @@ app.get("/" , function(req , res){
     })
 });
 
-app.get('/get-arcticles/:title' , (req,res) => {
-    Post.find((err , foundPost) => {
-        if(err){
-            console.log(err);
-        }else{
-            foundPost.forEach((post) => {
-                if(lodash.lowerCase(post.title) == lodash.lowerCase(req.params.title)){
-                    res.render("article" , {title : post.title , content : post.content});
-                }
-            });
+app.get('/get-arcticles/:article_id' , (req,res) => {
+    Post.findOne({_id : req.params.article_id} , function(err , foundPost){
+        if (!err) {
+            res.render("article" , {foundPost : foundPost});
         }
     });
-})
+});
 
 app.get('/login' , (req,res) => {
     res.render('login');
@@ -78,11 +72,11 @@ app.post("/addpost" , (req , res) => {
     newPost.save((err) => {
         if(err){
             console.log(err);
-        }else{
+        } else{
             console.log("Saved");
+            res.redirect("/");
         }
     });
-    res.redirect("/");
 });
 
 connectDB().then(() => {
