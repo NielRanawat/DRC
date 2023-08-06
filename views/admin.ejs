@@ -1,19 +1,20 @@
 <%- include("partial/header") -%>
 <body class="givePadding">
     <form action="/addpost" method="post">
+        <h2 class="display-3 mb-3">Add a Post</h2>
         <div class="form-group mb-3">
             <label>Title</label>
             <input type="text" name="title" class="form-control" required autofocus>
         </div>
-        <!-- <div class="form-group mb-3">
-            <label>Image</label>
-            <input type="url" name="image" class="form-control" required autofocus>
-        </div> -->
+        <div class="form-group mb-3">
+            <label>Image URL</label>
+            <input type="url" name="img_url" class="form-control" required autofocus>
+        </div>
         <div class="form-group mb-3">
             <label>Post</label>
             <textarea class="form-control" name="content" rows="3"></textarea>
         </div>
-        <label>Heading ?</label>
+        <label>Is Heading?</label>
         <select name="isHeading" class="form-select mb-3" aria-label="Default select example">
             <option selected disabled value="">Select a option</option>
             <option value="true">Yes</option>

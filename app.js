@@ -58,8 +58,11 @@ passport.deserializeUser(User.deserializeUser());
 const postSchema = new mongoose.Schema({
     title : {type : String , require : true},
     content : {type : String , require : true},
-    // img : {type : String , require : true}
+    img_url : {type : String , require : true},
+},{
+    timestamps: true
 });
+
 
 const Post = new mongoose.model("Post" , postSchema);
 
@@ -101,7 +104,6 @@ app.get("/logout" , (req , res) => {
 })
 
 app.get("/" , function(req , res){
-    
     Post.find({} , (err , foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
@@ -146,7 +148,7 @@ app.post("/addpost" , (req , res) => {
             const newPost = new Post({
                 title : req.body.title,
                 content : req.body.content,
-                // img : req.body.image
+                img_url : req.body.img_url
             });
             newPost.save((err) => {
                 if(err){

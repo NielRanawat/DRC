@@ -66,14 +66,17 @@
       <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
         <div class="card shadow h-100 mx-auto" style="width: 20rem;">
           <div class="p-1">
-            <img alt="..." src="https://d3cm515ijfiu6w.cloudfront.net/wp-content/uploads/2022/06/16130514/Daniel-Ricciardo-and-Zak-Brown-shake-hands-planetF1.jpg" class="card-img">
+            <img alt="..." src="<%= post.img_url %>" class="card-img">
           </div>
           <!-- Card Body -->
           <div class="card-body">
             <!-- Title -->
             <h3 class="h4"><%= post.title %></h3>
             <!-- Subtitle -->
-            <span class="card-date d-block text-muted text-sm font-semibold">Monday Jan 20 , 2021</span>
+            <% const day = (post.createdAt).getDate(); %>
+            <% const month = (post.createdAt).toLocaleString('default', { month: 'short' }); %>
+            <% const year = (post.createdAt).getFullYear(); %>
+            <span class="card-date d-block text-muted text-sm font-semibold">Published at <%= day %> <%= month %> <%= year %></span>
             <a style="margin-top: 1rem;" href="/get-arcticles/<%= post._id %>" class="btn btn-sm btn-dark">
               Read more
             </a>
