@@ -158,30 +158,6 @@ h4
   padding: 5rem;
 }
 
-@media (min-width : 768px)
-{
-    .carousel-caption {
-        position: absolute;
-        right: 0px;
-        bottom: 0%;
-        top: 0;
-        left: 64%;
-        padding-top: 1.25rem;
-        padding-bottom: 1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        color: black;
-        background-color:#eeeeee;
-        text-align: right;
-    }
-    .carouselLink{
-      text-decoration: none;
-      color: black;
-    }
-    .carouselLink:hover{
-      color: #0008C1;
-    }
-}
 
 /* article-page styling */
 
@@ -207,3 +183,26 @@ h4
   color: #0A66C2;
 }
 
+@media (min-width : 768px){
+    .carousel-caption {
+        position: absolute;
+        right: 0px;
+        bottom: 0%;
+        top: 0;
+        left: 64%;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        color: black;
+        background-color:#eeeeee;
+        text-align: right;
+    }
+    .carouselLink{
+      text-decoration: none;
+      color: black;
+    }
+    .carouselLink:hover{
+      color: #0008C1;
+    }
+}

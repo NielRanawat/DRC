@@ -119,11 +119,12 @@ app.get("/" , function(req , res){
 
 app.get('/get-arcticles/:article_id' , (req,res) => {
     Post.findOne({_id : req.params.article_id} , function(err , foundPost){
+        const content = foundPost.content.split("\n");
         if (!err) {
             if(req.isAuthenticated()){
-                res.render("article" , {foundPost : foundPost , loggedIn : true});
+                res.render("article" , {foundPost : foundPost , content : content , loggedIn : true});
             }else{
-                res.render("article" , {foundPost : foundPost , loggedIn : false});
+                res.render("article" , {foundPost : foundPost , content : content , loggedIn : false});
             }
         }
     });
