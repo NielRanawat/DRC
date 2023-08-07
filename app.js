@@ -59,6 +59,7 @@ const postSchema = new mongoose.Schema({
     title : {type : String , require : true},
     content : {type : String , require : true},
     img_url : {type : String , require : true},
+    author_name : {type : String , require : true}
 },{
     timestamps: true
 });
@@ -149,7 +150,8 @@ app.post("/addpost" , (req , res) => {
             const newPost = new Post({
                 title : req.body.title,
                 content : req.body.content,
-                img_url : req.body.img_url
+                img_url : req.body.img_url,
+                author_name : req.body.author_name
             });
             newPost.save((err) => {
                 if(err){

@@ -183,7 +183,15 @@ h4
   color: #0A66C2;
 }
 
+.articlePadding{
+  padding-left: 2%;
+}
+
 @media (min-width : 768px){
+  .articlePadding{
+    padding-left: 10%;
+    padding-right: 10%;
+  }
     .carousel-caption {
         position: absolute;
         right: 0px;

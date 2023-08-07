@@ -1,6 +1,7 @@
 <%- include("partial/header") -%>
 <body class="givePadding">
     <form action="/addpost" method="post">
+        <h1 class="text-center" style="font-size: 4rem;">Admin Portal</h1>
         <h2 class="display-3 mb-3">Add a Post</h2>
         <div class="form-group mb-3">
             <label>Title</label>
@@ -15,11 +16,36 @@
             <textarea class="form-control" name="content" rows="3"></textarea>
         </div>
         <label>Is Heading?</label>
-        <select name="isHeading" class="form-select mb-3" aria-label="Default select example">
+        <select id="headingOption" onchange="myFunction()" name="isHeading" class="form-select mb-3">
             <option selected disabled value="">Select a option</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group mb-3">
+            <label style="display: none;" id="cHead">Carousel Heading</label>
+            <input hidden id="carouselHeading" type="text" name="carousel-heading" class="form-control" required autofocus>
+        </div>  
+        <div class="form-group mb-3">
+            <label>Author Name</label>
+            <input type="text" name="author_name" class="form-control" required autofocus>
+        </div>
+       
+        <div class="mb-3">
+            <button type="submit" class="btn btn-lg btn-dark">Submit</button>
+        </div>
     </form>
 </body>
+
+<script>
+
+function myFunction(){
+    const a = $('#headingOption option:selected').text();
+    if (a === "Yes"){
+        $('#cHead').show();
+        $("#carouselHeading").prop('hidden', false);
+    } else {
+        $('#cHead').hide();
+        $("#carouselHeading").prop('hidden', true);
+    }
+}
+</script>

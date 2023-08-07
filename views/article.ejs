@@ -3,12 +3,12 @@
 <%- include("partial/navbar") -%>
 <body>
   
-    <section>
+    <section class="articlePadding">
 
         <div style="margin-top: 2rem;" class="container">
             <h1 style="font-weight: 600; margin-bottom: 1.2rem;"><%= foundPost.title %></h1>
-            <span style="margin-bottom: 20rem;">21 Jul 2023 2:40PM</span>
-            <div style="text-align: left; margin-top: 1rem;" >
+            <span style="margin-bottom: 20rem;">By <%= foundPost.author_name %> | 21 Jul 2023 2:40PM</span>
+            <div style="text-align: left; margin-top: 1rem; padding-right: 10%;" >
                 <img class="img-fluid" src="<%= foundPost.img_url %>" alt="">
             </div>
 
@@ -26,10 +26,10 @@
                 </div>
                 <div class="text-center" style="margin-top: 1rem;">
                     <a class="s-twitter" href=
-                        "https://twitter.com/share?url=http://localhost:3000/article?id=2323232" target="_blank"><i class="fab fa-xl fa-twitter"></i>
+                        "https://twitter.com/share?url=http://localhost:3000/get-arcticles/<%= foundPost._id %>" target="_blank"><i class="fab fa-xl fa-twitter"></i>
                     </a>
                     <a class="s-wtp" href=
-                        "whatsapp://send?text=http://localhost:3000/article?id=2323232" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp fa-xl"></i>
+                        "whatsapp://send?text=http://localhost:3000/get-arcticles/<%= foundPost._id %>" data-action="share/whatsapp/share" target="_blank"><i class="fa-brands fa-whatsapp fa-xl"></i>
                     </a>
                     <a class="s-linkd" href=
                         "https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:3000/article?id=2323232" target="_blank"><i class="fab fa-xl fa-linkedin-in"></i>
