@@ -167,6 +167,11 @@ h4
   font-weight: 400;
 }
 
+.article_img{
+  height: 58vh;
+  width: 52vw;
+}
+
 .s-twitter,.s-wtp,.s-linkd{
   color: black;
   margin-right: 7px;
