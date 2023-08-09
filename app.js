@@ -162,6 +162,11 @@ app.get('/get-arcticles/:article_id' , (req,res) => {
     });
 });
 
+app.get("/badcred" , (req,res)=>{
+    res.render("badcred");
+});
+
+
 app.get("/admin" , (req,res)=>{
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
