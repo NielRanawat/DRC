@@ -29,8 +29,11 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
+            <% if (loggedIn){ %>
+              <% const firstName = (user.name).split(" "); %>
+              <span style="margin-right: 3px; margin-top: 4px;">Hi <%= firstName[0] %>!</span>
+            <% } %>
             <img class="rounded-circle" width="35" height="35" src="https://img.icons8.com/3d-fluency/94/user-male-circle.png" alt="user-male-circle"/>
-            <span>Hi Ashish!</span>
 
             </a>
             <ul
@@ -38,13 +41,9 @@
               aria-labelledby="navbarDropdownMenuAvatar"
             >
             <% if(loggedIn){ %>              
-              <li>
-                <a class="dropdown-item" href="/account">My profile</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/account/settings">Settings</a>
-              </li>
-              <li>
+              <% if (user.isAdmin){ %>
+                <a class="dropdown-item" href="/admin">Admin</a>
+              <% } %>
                 <a class="dropdown-item" href="/logout">Logout</a>
               </li>
             <% }else{ %>

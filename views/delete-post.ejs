@@ -1,0 +1,27 @@
+<%- include("partial/header") -%>
+<body class="givePadding">
+    <h1 class="text-center" style="font-size: 4rem;">Admin Portal</h1>
+    <h2 class="display-3 mb-3">Delete Post</h2>
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% foundPost.forEach(function(post){ %>
+                <tr>
+                    <td scope="row"><%= post.title %></td>
+                    <td><%= post.createdAt %></td>
+                    <form action="/delete-post" method="POST">
+                        <input name="id" value="<%= post._id %>" type="id" hidden>
+                        <td><button type="submit" class="btn btn-danger btn-sm">Delete</button></td>
+                    </form>
+                </tr>
+            <% }) %>
+        </tbody>
+      </table>
+</body>
+

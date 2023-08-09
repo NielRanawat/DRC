@@ -40,11 +40,6 @@ h4
 }
 
 
-.carousel-img 
-{
-    height: 36vw;
-    width: 64%;
-}
 
 @media (max-width : 768px)
 {
@@ -197,6 +192,12 @@ h4
     padding-left: 10%;
     padding-right: 10%;
   }
+
+  .carousel-img 
+{
+    height: 36vw;
+    width: 64%;
+}
     .carousel-caption {
         position: absolute;
         right: 0px;

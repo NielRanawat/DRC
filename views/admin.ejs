@@ -1,59 +1,16 @@
 <%- include("partial/header") -%>
 <body class="givePadding">
-    <form action="/addpost" method="post">
-        <h1 class="text-center" style="font-size: 4rem;">Admin Portal</h1>
-        <h2 class="display-3 mb-3">Add a Post</h2>
-        <div class="form-group mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" required autofocus>
-        </div>
-        <div class="form-group mb-3">
-            <label>Image URL</label>
-            <input type="url" name="img_url" class="form-control" required autofocus>
-        </div>
-        <div class="form-group mb-3">
-            <label>Post</label>
-            <textarea class="form-control" name="content" rows="3"></textarea>
-        </div>
-        <label>Is Heading?</label>
-        <select id="headingOption" onchange="myFunction()" name="isHeading" class="form-select mb-3">
-            <option selected disabled value="">Select a option</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        <div class="form-group mb-3">
-            <label style="display: none;" id="cHead">Carousel Heading</label>
-            <input hidden id="carouselHeading" type="text" name="carouselHeading" class="form-control" required autofocus>
-        </div>  
-        <div class="form-group mb-3">
-            <label style="display: none;" id="c_id">Carousel ID</label>
-            <input hidden id="carousel_id" type="text" name="carousel_id" class="form-control" required autofocus>
-        </div>  
-        <div class="form-group mb-3">
-            <label>Author Name</label>
-            <input type="text" name="author_name" class="form-control" required autofocus>
-        </div>
-       
+    <h1 class="text-center mb-3" style="font-size: 7vw;">Admin Portal</h1>
+    <div class="text-center">
         <div class="mb-3">
-            <button type="submit" class="btn btn-lg btn-dark">Submit</button>
+            <a href="/add-post"><button class="btn btn-success btn-lg">Add a Post</button></a>
         </div>
-    </form>
+        <div class="mb-3">
+            <a href="/delete-post"><button class="btn btn-danger btn-lg">Delete Post</button></a>
+        </div>
+        <div class="mb-3">
+            <a href="/logout"><button class="btn btn-dark btn-lg">Logout!</button></a>
+        </div>
+    </div>
 </body>
 
-<script>
-
-function myFunction(){
-    const a = $('#headingOption option:selected').text();
-    if (a === "Yes"){
-        $('#cHead').show();
-        $('#c_id').show();
-        $("#carouselHeading").prop('hidden', false);
-        $("#carousel_id").prop('hidden', false);
-    } else {
-        $('#cHead').hide();
-        $('#c_id').hide();
-        $("#carouselHeading").prop('hidden', true);
-        $("#carousel_id").prop('hidden', true);
-    }
-}
-</script>

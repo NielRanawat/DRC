@@ -61,7 +61,8 @@ const postSchema = new mongoose.Schema({
     img_url : {type : String , require : true},
     author_name : {type : String , require : true},
     carouselHeading : String,
-    carousel_id : Number 
+    carousel_id : Number,
+    tags : [] 
 },{
     timestamps: true
 });
@@ -107,7 +108,7 @@ app.get("/logout" , (req , res) => {
 })
 
 app.get("/" , function(req , res){
-    Post.find({} , (err , foundPost) => {
+    Post.find().sort({ createdAt: -1 }).exec((err, foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
                 let carousel1 = 0;
@@ -123,9 +124,9 @@ app.get("/" , function(req , res){
                     if(post.carousel_id == 3){
                         carousel3 = post;
                     }
-                })
-                res.render("home" , {foundPost : foundPost , loggedIn : true , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 , carousel3});
-            }else{
+                });
+                res.render("home" , {foundPost : foundPost , loggedIn : true ,user : req.user, carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
+            } else{
                 let carousel1 = 0;
                 let carousel2 = 0;
                 let carousel3 = 0;
@@ -139,13 +140,13 @@ app.get("/" , function(req , res){
                     if(post.carousel_id == 3){
                         carousel3 = post;
                     }
-                })
-                res.render("home" , {foundPost : foundPost , loggedIn : false , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 , carousel3});
+                });
+                res.render("home" , {foundPost : foundPost , loggedIn : false , user : null , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
             }
         } else{
             console.log(err);
         }
-    })
+    });
 });
 
 app.get('/get-arcticles/:article_id' , (req,res) => {
@@ -153,19 +154,30 @@ app.get('/get-arcticles/:article_id' , (req,res) => {
         const content = foundPost.content.split("\n");
         if (!err) {
             if(req.isAuthenticated()){
-                res.render("article" , {foundPost : foundPost , content : content , loggedIn : true});
+                res.render("article" , {foundPost : foundPost , content : content , loggedIn : true , user : req.user});
             }else{
-                res.render("article" , {foundPost : foundPost , content : content , loggedIn : false});
+                res.render("article" , {foundPost : foundPost , content : content , loggedIn : false , user : null});
             }
         }
     });
 });
 
-
-app.get('/admin' , (req,res) => {
+app.get("/admin" , (req,res)=>{
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
             res.render('admin');
+        } else{
+            res.status(404).render("404");
+        }
+    } else{
+        res.redirect("/login");
+    }
+})
+
+app.get('/add-post' , (req,res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            res.render('add-post');
         } else{
             res.redirect("/");
         }
@@ -174,31 +186,73 @@ app.get('/admin' , (req,res) => {
     }
 });
 
-app.post("/addpost" , (req , res) => {
+app.get("/delete-post" , (req,res) => {
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
+            Post.find().sort({ createdAt: -1 }).exec((err, foundPost) => {
+                if (err) {
+                  console.error(err);  
+                } else {
+                    res.render('delete-post' , {foundPost : foundPost});
+                }                
+            });
+        } else{
+            res.status(404).render("404");
+        }
+    } else{
+        res.redirect("/login");
+    } 
+});
+
+app.post("/delete-post" , (req,res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            Post.findOneAndDelete({_id : req.body.id} , (err)=>{
+                if (!err) {
+                    res.redirect("/delete-post")
+                } else {
+                    console.log(err);
+                }
+            })
+        } else{
+            res.status(404).render("404");
+        }
+    } else {
+        res.redirect("/login");
+    }
+});
+
+app.post("/add-post" , (req , res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            const gotTagString = req.body.tags;
+            const tagArray = gotTagString.split(',');
             const newPost = new Post({
                 title : req.body.title,
                 content : req.body.content,
                 img_url : req.body.img_url,
                 author_name : req.body.author_name,
                 carouselHeading : req.body.carouselHeading,
-                carousel_id : req.body.carousel_id
+                carousel_id : req.body.carousel_id,
+                tags : tagArray
             });
             newPost.save((err) => {
                 if(err){
                     console.log(err);
                 } else{
-                    console.log("Saved");
-                    res.redirect("/");
+                    res.redirect("/add-post")
                 }
             });
         } else{
-            res.redirect("/");
+            res.status(404).render("404");
         }
     } else{
         res.redirect("/login");
     }
+});
+
+app.use((req, res, next) => {
+    res.status(404).render("404");
 });
 
 connectDB().then(() => {
