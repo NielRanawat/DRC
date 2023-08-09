@@ -23,7 +23,11 @@
           </select>
         <div class="form-group mb-3">
             <label style="display: none;" id="cHead">Carousel Heading</label>
-            <input hidden id="carouselHeading" type="text" name="carousel-heading" class="form-control" required autofocus>
+            <input hidden id="carouselHeading" type="text" name="carouselHeading" class="form-control" required autofocus>
+        </div>  
+        <div class="form-group mb-3">
+            <label style="display: none;" id="c_id">Carousel ID</label>
+            <input hidden id="carousel_id" type="text" name="carousel_id" class="form-control" required autofocus>
         </div>  
         <div class="form-group mb-3">
             <label>Author Name</label>
@@ -42,10 +46,14 @@ function myFunction(){
     const a = $('#headingOption option:selected').text();
     if (a === "Yes"){
         $('#cHead').show();
+        $('#c_id').show();
         $("#carouselHeading").prop('hidden', false);
+        $("#carousel_id").prop('hidden', false);
     } else {
         $('#cHead').hide();
+        $('#c_id').hide();
         $("#carouselHeading").prop('hidden', true);
+        $("#carousel_id").prop('hidden', true);
     }
 }
 </script>

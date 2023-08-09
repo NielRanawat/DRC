@@ -59,7 +59,9 @@ const postSchema = new mongoose.Schema({
     title : {type : String , require : true},
     content : {type : String , require : true},
     img_url : {type : String , require : true},
-    author_name : {type : String , require : true}
+    author_name : {type : String , require : true},
+    carouselHeading : String,
+    carousel_id : Number 
 },{
     timestamps: true
 });
@@ -108,9 +110,37 @@ app.get("/" , function(req , res){
     Post.find({} , (err , foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
-                res.render("home" , {foundPost : foundPost , loggedIn : true});
+                let carousel1 = 0;
+                let carousel2 = 0;
+                let carousel3 = 0;
+                foundPost.forEach((post) => {
+                    if(post.carousel_id == 1){
+                        carousel1 = post;
+                    }
+                    if(post.carousel_id == 2){
+                        carousel2 = post;
+                    }
+                    if(post.carousel_id == 3){
+                        carousel3 = post;
+                    }
+                })
+                res.render("home" , {foundPost : foundPost , loggedIn : true , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 , carousel3});
             }else{
-                res.render("home" , {foundPost : foundPost , loggedIn : false});
+                let carousel1 = 0;
+                let carousel2 = 0;
+                let carousel3 = 0;
+                foundPost.forEach((post) => {
+                    if(post.carousel_id == 1){
+                        carousel1 = post;
+                    }
+                    if(post.carousel_id == 2){
+                        carousel2 = post;
+                    }
+                    if(post.carousel_id == 3){
+                        carousel3 = post;
+                    }
+                })
+                res.render("home" , {foundPost : foundPost , loggedIn : false , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 , carousel3});
             }
         } else{
             console.log(err);
@@ -151,7 +181,9 @@ app.post("/addpost" , (req , res) => {
                 title : req.body.title,
                 content : req.body.content,
                 img_url : req.body.img_url,
-                author_name : req.body.author_name
+                author_name : req.body.author_name,
+                carouselHeading : req.body.carouselHeading,
+                carousel_id : req.body.carousel_id
             });
             newPost.save((err) => {
                 if(err){

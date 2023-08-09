@@ -11,38 +11,37 @@
           aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
           aria-label="Slide 2"></button>
-        <!-- <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-          aria-label="Slide 3"></button> -->
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img
-            src="https://substackcdn.com/image/fetch/w_1280,h_720,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8e403da-6c22-4cda-8171-ee7577710891_4096x2731.jpeg"
+            src="<%= carousel1.img_url %>"
             class="carousel-img" alt="...">
           <div class="carousel-caption">
-            <a class="carouselLink" href="/get-arcticles/"><h5 style="font-weight: 800;" class="carouselH">F1's Track Limit saga</h5>
-            </a>
-            <p class="carouselP">Where did F1 go wrong with Track Limits in Austria and how can it take Inspiration from MotoGP and develop a solution to the track limit policing issues it faced.</p>
+            <a class="carouselLink" href="/get-arcticles/<%= carousel1._id %>"><h5 style="font-weight: 800;" class="carouselH"><%= carousel1.carouselHeading %></h5></a>
+            <p class="carouselP"><%= carousel1.title.substr(0 , 150) %>...</p>
           </div>
         </div>
         <div class="carousel-item">
           <img
-            src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F282d3208-0840-4c3c-a6d2-62e2103e6240_1125x633.png"
+            src="<%= carousel2.img_url %>"
             class="carousel-img" alt="...">
           <div class="carousel-caption">
-            <h5 style="font-weight: 800;" class="carouselH">Hungarian GP Preview</h5>
-            <p class="carouselP">F1 heads to Hungaroring, the track reputed as "Monaco without walls". From Ricciardo's return, Red Bull upgrades, the fight for P2 and cost cop rumours</p>
+            <a class="carouselLink" href="/get-arcticles/<%= carousel2._id %>"><h5 style="font-weight: 800;" class="carouselH"><%= carousel2.carouselHeading %></h5></a>
+            <p class="carouselP"><%= carousel2.title.substr(0 , 150) %>...</p>
           </div>
         </div>
-        <!-- <div class="carousel-item">
+        <div class="carousel-item">
           <img
-            src="https://substackcdn.com/image/fetch/w_320,h_213,c_fill,f_webp,q_auto:good,fl_progressive:steep,g_center/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58905004-3692-4308-b42a-2dca9f080c04_781x370.png"
+            src="<%= carousel3.img_url %>"
             class="carousel-img" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5 class="carouselH">Third slide label</h5>
-            <p class="carouselP">Some representative placeholder content for the third slide.</p>
+          <div class="carousel-caption">
+            <a class="carouselLink" href="/get-arcticles/<%= carousel3._id %>"><h5 style="font-weight: 800;" class="carouselH"><%= carousel3.carouselHeading %></h5></a>
+            <p class="carouselP"><%= carousel3.title.substr(0 , 150) %>...</p>
           </div>
-        </div> -->
+        </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -63,26 +62,28 @@
   
   <div class="row justify-content-center">
     <% foundPost.forEach((post) => { %>
-      <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
-        <div class="card shadow h-100 mx-auto" style="width: 20rem;">
-          <div class="p-1">
-            <img alt="..." src="<%= post.img_url %>" class="card-img">
-          </div>
-          <!-- Card Body -->
-          <div class="card-body">
-            <!-- Title -->
-            <h3 class="h4"><%= post.title %></h3>
-            <!-- Subtitle -->
-            <% const day = (post.createdAt).getDate(); %>
-            <% const month = (post.createdAt).toLocaleString('default', { month: 'short' }); %>
-            <% const year = (post.createdAt).getFullYear(); %>
-            <span class="card-date d-block text-muted text-sm font-semibold">Published at <%= day %> <%= month %> <%= year %></span>
-            <a style="margin-top: 1rem;" href="/get-arcticles/<%= post._id %>" class="btn btn-sm btn-dark">
-              Read more
-            </a>
+      <% if(post._id != carousel1._id && post._id != carousel2._id && post._id != carousel3._id){ %>
+        <div style="margin-bottom: 20px; margin-left: 5px;" class="col-md">
+          <div class="card shadow h-100 mx-auto" style="width: 20rem;">
+            <div class="p-1">
+              <img alt="..." src="<%= post.img_url %>" class="card-img">
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <!-- Title -->
+              <h3 class="h4"><%= post.title %></h3>
+              <!-- Subtitle -->
+              <% const day = (post.createdAt).getDate(); %>
+              <% const month = (post.createdAt).toLocaleString('default', { month: 'short' }); %>
+              <% const year = (post.createdAt).getFullYear(); %>
+              <span class="card-date d-block text-muted text-sm font-semibold">Published at <%= day %> <%= month %> <%= year %></span>
+              <a style="margin-top: 1rem;" href="/get-arcticles/<%= post._id %>" class="btn btn-sm btn-dark">
+                Read more
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      <% } %>
     <% }) %>
    
   </div>
