@@ -162,11 +162,6 @@ h4
   font-weight: 400;
 }
 
-.article_img{
-  height: 58vh;
-  width: 52vw;
-}
-
 .s-twitter,.s-wtp,.s-linkd{
   color: black;
   margin-right: 7px;
@@ -188,6 +183,11 @@ h4
 }
 
 @media (min-width : 768px){
+  /* .article_img{
+    height: 58vh;
+    width: 52vw;
+  } */
+  
   .articlePadding{
     padding-left: 10%;
     padding-right: 10%;
@@ -219,4 +219,11 @@ h4
     .carouselLink:hover{
       color: #0008C1;
     }
+}
+
+@media (min-width : 1200px){
+  .article_img{
+    height: 58vh;
+    width: 52vw;
+  }
 }

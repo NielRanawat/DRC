@@ -109,36 +109,49 @@ app.get("/logout" , (req , res) => {
 
 app.get("/" , function(req , res){
     Post.find().sort({ createdAt: -1 }).exec((err, foundPost) => {
+    // Post.find((err, foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
                 let carousel1 = 0;
+                let carousel1found = false;
                 let carousel2 = 0;
+                let carousel2found = false;
                 let carousel3 = 0;
+                let carousel3found = false;
                 foundPost.forEach((post) => {
-                    if(post.carousel_id == 1){
+                    if(post.carousel_id == 1 && !carousel1found){
                         carousel1 = post;
+                        carousel1found = true;
                     }
-                    if(post.carousel_id == 2){
+                    if(post.carousel_id == 2 && !carousel2found){
                         carousel2 = post;
+                        carousel2found = true;
                     }
-                    if(post.carousel_id == 3){
+                    if(post.carousel_id == 3 && !carousel3found){
                         carousel3 = post;
+                        carousel3found = true;
                     }
                 });
                 res.render("home" , {foundPost : foundPost , loggedIn : true ,user : req.user, carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
             } else{
                 let carousel1 = 0;
+                let carousel1found = false;
                 let carousel2 = 0;
+                let carousel2found = false;
                 let carousel3 = 0;
+                let carousel3found = false;
                 foundPost.forEach((post) => {
-                    if(post.carousel_id == 1){
+                    if(post.carousel_id == 1 && !carousel1found){
                         carousel1 = post;
+                        carousel1found = true;
                     }
-                    if(post.carousel_id == 2){
+                    if(post.carousel_id == 2 && !carousel2found){
                         carousel2 = post;
+                        carousel2found = true;
                     }
-                    if(post.carousel_id == 3){
+                    if(post.carousel_id == 3 && !carousel3found){
                         carousel3 = post;
+                        carousel3found = true;
                     }
                 });
                 res.render("home" , {foundPost : foundPost , loggedIn : false , user : null , carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
@@ -245,7 +258,7 @@ app.post("/add-post" , (req , res) => {
                 if(err){
                     console.log(err);
                 } else{
-                    res.redirect("/add-post")
+                    res.redirect("/")
                 }
             });
         } else{
