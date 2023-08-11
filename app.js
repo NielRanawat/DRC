@@ -6,6 +6,7 @@ const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 
@@ -21,7 +22,8 @@ app.use(session({
     saveUninitialized : false,
     cookie : {
         expires : 600000
-    }
+    },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use(passport.initialize());
