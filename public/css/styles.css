@@ -92,6 +92,7 @@ h4
     background-color: #333;
     color: #fff;
     padding: 40px 0;
+    
   }
   .footer h5 {
     color: #fff;
@@ -180,6 +181,16 @@ h4
 
 .articlePadding{
   padding-left: 2%;
+}
+
+.fit-cover {
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .fit-cover {
+    position: absolute;
+  }
 }
 
 @media (min-width : 768px){

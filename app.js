@@ -301,13 +301,13 @@ app.post("/approve-post" , (req , res) => {
 });
 
 app.get("/category?" , (req , res) => {
-    if(req.user.isAuthenticated){
+    if(req.isAuthenticated()){
         Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : true});
+            res.render("category" , {foundPost : foundPost , loggedIn : true , user : req.user});
         });        
     } else{
         Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : false});
+            res.render("category" , {foundPost : foundPost , loggedIn : false , user : null});
         });   
     }
 })

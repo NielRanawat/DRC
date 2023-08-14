@@ -3,19 +3,39 @@
 <%- include("partial/navbar") -%>
 <body>
   
-    <section class="container">
+    <section style="margin-top: 3rem; margin-bottom: 10rem;" class="container">
         <% foundPost.forEach((post) => { %>
-                <div class="card mb-5" style="width: 100%">
-                    <!-- <h5 class="card-header"><%= post.title %></h5> -->
-                    <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text"><%= post.content.substr(0 , 150) %></p>
-                    <a style="margin-top: 1rem;" href="/get-arcticles/<%= post._id %>" class="btn btn-sm btn-dark">
-                        Read more
-                      </a>
-                    </div>
+          <div class="container">
+            <div class="card mb-5 h-100" style="width: 100%;">
+              <div class="row g-0">
+                <div class="col-sm-4 position-relative">
+                  <img src="<%= post.img_url %>" class="card-img fit-cover w-100 h-100" alt="...">
                 </div>
+          
+                <div class="col-sm-8">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="link-dark text-decoration-none" href="#" target="_blank"><%= post.title %></a>
+                    </h5>
+          
+                    <p class="card-text"><%= post.content.substr(0 , 150) %></p>
+                    <br>
+                    <span class="badge rounded-pill bg-dark"></span>
+
+                  </div>
+                  <% const day = (post.createdAt).getDate(); %>
+        <% const month = (post.createdAt).toLocaleString('default', { month: 'short' }); %>
+        <% const year = (post.createdAt).getFullYear(); %>
+        <% const hour = (post.createdAt).getHours(); %>
+        <% const minute = (post.createdAt).getMinutes(); %>
+                  <div class="card-footer bg-white text-end text-muted">
+                    Published at <%= day %> <%= month %> <%= year %> <%= hour %>:<%= minute %>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         <% }) %>
+        
     </section>
   
   <%- include("partial/footer") -%>
