@@ -64,7 +64,8 @@ const postSchema = new mongoose.Schema({
     author_name : {type : String , require : true},
     carouselHeading : String,
     carousel_id : Number,
-    tags : [] 
+    tags : [],
+    approved : {type : Boolean , require : true , default : false}
 },{
     timestamps: true
 });
@@ -110,7 +111,7 @@ app.get("/logout" , (req , res) => {
 })
 
 app.get("/" , function(req , res){
-    Post.find().sort({ createdAt: -1 }).exec((err, foundPost) => {
+    Post.find({approved : true}).sort({ createdAt: -1 }).exec((err, foundPost) => {
     // Post.find((err, foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
@@ -196,11 +197,7 @@ app.get("/admin" , (req,res)=>{
 
 app.get('/add-post' , (req,res) => {
     if(req.isAuthenticated()){
-        if(req.user.isAdmin){
             res.render('add-post');
-        } else{
-            res.redirect("/");
-        }
     } else{
         res.redirect("/login");
     }
@@ -244,7 +241,6 @@ app.post("/delete-post" , (req,res) => {
 
 app.post("/add-post" , (req , res) => {
     if(req.isAuthenticated()){
-        if(req.user.isAdmin){
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
             const newPost = new Post({
@@ -262,14 +258,59 @@ app.post("/add-post" , (req , res) => {
                 } else{
                     res.redirect("/")
                 }
-            });
-        } else{
-            res.status(404).render("404");
-        }
+            }); 
     } else{
         res.redirect("/login");
     }
 });
+
+app.get("/pending-articles" , (req , res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            Post.find({approved : false} , (err , foundPost)=>{
+                if (!err) {
+                    res.render("pending-article" , {foundPost : foundPost});
+                } else {
+                    console.log(err);
+                }
+            })
+        } else{
+            res.status(404).render("404");
+        }
+    } else {
+        res.redirect("/login");
+    }
+});
+
+app.post("/approve-post" , (req , res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            Post.findOneAndUpdate({_id : req.body.id} , {approved : true} , (err) => {
+                if(err){
+                    console.log(err);
+                } else{
+                    res.redirect("/pending-articles");
+                }
+            });
+        } else{
+            res.status(404).render("404");
+        }
+    } else {
+        res.redirect("/login");
+    }
+});
+
+app.get("/category?" , (req , res) => {
+    if(req.user.isAuthenticated){
+        Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
+            res.render("category" , {foundPost : foundPost , loggedIn : true});
+        });        
+    } else{
+        Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
+            res.render("category" , {foundPost : foundPost , loggedIn : false});
+        });   
+    }
+})
 
 app.use((req, res, next) => {
     res.status(404).render("404");

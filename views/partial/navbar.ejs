@@ -13,9 +13,9 @@
         <!-- Nav -->
         <div class="navbar-nav mx-lg-auto">
           <a class="nav-item nav-link active" href="/" aria-current="page">Home</a>
-          <!-- <a class="nav-item nav-link" href="/formula1">Formula 1</a>
-          <a class="nav-item nav-link" href="/motogp">MotoGP</a>
-          <a class="nav-item nav-link" href="/wec">WEC</a> -->
+          <a class="nav-item nav-link" href="/category?category=f1">Formula 1</a>
+          <a class="nav-item nav-link" href="/category?category=motogp">MotoGP</a>
+          <a class="nav-item nav-link" href="/category?category=im">Indian Motorsport</a>
         </div>
         <!-- Right navigation -->
         
@@ -43,6 +43,8 @@
             <% if(loggedIn){ %>              
               <% if (user.isAdmin){ %>
                 <a class="dropdown-item" href="/admin">Admin</a>
+              <% } else{ %>
+                <a class="dropdown-item" href="/add-post">Post Article</a>
               <% } %>
                 <a class="dropdown-item" href="/logout">Logout</a>
               </li>

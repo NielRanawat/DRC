@@ -1,0 +1,21 @@
+<%- include("partial/header") -%>
+
+<%- include("partial/navbar") -%>
+<body>
+  
+    <section class="container">
+        <% foundPost.forEach((post) => { %>
+                <div class="card mb-5" style="width: 100%">
+                    <!-- <h5 class="card-header"><%= post.title %></h5> -->
+                    <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text"><%= post.content.substr(0 , 150) %></p>
+                    <a style="margin-top: 1rem;" href="/get-arcticles/<%= post._id %>" class="btn btn-sm btn-dark">
+                        Read more
+                      </a>
+                    </div>
+                </div>
+        <% }) %>
+    </section>
+  
+  <%- include("partial/footer") -%>
