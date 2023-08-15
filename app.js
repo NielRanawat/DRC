@@ -241,16 +241,11 @@ app.post("/delete-post" , (req,res) => {
 
 app.post("/add-post" , (req , res) => {
     if(req.isAuthenticated()){
-            const gotTagString = req.body.tags;
-            const tagArray = gotTagString.split(',');
             const newPost = new Post({
                 title : req.body.title,
                 content : req.body.content,
                 img_url : req.body.img_url,
                 author_name : req.body.author_name,
-                carouselHeading : req.body.carouselHeading,
-                carousel_id : req.body.carousel_id,
-                tags : tagArray
             });
             newPost.save((err) => {
                 if(err){
@@ -285,13 +280,9 @@ app.get("/pending-articles" , (req , res) => {
 app.post("/approve-post" , (req , res) => {
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
-            Post.findOneAndUpdate({_id : req.body.id} , {approved : true} , (err) => {
-                if(err){
-                    console.log(err);
-                } else{
-                    res.redirect("/pending-articles");
-                }
-            });
+            Post.findOne({_id : req.body.id} , (err , foundPost) => {
+                res.render("edit-post" , {foundPost : foundPost});
+            })
         } else{
             res.status(404).render("404");
         }
@@ -310,7 +301,27 @@ app.get("/category?" , (req , res) => {
             res.render("category" , {foundPost : foundPost , loggedIn : false , user : null});
         });   
     }
-})
+});
+
+app.post("/edit-post" , (req , res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            const gotTagString = req.body.tags;
+            const tagArray = gotTagString.split(',');
+            Post.findOneAndUpdate({_id : req.body.id} , {carouse_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
+                if(err){
+                    console.log(err);
+                } else{
+                    res.redirect("/pending-articles");
+                }
+            });
+        } else{
+            res.status(404).render("404");
+        }
+    } else {
+        res.redirect("/login");
+    }
+});
 
 app.use((req, res, next) => {
     res.status(404).render("404");
