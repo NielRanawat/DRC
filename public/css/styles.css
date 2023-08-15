@@ -238,3 +238,8 @@ h4
     width: 52vw;
   }
 }
+
+.custom-Navbar{
+  padding-left: 2px;
+  padding-right: 2px;
+}

@@ -293,12 +293,12 @@ app.post("/approve-post" , (req , res) => {
 
 app.get("/category?" , (req , res) => {
     if(req.isAuthenticated()){
-        Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : true , user : req.user});
+        Post.find({approved : true , tags : req.query.category}).sort({ createdAt: -1 }).exec((err, foundPost) => {
+            res.render("category" , {foundPost : foundPost , loggedIn : true , user : req.user , category : req.query.category});
         });        
     } else{
-        Post.find({approved : true , tags : req.query.category} , (err , foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : false , user : null});
+        Post.find({approved : true , tags : req.query.category}).sort({ createdAt: -1 }).exec((err, foundPost) => {
+            res.render("category" , {foundPost : foundPost , loggedIn : false , user : null , category : req.query.category});
         });   
     }
 });
@@ -308,7 +308,7 @@ app.post("/edit-post" , (req , res) => {
         if(req.user.isAdmin){
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
-            Post.findOneAndUpdate({_id : req.body.id} , {carouse_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
+            Post.findOneAndUpdate({_id : req.body.id} , {title : req.body.title , content : req.body.content, img_url : req.body.img_url , carouse_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
                 if(err){
                     console.log(err);
                 } else{

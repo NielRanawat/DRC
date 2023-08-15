@@ -9,13 +9,14 @@
             <div class="card mb-5 h-100" style="width: 100%;">
               <div class="row g-0">
                 <div class="col-sm-4 position-relative">
-                  <img src="<%= post.img_url %>" class="card-img fit-cover w-100 h-100" alt="...">
+                  <a href="/get-arcticles/<%= post._id %>" target="_blank"><img src="<%= post.img_url %>" class="card-img fit-cover w-100 h-100" alt="...">
+                  </a>
                 </div>
           
                 <div class="col-sm-8">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <a class="link-dark text-decoration-none" href="#" target="_blank"><%= post.title %></a>
+                      <a class="link-dark text-decoration-none" href="/get-arcticles/<%= post._id %>" target="_blank"><%= post.title %></a>
                     </h5>
           
                     <p class="card-text"><%= post.content.substr(0 , 150) %></p>
