@@ -62,8 +62,8 @@ const postSchema = new mongoose.Schema({
     content : {type : String , require : true},
     img_url : {type : String , require : true},
     author_name : {type : String , require : true},
-    carouselHeading : String,
-    carousel_id : Number,
+    carouselHeading : {type : String , require : true , default : null},
+    carousel_id : {type : Number , require : true , default : null},
     tags : [],
     approved : {type : Boolean , require : true , default : false}
 },{
@@ -306,9 +306,10 @@ app.get("/category?" , (req , res) => {
 app.post("/edit-post" , (req , res) => {
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
+            console.log(req.body.carousel_id);
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
-            Post.findOneAndUpdate({_id : req.body.id} , {title : req.body.title , content : req.body.content, img_url : req.body.img_url , carouse_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
+            Post.findOneAndUpdate({_id : req.body.id} , {title : req.body.title , content : req.body.content, img_url : req.body.img_url , carousel_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
                 if(err){
                     console.log(err);
                 } else{
