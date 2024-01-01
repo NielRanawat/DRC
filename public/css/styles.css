@@ -48,6 +48,22 @@ h4
         width: 100%;
     }
 
+    .dark-gradient-overlay {
+      position: relative;
+    }
+    
+    .dark-gradient-overlay::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+      pointer-events: none;
+    }
+    
+
     .carousel-caption
     {
         color:white;
