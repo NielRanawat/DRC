@@ -167,12 +167,12 @@ app.get("/" , function(req , res){
 
 app.get('/get-arcticles/:article_id' , (req,res) => {
     Post.findOne({_id : req.params.article_id} , function(err , foundPost){
-        const content = foundPost.content.split("\n");
+        // const content = foundPost.content;
         if (!err) {
             if(req.isAuthenticated()){
-                res.render("article" , {foundPost : foundPost , content : content , loggedIn : true , user : req.user});
+                res.render("article" , {foundPost : foundPost , loggedIn : true , user : req.user});
             }else{
-                res.render("article" , {foundPost : foundPost , content : content , loggedIn : false , user : null});
+                res.render("article" , {foundPost : foundPost , loggedIn : false , user : null});
             }
         }
     });
