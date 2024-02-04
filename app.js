@@ -92,12 +92,16 @@ app.post("/register", function (req, res) {
 
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/badcred"
+    failureRedirect: "/login?wrongcredential=1"
 }), function (req, res) {
 });
 
 app.get('/login' , (req,res) => {
-    res.render('login');
+    if(req.isAuthenticated()){
+        res.redirect("/profile");
+    } else {
+        res.render('login');
+    }
 });
 
 app.get("/logout" , (req , res) => {
@@ -112,7 +116,6 @@ app.get("/logout" , (req , res) => {
 
 app.get("/" , function(req , res){
     Post.find({approved : true}).sort({ createdAt: -1 }).exec((err, foundPost) => {
-    // Post.find((err, foundPost) => {
         if(!err){
             if(req.isAuthenticated()){
                 let carousel1 = 0;
@@ -135,7 +138,7 @@ app.get("/" , function(req , res){
                         carousel3found = true;
                     }
                 });
-                res.render("home" , {foundPost : foundPost , loggedIn : true ,user : req.user, carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
+                res.render("home" , {foundPost : foundPost , loggedIn : true ,user : req.user.name, carousel1 : carousel1 , carousel2 : carousel2 , carousel3 : carousel3});
             } else{
                 let carousel1 = 0;
                 let carousel1found = false;
@@ -165,21 +168,18 @@ app.get("/" , function(req , res){
     });
 });
 
-app.get('/get-arcticles/:article_id' , (req,res) => {
+app.get('/article/:article_id' , (req,res) => {
+    console.log(req.params.article_id);
     Post.findOne({_id : req.params.article_id} , function(err , foundPost){
         // const content = foundPost.content;
         if (!err) {
             if(req.isAuthenticated()){
-                res.render("article" , {foundPost : foundPost , loggedIn : true , user : req.user});
+                res.render("article" , {foundPost : foundPost , loggedIn : true , user : req.user.name});
             }else{
                 res.render("article" , {foundPost : foundPost , loggedIn : false , user : null});
             }
         }
     });
-});
-
-app.get("/badcred" , (req,res)=>{
-    res.render("badcred");
 });
 
 
@@ -188,16 +188,24 @@ app.get("/admin" , (req,res)=>{
         if(req.user.isAdmin){
             res.render('admin');
         } else{
-            res.status(404).render("404");
+            res.redirect('/')
         }
     } else{
         res.redirect("/login");
     }
-})
+});
+
+app.get('/profile' , async (req,res) => {
+    if(req.isAuthenticated()){
+        res.render('profile' , {user : req.user.name , admin : req.user.isAdmin});
+    } else {
+        res.redirect('/login');
+    }
+});
 
 app.get('/add-post' , (req,res) => {
     if(req.isAuthenticated()){
-            res.render('add-post');
+        res.render('add-post');
     } else{
         res.redirect("/login");
     }
@@ -224,18 +232,56 @@ app.get("/delete-post" , (req,res) => {
 app.post("/delete-post" , (req,res) => {
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
-            Post.findOneAndDelete({_id : req.body.id} , (err)=>{
+            Post.findOneAndDelete({_id : req.body.article_id} , (err)=>{
                 if (!err) {
-                    res.redirect("/delete-post")
+                    res.redirect("/admin")
                 } else {
                     console.log(err);
                 }
             })
         } else{
-            res.status(404).render("404");
+            res.redirect('/');
         }
     } else {
         res.redirect("/login");
+    }
+});
+
+app.get('/delete-article-confirmation/:article_id' , async (req,res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            const foundArticle = await Post.findOne({_id : req.params.article_id , approved : true});
+            if (foundArticle != null) {
+                res.render('delete-posts' , {post : foundArticle});
+            } else {
+                res.render('404');
+            }
+        } else {
+            res.redirect('/');
+        }
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/view-pending-article?' , async (req,res) => {
+    if(req.isAuthenticated){
+        if(req.user.isAdmin){
+            try {
+                const foundArticle = await Post.findOne({_id : req.query.article_id, approved : false});
+                if (foundArticle != null) {
+                    res.render("unparticle" , {post : foundArticle})
+                } else {
+                    res.render('404');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            res.redirect('/');
+        }
+    } else {
+        res.redirect('/login');
     }
 });
 
@@ -291,25 +337,23 @@ app.post("/approve-post" , (req , res) => {
     }
 });
 
-app.get("/category?" , (req , res) => {
+
+app.get('/category?' , async (req,res) => {
+    const foundArticles = await Post.find({approved : true ,  tags : req.query.name}).sort({ createdAt: -1 });
     if(req.isAuthenticated()){
-        Post.find({approved : true , tags : req.query.category}).sort({ createdAt: -1 }).exec((err, foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : true , user : req.user , category : req.query.category});
-        });        
-    } else{
-        Post.find({approved : true , tags : req.query.category}).sort({ createdAt: -1 }).exec((err, foundPost) => {
-            res.render("category" , {foundPost : foundPost , loggedIn : false , user : null , category : req.query.category});
-        });   
+        res.render("category" , {foundPost : foundArticles , loggedIn : true , user : req.user.name , category : req.query.name});
+    } else {
+        res.render("category" , {foundPost : foundArticles , loggedIn : false , user : null , category : req.query.name});
     }
 });
+
 
 app.post("/edit-post" , (req , res) => {
     if(req.isAuthenticated()){
         if(req.user.isAdmin){
-            console.log(req.body.carousel_id);
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
-            Post.findOneAndUpdate({_id : req.body.id} , {title : req.body.title , content : req.body.content, img_url : req.body.img_url , carousel_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
+            Post.findOneAndUpdate({_id : req.body.id} , {title : req.body.title , content : req.body.content, img_url : req.body.img_url , author_name : req.body.author_name ,carousel_id : req.body.carousel_id , carouselHeading : req.body.carouselHeading , tags : tagArray , approved : true} , (err) => {
                 if(err){
                     console.log(err);
                 } else{
@@ -317,10 +361,31 @@ app.post("/edit-post" , (req , res) => {
                 }
             });
         } else{
-            res.status(404).render("404");
+            res.redirect('/');
         }
     } else {
         res.redirect("/login");
+    }
+});
+
+app.get('/edit-post/:article_id' , async (req,res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            try {
+                const foundPost = await Post.findOne({_id : req.params.article_id , approved : true});
+                if(foundPost != null) {
+                    res.render("edit-post" , {foundPost : foundPost});
+                } else {
+                    res.render('404');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            res.redirect('/');
+        }
+    } else { 
+        res.redirect('/login');
     }
 });
 

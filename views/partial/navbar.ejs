@@ -1,63 +1,50 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light custom-Navbar">
-    <div class="container-xl">
-      <!-- Logo -->
-      <a class="navbar-brand" href="/">
-        <img style="border-radius: 100%;" width="60" height="60" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" class="h-8" alt="..."> Desi Racing Co
-      </a>
-      <!-- Navbar toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Collapse -->
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <!-- Nav -->
-        <div class="navbar-nav mx-lg-auto">
-          <a class="nav-item nav-link" href="/" aria-current="page">Home</a>
-          <a class="nav-item nav-link" href="/category?category=f1">Formula 1</a>
-          <a class="nav-item nav-link" href="/category?category=motogp">MotoGP</a>
-          <a class="nav-item nav-link" href="/category?category=im">Indian Motorsport</a>
-        </div>
-        <!-- Right navigation -->
-        
-        <div class="navbar-nav ms-lg-4">
-          <div class="dropdown">
-            <a style="color: black; text-decoration: none;"
-              class=" d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-            <% if (loggedIn){ %>
-              <% const firstName = (user.name).split(" "); %>
-              <span style="margin-right: 3px; margin-top: 4px;">Hi <%= firstName[0] %>!</span>
-            <% } %>
-            <img class="rounded-circle" width="35" height="35" src="https://img.icons8.com/3d-fluency/94/user-male-circle.png" alt="user-male-circle"/>
+<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
+  <nav class="relative max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" aria-label="Global">
+    <div class="flex items-center justify-between">
+      <img onclick="window.location.href = '/';" class=" h-[3.275rem] w-[3.275rem] mr-3 rounded-full"
+                    src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" alt="logo">
+      <a class="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand">DesiRacingCo</a>
+      <div class="sm:hidden">
+        <button type="button" class="hs-collapse-toggle w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+          <svg class="hs-collapse-open:hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+          <svg class="hs-collapse-open:block flex-shrink-0 hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+      <div class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
+        <a class="font-medium text-gray-500 hover:text-blue-600  sm:py-6 dark:text-blue-500" href="/" aria-current="page">Latest</a>
+        <a class="font-medium text-gray-500 hover:text-blue-600 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/category?name=f1">Formula 1</a>
+        <a class="font-medium text-gray-500 hover:text-blue-600 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/category?name=motogp">Moto GP</a>
+        <a class="font-medium text-gray-500 hover:text-blue-600 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="/category?name=imsp">Indian Motorsport</a>
+        <a class="flex items-center gap-x-1 font-medium text-gray-500 hover:text-blue-600" href="/add-post">
+          <svg class="w-[17px] h-[17px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4c0-.6-.4-1-1-1H9a1 1 0 0 0-.8.3l-4 4a1 1 0 0 0-.2.6V20c0 .6.4 1 1 1h12c.6 0 1-.4 1-1v-5M9 3v4c0 .6-.4 1-1 1H4m11.4.8 2.7 2.7m1.2-3.9a2 2 0 0 1 0 3l-6.6 6.6L9 18l.7-3.7 6.7-6.7a2 2 0 0 1 3 0Z"/>
+          </svg>
+          Publish
+        </a>
 
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
-            >
-            <% if(loggedIn){ %>              
-              <% if (user.isAdmin){ %>
-                <a class="dropdown-item" href="/admin">Admin</a>
-              <% } else{ %>
-                <a class="dropdown-item" href="/add-post">Post Article</a>
-              <% } %>
-                <a class="dropdown-item" href="/logout">Logout</a>
-              </li>
-            <% }else{ %>
-              <li>
-                <a class="dropdown-item" href="/login">Login/Sign-up</a>
-              </li>
-            <% } %>
-            </ul>
-          </div>
-        </div>
-        <!-- Action -->
-        <!-- s -->
+        <% if(user != null) { %>
+          <a class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500" href="/profile">
+            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+            </svg>
+            Hi <%= user %>!
+          </a>
+        <% } else { %>
+          <a class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500" href="/login">
+            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+            </svg>
+            Log in
+          </a>
+        <% } %>
+        
       </div>
     </div>
   </nav>
+</header>
