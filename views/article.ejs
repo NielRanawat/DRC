@@ -1,9 +1,7 @@
 <%- include("partial/header") -%>
 
     <%- include("partial/navbar") -%>
-        <script src="
-https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
-"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js"></script>
 
         <body>
 
@@ -15,7 +13,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                         <div class="flex justify-between items-center mb-6">
                             <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
                                 <div class="flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full"
+                                    <img class="h-10 w-10 rounded-full "
                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAXVBMVEWJk6T///+Fj6F/ip24vseCjZ+Nl6eWn66Ej6CaorGTnKv5+fqss77x8vS1u8XZ3OHT1tyhqbbAxc7h4+fLz9bm6Ov09fbl5+rs7vDFydGnrruvtcDX2uCeprPDx9CMoWWvAAAMLklEQVR4nN2d6baiOBSFcxOCEVCZ9OJU7/+YzeAsGc9Gub1/9FrVq0r5TEhyxrCfyZWuqlNdRlmxXCRxzOI4WSyLLCrrU7VKp/96NuWH76p6vYy5kJJzpTi7q/sjl1Lw+Lyuq92UDzEV4W5Tnju0J64xcdWBnqPNVJhTEO7yY9wOmwXtBVTK+JhPQYkmTKsoEZ50VykpkuMG/EBYwvSU+Y7dO6XKsJBAws2BijeIS46ERBH+rjkE7wYZNaAnwxDmiVAwvAukWOaQZwMQ7kouwXgDo+QlYHElEzZH4Ox8hzySJyuRsDnAp+ezlDgQGUmEzWHC8buKSxojgXB1ENPz9YzisPoGYfSB8bsxyijYCgklrK1HajAjqz9KuE0m2R+Mksn2c4TrD72Az+Ji/SHCin2Dr2dk1ScIj+JLfJ3EcXLCbTztDm+Tin3fRk/C8psDOEiUExKmy88voe+SS6+90Yew4t9aYp7Fuc+C40G4//4MvUrspyAs5jBDr5IFnDBN5jFDr+KJ68voSNiw724S71LM0aZyI9zMaYZeJd3WGyfCej5rzKOEk7nhQjhTQEdEB8IZ7RKvctk17IQzOKjp5XCEsxL+mzNgi/iPSjjjKTrIOlEthLNdZO4SFue/mTCfP6AV0UhY/QXAFtG49ZsImzmeZMYkTQc4A2H67Qf3kOEYbiBczMuaMIkvQggLNKDiUkohRPtfDo+n6u1FLeEe+RJyKXix3p+qbbNqtlW+XxcqNGNjXFK7LeoIgcsol/yQv68FqzxjQEjtgqoh3MGmkRSZfjGvDgI2VZQmIq4hXIAIZWIzcGpUkEdpVptxwhLzrTI+Wfg6nWLQt43bGaOEmJdQOYf8aszaOv4qjhIivo6Jg7trOj1gFjZXwgywwnHuMkHvOiGGkY9FpkYIN4DfU5594+47RExEjOTDjRACRjAgzNdFlulfPILz/r/W9OniE1Z4EMCfoN4D4W+EW/rXuPkxRwTwKIi3AOobIT0+YXMrTIrIExthTX7fA6fooH/kr5evE+iVkDyCMigl5KYjGZGbCSMqIT+TAAEnYh6ZCFf0V51aBUO3auSzkfFMeKAOodnt5STygYMf9IQN+cNDdvpXkQ+N4sncfiIkDyEkL57s41NPTpvHZyIPocRk15N3rKdt/5GQOoQmn56XEiLhk+ftgZA+hKhKF3LawOOb+ECYUdfptwNTsMiD+LCc3gl31B8O9BZ2Ir+J8p76ficsZ7GQXkQ+Wt0PNvfHov5sr6clktZURPlOmJMnRlii+bh+ca/MjZAcaYqBgHR3333nuhKSTXtOs5peRfal3Hb9KyF94mNrW8lb4u0XvxLSLV9s8wDy3nWzhBnoJwNu94Oom/5tUl0IyVbFi1FGF+yJBsKUPITKmn3lqX90Wz99IDzRXVy4I9sg8v7M5OmBkG76OibsuquiLzWHB0J6qEKgyuevItty19WUYX4vJtBNO3Z0wmFe9YRkL2lLiO6lkwLGMLoRkveelhAM+PMDiLUlV0LAhJjlGA6vTkdIX5hnSthvYR0hIm4vCBXzowIEGBjPLoQx/bOw9m+nLSLJJh4I6cd4BjeeQIVIXZCGIY5srXhoZFunPSKpr/vdGWQ3bE/eiJjMo46INKluR2wJl5DmTkswISRDuXsqRncjXj4Mu12kmMxT2REiluXus36hhICjcqd2E2Oo6knuWSZvEd0D36tdahhm0WqFCq0NAhyVO/F9S4g40XSCnmpAr053qmGwsgpOyRR6FWpi8UVLiPkohvUngiZpqx9Gd7NdBcg0uQpXCyFTBvCHXKTc+xzYVKCeiYmGgTae/tNQ9gXuV2eyYgjz9yJD8ZGfgCVXMmeoVauTwJxrfoGFnXzPQIeH4eMwuz6yLJCXjBw4fNRb+mqIoFVzas3IWTRPknTHMOo4M0hlDFxISZ+nC+jz8IItoR9ITYL++VmDy6uXDPuTkTL1O8FbHCwY7gR4ESnOhu8AkDCEs/RZBNcpoJzlVXi+Vio0lgjxAr9oEsJQnw3wiPyoSRiDlptp+qjEE42i8E9UhBTnvSvGr6WD5NLvdLNaTNRmJIHvh1cpr/wTekGZTgv0meZBcum6pv5ONYCsO9OcJ+xgIo8uHsZmys7n/Ay2LV6kRGbb/n+n7eze2hZQ+/BdXC5rfcwmrRcTN85u7UOkjT8qLkVRj72RTV1gO7iMfnvJ6k+07ZSSF1H+uxtGM1395mXB5SfaUPE90tdm+a6uwRBvd2DetRn6VIcmmSP9pXOUrIA+71lKNMC4xSwlU2DsaZ4Cxg9nqT5+iIoBz1J9DBgZuJid+jj+LDtZo9TnYmC96DNTn08DyomapyQur22euuS1QXIT56lLbiIkv3Se6gqDWsLV/5hwNeR5f/s5ptMlzxtwquGK40W/2e2Wq08xgnl/83S2jvBaZ+fuxmsC563eInzPl+JQN1PeHp42NaGJa58u2dc9hcUuFOq2V5vyZeBVoH2LgJ4wpPidiwJdRKLXtghxOg4tBkPrD+USm9dtU4jjf6hyCawh9b38DKDIe7V4qCH13S8U++wADqo8b2Tq94oroZ+NqJxvk8IqTbwQL6VYl44DPmMIa3jlLy+f0qVtxIXQZ5p+aQR7eUSsL5M0oC8GR1dt+2jnPhIvfTHcpykwXz1E7klTL71NnM1giewGFaLIcbbd2lZdCV3DF9heSSFyPGLemjzc+kS5eWu+PEc7uc3Tez2kZ68vaodZhM4uDzrS68tprZnBEDoO4ki/NpeKvy/u9Y9y2PdHe+45FK3DC7bDVNsJR/smOvS+hLdoCZO9j8f1PNPJq38pup9XqKxnN03/UmsvJWjvR4psxxNdD1rrIMK7XYXKtrNp+wjbBhHeCypUlqHg2l7Qtn8JbhwYLsuyb+jnbRvEuRCaO36berLbgjSfpDDK+JTyOanV526E79sVV5nsC/PdCObT6R8hfPm7PneU/AlC6x0lpntm/gKh/Z4ZU3HVXyB837N97nv6A4Qu9z0ZluI/QOh0Z5f+GpT5Ezreu6Z1gM+e8NEsvMnn/sPZEzrff6jz9cydcLxphc89pDMn9LmHVHNzFrRPEkWjtoXfXbKam7O+ENseUxqPLYW6lnh+dzoHFL/itYvHfn7fO511HUYkugGkv5rRvcz/Xm6dvS9xzaDCVI0+lqGtv8FuH7+nj38zyP3zk4++PcrgyTUQarwh30k1uajUnCgNv7rJ99JorOHgm1TJKsafSJrcnEbvki6OFXTdL13N6C5hi/mZ/Wfjs757Gb/gHNY9jKVFhcVDqOtVwT8+U9NCB2h5EpsPVHvPsiw+uqZudElt1st5rV5e3erF+AcDNWmmewr7QdLux/6ndU3J4kMR05zpHIDCfr2Ng6de3zeGawwWrFZn7QO4rAYusQhDaxwZT56dUeqTvJ2WO6doi26d7r+lmHTjqLUT1LWTkVs8yZQIrsRxstcxjw1f7Ng2zTFi1pgykJVblxZvGfkUc5w7rjHB1BDP6MbxAJ+rOTMFM91NHPeop+bUe/1GcUbecLErjXw+ZqpHXFe/MV6+Na5BL+TG1pXHYRu8ySdyXXFL1pSUBX0gm4hJ8/co7rNFecXmd9bCFSXVmgLZ7BNr/Y9ceE0Vz+wD7Sn1EZIf8qDpWkWxQy2er0vTN7/id9SV9yIuxaLceFFu64K7lBqq2NeH4p9BcnTLQu6aJGX1r8Oa3pzKpZS2d3xQgHchIEemMhykXjCllEkR5dVqDDRdbfN/2aIrE3X8QM4CTsFBWUCRTzWg6htECZYU2ToqyzJaH7PDMmGiaxelXOE6vjCPe1ieU5OEVK5e6qGVCipiloG+odBMLr1ROo04C/UohOeqRR/rSNa90OEhIUI23uoQWIDsq/ZcT7BdSPmGTfEBRkW0sYkZlWFF1h6il4yTc0abbML3kcuMbHcCsmJX0TRtENt9NAL4DjB5v8FdDwx8qI4NqMzm7VFarDovPKkilFsEmLt9KjCztbUxDkCPCDQ7Pc0PTiaQQa11mW2gMR94/n0VJaE9ZZQUyRF9YyuesNUuz2LfCdsunPExzDVg0VQ1FLtNee4sP6sV0f4NKfg52kziVP6ZjrDXrqqPCya7tsGdzfTEpTovgJBscdxXkwbpPlAHk66qU11GWbFcJHHM4jhZLIssKuvTuO0P1n/Heal9uLqX3wAAAABJRU5ErkJggg=="
                                         alt="Avatar">
                                 </div>
@@ -38,7 +36,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                                                             <div
                                                                 class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
                                                                 <div class="flex-shrink-0">
-                                                                    <img class="h-8 w-8 rounded-full"
+                                                                    <img class="h-8 w-8 rounded-full "
                                                                         src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
                                                                         alt="Image Description">
                                                                 </div>
@@ -178,7 +176,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                                         alt="Article Image">
                                     </figure>
 
-                                    <div class="text-xl articleContent my-12 text-gray-800 ">
+                                    <div id="dynamicContent" class="text-xl articleContent my-12 text-gray-800 ">
                                         <%- foundPost.content %>
                                     </div>
 
@@ -207,92 +205,111 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
             <div class="max-w-[65rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                 <!-- Grid -->
                 <div class="max-w-2xl mb-10 lg:mb-14">
-                  <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Explore More</h2>
+                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Explore More</h2>
                 </div>
-              
+
                 <div class="grid lg:grid-cols-2 gap-6">
-                  <!-- Card -->
-                  <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/category?name=f1">
-                    <div class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
-                      <img class="w-full h-full absolute top-0 start-0 object-cover" src="https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-02/nba-plain--5a35d13f-c0ee-4740-bb0d-357b329fd4db.png?itok=R6Y5e-bq" alt="Image Description">
-                    </div>
-              
-                    <div class="absolute top-0 inset-x-0 z-10">
-                      <div class="p-4 flex flex-col h-full sm:p-6">
-              
-                      </div>
-                    </div>
-              
-                    <div class="absolute bottom-0 inset-x-0 z-10">
-                      <div class="flex flex-col h-full p-4 sm:p-6">
-                        <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
-                          Latest from Formula 1
-                        </h3>
-                        <p class="mt-2 text-white/[.8]">
-                          Explore the latest and most exciting news
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <!-- End Card -->
-              
-                  <!-- Card -->
-                  <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/category?name=motogp">
-                    <div class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
-                      <img class="w-full h-full absolute top-0 start-0 object-cover" src="https://vroom.media/wp-content/uploads/motogp-4k-hd-ibc-tv.jpg" alt="Image Description">
-                    </div>
-              
-                    <div class="absolute top-0 inset-x-0 z-10">
-                      <div class="p-4 flex flex-col h-full sm:p-6">
-              
-                      </div>
-                    </div>
-              
-                    <div class="absolute bottom-0 inset-x-0 z-10">
-                      <div class="flex flex-col h-full p-4 sm:p-6">
-                        <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
-                          Latest from MotoGP
-                        </h3>
-                        <p class="mt-2 text-white/[.8]">
-                          Explore the latest and most exciting news
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                  <!-- End Card -->
+                    <!-- Card -->
+                    <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        href="/category?name=f1">
+                        <div
+                            class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
+                            <img class="w-full h-full absolute top-0 start-0  object-cover"
+                                src="https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-02/nba-plain--5a35d13f-c0ee-4740-bb0d-357b329fd4db.png?itok=R6Y5e-bq"
+                                alt="Image Description">
+                        </div>
+
+                        <div class="absolute top-0 inset-x-0 z-10">
+                            <div class="p-4 flex flex-col h-full sm:p-6">
+
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 inset-x-0 z-10">
+                            <div class="flex flex-col h-full p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
+                                    Latest from Formula 1
+                                </h3>
+                                <p class="mt-2 text-white/[.8]">
+                                    Explore the latest and most exciting news
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
+
+                    <!-- Card -->
+                    <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        href="/category?name=motogp">
+                        <div
+                            class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
+                            <img class="w-full h-full absolute top-0 start-0  object-cover"
+                                src="https://vroom.media/wp-content/uploads/motogp-4k-hd-ibc-tv.jpg"
+                                alt="Image Description">
+                        </div>
+
+                        <div class="absolute top-0 inset-x-0 z-10">
+                            <div class="p-4 flex flex-col h-full sm:p-6">
+
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 inset-x-0 z-10">
+                            <div class="flex flex-col h-full p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
+                                    Latest from MotoGP
+                                </h3>
+                                <p class="mt-2 text-white/[.8]">
+                                    Explore the latest and most exciting news
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- End Card -->
                 </div>
                 <!-- End Grid -->
-              </div>
+            </div>
 
             <script>
                 let text = 'https://desiracingco.in/article/<%- foundPost._id %>';
-                console.log(text);
+                let textTitle = '<%- foundPost.title %>'
 
                 const shareButton = document.getElementById('shareButton');
-                    shareButton.addEventListener('click', () => {
-                        const shareText = 'Check out this interesting article from DesiRacingCo!';
-                        const shareUrl = text;
-                        // Create the WhatsApp share URL
-                        const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A%0A${encodeURIComponent(shareUrl)}`;
-                        // Open WhatsApp with the share URL
-                        window.location.href = whatsappUrl;
-                    });
+                shareButton.addEventListener('click', () => {
+                    const shareText = textTitle + '\n\nCheck out this interesting article from DesiRacingCo!';
+                    const shareUrl = text;
+                    // Create the WhatsApp share URL
+                    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A%0A${encodeURIComponent(shareUrl)}`;
+                    // Open WhatsApp with the share URL
+                    window.location.href = whatsappUrl;
+                });
 
                 function sharePage() {
                     const url = text;
-                    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent("Check out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
+                    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle +"\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
                     return false;
                 };
 
                 const copyContent = async () => {
                     try {
                         await navigator.clipboard.writeText(text);
-                        document.getElementById('copied').innerHTML="Copied!"
+                        document.getElementById('copied').innerHTML = "Copied!"
                         setTimeout(() => {
-                            document.getElementById('copied').innerHTML="Copy Link"
+                            document.getElementById('copied').innerHTML = "Copy Link"
                         }, 3000);
                     } catch (err) {
                     }
                 }
             </script>
+
+<script>
+    // Get all img elements inside the dynamicContent div
+    const imgElements = document.querySelectorAll('#dynamicContent img');
+
+    // Loop through each img element and add Tailwind CSS classes
+    imgElements.forEach(img => {
+        img.classList.add('rounded-xl' , 'w-[40rem]' , 'my-4');
+    });
+</script>
+
             <%- include("partial/footer") -%>
