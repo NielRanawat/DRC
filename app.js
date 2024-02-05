@@ -232,6 +232,23 @@ app.get("/articles-list", (req, res) => {
     }
 });
 
+app.post('/reject-post' , async (req,res) => {
+    if(req.isAuthenticated()){
+        if(req.user.isAdmin){
+            try {
+                const updatePost = await Post.findOneAndUpdate({_id : req.body.article_id , status : 'Pending'} , {status : 'Rejected'});
+                res.redirect('/pending-articles?returnMsg=postRejected');
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            res.redirect('/');
+        }
+    } else {
+        res.redirect('/login');
+    }
+});
+
 app.post("/delete-post", (req, res) => {
     if (req.isAuthenticated()) {
         if (req.user.isAdmin) {
