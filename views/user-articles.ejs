@@ -1,0 +1,364 @@
+<%- include("partial/header") -%>
+
+    <%- include("partial/navbar") -%>
+
+        <body>
+            <!-- Table Section -->
+            <!-- Table Section -->
+            <!-- Toast -->
+            <div style="display: none;" id="toast-success"
+                class="flex mx-8 md:mx-auto max-w-sm md:max-w-xl mt-12 items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+                role="alert">
+                <div
+                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <span class="sr-only">Check icon</span>
+                </div>
+                <div class="ms-3 text-sm font-normal">Post submitted successfully!</div>
+                <button type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                    data-dismiss-target="#toast-success" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+
+            <h2 class="text-4xl font-bold text-center mt-12 mb-2">Manage your Articles</h2>
+
+            <% if(foundPosts.length> 0){ %>
+                <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+                    <!-- Card -->
+                    <div class="flex flex-col">
+                        <div class="-m-1.5 overflow-x-auto">
+                            <div class="p-1.5 min-w-full inline-block align-middle">
+                                <div
+                                    class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                                    <!-- Header -->
+                                    <div
+                                        class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
+                                        <div>
+                                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                                Your Articles
+                                            </h2>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                                View status of your submitted articles.
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <div class="inline-flex gap-x-2">
+                                                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                                    href="mailto:desiracingco@gmail.com">
+                                                    Raise Issue
+                                                </a>
+
+                                                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                                    href="/add-post">
+                                                    <svg class="flex-shrink-0 w-4 h-4"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M5 12h14" />
+                                                        <path d="M12 5v14" />
+                                                    </svg>
+                                                    Add Post
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Header -->
+
+
+                                    <!-- Table -->
+                                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                        <thead class="bg-gray-50 dark:bg-slate-900">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-start">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span
+                                                            class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                            Post Title
+                                                        </span>
+
+                                                    </div>
+                                                </th>
+
+
+                                                <th scope="col" class="px-6 py-3 text-start">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span
+                                                            class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                            Status
+                                                        </span>
+                                                    </div>
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 text-start">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span
+                                                            class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                            Author
+                                                        </span>
+                                                    </div>
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 text-start">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span
+                                                            class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
+                                                            Date
+                                                        </span>
+                                                    </div>
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 text-end"></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                            <% foundPosts.forEach((post)=> {%>
+                                                <tr
+                                                    class="bg-white hover:bg-gray-50 dark:bg-slate-900 dark:hover:bg-slate-800">
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <button type="button" class="block">
+                                                            <span class="block px-6 py-2">
+                                                                <span
+                                                                    class="font-mono text-sm text-blue-600 dark:text-blue-500">
+                                                                    <%= post.title.substr(0,50) %>...
+                                                                </span>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <button type="button" class="block">
+                                                            <span class="block px-6 py-2">
+                                                                <% if(post.status==='Approved' ){ %>
+                                                                    <span
+                                                                        class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                                                                        <svg class="w-2.5 h-2.5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16" height="16" fill="currentColor"
+                                                                            viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                                        </svg>
+                                                                        Published
+                                                                    </span>
+                                                                    <% } else if(post.status==='Pending' ){ %>
+                                                                        <span
+                                                                            class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                                                                            <svg class="w-3 h-3" aria-hidden="true"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="currentColor" viewBox="0 0 24 24">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm9-3a1.5 1.5 0 0 1 2.5 1.1 1.4 1.4 0 0 1-1.5 1.5 1 1 0 0 0-1 1V14a1 1 0 1 0 2 0v-.5a3.4 3.4 0 0 0 2.5-3.3 3.5 3.5 0 0 0-7-.3 1 1 0 0 0 2 .1c0-.4.2-.7.5-1Zm1 7a1 1 0 1 0 0 2 1 1 0 1 0 0-2Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+                                                                            Pending
+                                                                        </span>
+                                                                        <% } else if (post.status==='Rejected' ){ %>
+                                                                            <span
+                                                                                class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+                                                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="currentColor"
+                                                                                    viewBox="0 0 24 24">
+                                                                                    <path fill-rule="evenodd"
+                                                                                        d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z"
+                                                                                        clip-rule="evenodd" />
+                                                                                </svg>
+                                                                                Rejected
+                                                                            </span>
+                                                                            <% } %>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <button type="button" class="block">
+                                                            <span class="block px-6 py-2">
+                                                                <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                                    <%= post.author_name %>
+                                                                </span>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <button type="button" class="block">
+                                                            <span class="block px-6 py-2">
+                                                                <span class="text-sm text-gray-600 dark:text-gray-400">
+                                                                    <%= post.createdAt.toLocaleString('en-US', {
+                                                                        month: 'short' , day: '2-digit' ,
+                                                                        year: 'numeric' }) %>
+                                                                </span>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                    <td class="h-px w-px whitespace-nowrap">
+                                                        <button type="button" class="block">
+                                                            <span class="px-6 py-1.5">
+                                                                <% if(post.status==='Approved' ){ %>
+                                                                    <a href="/article/<%= post._id %>"
+                                                                        class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                                                        <% } else {%>
+                                                                            <a href="/user-unpublished-article/<%= post._id %>"
+                                                                                class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                                                                <% } %>
+                                                                                    <svg class="flex-shrink-0 w-4 h-4"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="16" height="16"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 16 16">
+                                                                                        <path
+                                                                                            d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
+                                                                                        <path
+                                                                                            d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
+                                                                                    </svg>
+                                                                                    View
+                                                                            </a>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+
+
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table -->
+
+                                    <!-- Footer -->
+                                    <div
+                                        class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
+                                        <div>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                                <span class="text-gray-800 dark:text-gray-200">Found <%=
+                                                        foundPosts.length %> articles
+                                                </span>
+                                            </p>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- End Footer -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <!-- End Table Section -->
+
+                <% } else { %>
+                    <!-- Table Section -->
+                    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+                        <!-- Card -->
+                        <div class="flex flex-col">
+                            <div class="-m-1.5 overflow-x-auto">
+                                <div class="p-1.5 min-w-full inline-block align-middle">
+                                    <div
+                                        class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                                        <!-- Header -->
+                                        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                                Your Articles
+                                            </h2>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                                View status of your submitted articles.
+                                            </p>
+                                        </div>
+                                        <!-- End Header -->
+
+                                        <!-- Body -->
+                                        <div
+                                            class="max-w-sm w-full min-h-[400px] flex flex-col justify-center mx-auto px-6 py-4">
+                                            <div
+                                                class="flex justify-center items-center w-[46px] h-[46px] bg-gray-100 rounded-lg dark:bg-gray-800">
+                                                <svg class="flex-shrink-0 w-6 h-6 text-gray-600 dark:text-gray-400"
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
+                                                    <path
+                                                        d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
+                                                </svg>
+                                            </div>
+
+                                            <h2 class="mt-5 font-semibold text-gray-800 dark:text-white">
+                                                No articles found!
+                                            </h2>
+                                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                                Start by creating a post
+                                            </p>
+
+                                            <div class="mt-5 grid sm:flex gap-2">
+                                                <a href="/add-post">
+                                                    <button type="button"
+                                                        class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                        <svg class="flex-shrink-0 w-4 h-4"
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                            <path d="M5 12h14" />
+                                                            <path d="M12 5v14" />
+                                                        </svg>
+                                                        Create a new post
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- End Body -->
+
+                                        <!-- Footer -->
+                                        <div
+                                            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
+                                            <div>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400">
+                                                    <span
+                                                        class="font-semibold text-gray-800 dark:text-gray-200">0</span>
+                                                    results
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                        <!-- End Footer -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <!-- End Table Section -->
+                    <% } %>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Get the URL parameters
+                                const urlParams = new URLSearchParams(window.location.search);
+
+                                // Check if the 'returnMsg' parameter is present and has the value 'post added'
+                                if (urlParams.has('returnMsg') && urlParams.get('returnMsg') === 'postAdded') {
+                                    // Show the alert div
+                                    document.getElementById('toast-success').style.display = 'flex';
+                                    setTimeout(function () {
+                                    document.getElementById('toast-success').style.display = 'none';
+                                }, 4000);
+                                }
+                            });
+
+                        </script>
+
+                        <!-- End Modal -->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
+        </body>

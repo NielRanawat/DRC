@@ -1,6 +1,9 @@
 <%- include("partial/header") -%>
 
-<%- include("partial/admin-navbar") -%>
+
+<% if(source === 'admin'){ %>
+    <%- include("partial/admin-navbar") -%>
+<% } %>
 
 
         <script src="
@@ -13,9 +16,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                 <!-- Blog Article -->
                 <div class="max-w-5xl px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-16 mx-auto">
                     <div class="max-w-5xl">
-                        <h1 class="text-4xl font-bold mb-12 text-center mt-8">Admin Panel</h1>
-
-                        <h1 class="text-3xl my-8 text-red-500 font-bold">Unpublished Article</h1>
+                        <h1 class="text-3xl my-8 text-center text-red-500 font-bold">Unpublished Article</h1>
                         <!-- Avatar Media -->
                         <div class="flex justify-between items-center mb-6">
                             <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
@@ -38,32 +39,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                                                         <!-- Footer -->
                                                         <div
                                                             class="flex justify-between items-center px-4 py-3 sm:px-5">
-                                                            <ul class="text-xs space-x-3">
-                                                                <li class="inline-block">
-                                                                    <span class="font-semibold text-gray-200">56</span>
-                                                                    <span class="text-gray-400">articles</span>
-                                                                </li>
-                                                                <li class="inline-block">
-                                                                    <span class="font-semibold text-gray-200">1k+</span>
-                                                                    <span class="text-gray-400">followers</span>
-                                                                </li>
-                                                            </ul>
 
-                                                            <div>
-                                                                <button type="button"
-                                                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                                                    <svg class="flex-shrink-0 w-3.5 h-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" fill="currentColor"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                                    </svg>
-                                                                    Follow
-                                                                </button>
-                                                            </div>
                                                         </div>
                                                         <!-- End Footer -->
                                                     </div>
@@ -105,9 +81,15 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
 
                             </div>
                             <div class="">
-                                <a href="/pending-articles">
+                                <% if( source === 'adming'){ %>
+                                    <a href="/pending-articles">
                                     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Back to Approval page</button>
                                 </a>
+                                <% } else { %>
+                                    <a href="/user-articles">
+                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Back to Articles page</button>
+                                    </a>
+                                <% }  %>
                             </div>
                             <!-- End Content -->
                         </div>
