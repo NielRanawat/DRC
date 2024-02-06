@@ -75,7 +75,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                                         alt="Article Image">
                                     </figure>
 
-                                    <div class="text-2xl articleContent my-12 text-gray-800 ">
+                                    <div id="dynamicContent" class="text-2xl articleContent my-12 text-gray-800 ">
                                         <%- post.content %>
                                     </div>
 
@@ -97,6 +97,19 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
 
                     <!-- End Sticky Share Group -->
             </section>
+            <script>
+                // Get all img elements inside the dynamicContent div
+                const imgElements = document.querySelectorAll('#dynamicContent img');
+                const pElements = document.querySelectorAll('#dynamicContent p');
 
+                pElements.forEach(p => {
+                    p.classList.add('my-6');
+                });
 
+                // Loop through each img element and add Tailwind CSS classes
+                imgElements.forEach(img => {
+                    img.classList.add('rounded-xl' , 'w-[40rem]' , 'my-8');
+                });
+            </script>
+</body>
             <%- include("partial/footer") -%>

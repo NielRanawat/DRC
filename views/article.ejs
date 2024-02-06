@@ -286,7 +286,7 @@
 
                 function sharePage() {
                     const url = text;
-                    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle +"\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
+                    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle + "\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
                     return false;
                 };
 
@@ -302,14 +302,18 @@
                 }
             </script>
 
-<script>
-    // Get all img elements inside the dynamicContent div
-    const imgElements = document.querySelectorAll('#dynamicContent img');
+            <script>
+                // Get all img elements inside the dynamicContent div
+                const imgElements = document.querySelectorAll('#dynamicContent img');
+                const pElements = document.querySelectorAll('#dynamicContent p');
 
-    // Loop through each img element and add Tailwind CSS classes
-    imgElements.forEach(img => {
-        img.classList.add('rounded-xl' , 'w-[40rem]' , 'my-4');
-    });
-</script>
+                pElements.forEach(p => {
+                    p.classList.add('my-6');
+                });
+                // Loop through each img element and add Tailwind CSS classes
+                imgElements.forEach(img => {
+                    img.classList.add('rounded-xl', 'w-[40rem]', 'my-8');
+                });
+            </script>
 
             <%- include("partial/footer") -%>
