@@ -65,7 +65,7 @@ const postSchema = new mongoose.Schema({
     author_name: { type: String, require: true },
     carouselHeading: { type: String, require: true, default: null },
     carousel_id: { type: Number, require: true, default: null },
-    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp'] },
+    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp' , 'none'] , default : 'none' }, //this functionality is not implemented yet don't touch it
     tags: [],
     status: { type: String, require: true, default: 'Pending', enum: ['Pending', 'Approved', 'Rejected'] },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
@@ -77,14 +77,22 @@ const postSchema = new mongoose.Schema({
 const Post = new mongoose.model("Post", postSchema);
 
 app.get("/register", function (req, res) {
-    res.render("register");
+    if(req.isAuthenticated()){
+        res.redirect('/');
+    } else {
+        res.render("register");
+    }
 });
 
 app.post("/register", function (req, res) {
     User.register({ username: req.body.username, email: req.body.username, name: req.body.name }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            // res.render("alerts/uaxerror");
+            if(err.name === 'UserExistsError'){
+                res.redirect("/register?userExists=1");
+            } else {
+                throw new Error();
+            }
         } else {
             passport.authenticate("local")(req, res, function () {
                 res.redirect("/");
@@ -111,11 +119,12 @@ app.get("/logout", (req, res) => {
     req.logout(function (err) {
         if (err) {
             console.log(err);
+            throw new Error();
         } else {
             res.redirect("/login")
         }
     });
-})
+});
 
 app.get("/", function (req, res) {
     Post.find({ status: 'Approved' }).sort({ createdAt: -1 }).exec((err, foundPost) => {
@@ -167,20 +176,26 @@ app.get("/", function (req, res) {
             }
         } else {
             console.log(err);
+            throw new Error();
         }
     });
 });
 
 app.get('/article/:article_id', (req, res) => {
-    console.log(req.params.article_id);
     Post.findOne({ _id: req.params.article_id }, function (err, foundPost) {
-        // const content = foundPost.content;
         if (!err) {
-            if (req.isAuthenticated()) {
-                res.render("article", { foundPost: foundPost, loggedIn: true, user: req.user.name });
+            if(foundPost != null) {
+                if (req.isAuthenticated()) {
+                    res.render("article", { foundPost: foundPost, loggedIn: true, user: req.user.name });
+                } else {
+                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null });
+                }
             } else {
-                res.render("article", { foundPost: foundPost, loggedIn: false, user: null });
+                res.render('404');
             }
+        } else {
+            console.log(err);
+            throw new Error();
         }
     });
 });
@@ -191,7 +206,7 @@ app.get("/admin", (req, res) => {
         if (req.user.isAdmin) {
             res.render('admin');
         } else {
-            res.redirect('/')
+            res.redirect('/');
         }
     } else {
         res.redirect("/login");
@@ -220,6 +235,7 @@ app.get("/articles-list", (req, res) => {
             Post.find({status : 'Approved'}).sort({ createdAt: -1 }).exec((err, foundPost) => {
                 if (err) {
                     console.error(err);
+                    throw new Error();
                 } else {
                     res.render('articles-list', { foundPost: foundPost });
                 }
@@ -240,6 +256,7 @@ app.post('/reject-post' , async (req,res) => {
                 res.redirect('/pending-articles?returnMsg=postRejected');
             } catch (error) {
                 console.log(error);
+                throw new Error();
             }
         } else {
             res.redirect('/');
@@ -258,6 +275,7 @@ app.post("/delete-post", (req, res) => {
                     res.redirect("/articles-list?returnMsg=postDeleted")
                 } else {
                     console.log(err);
+                    throw new Error();
                 }
             })
         } else {
@@ -297,6 +315,7 @@ app.get('/view-pending-article?', async (req, res) => {
                 }
             } catch (error) {
                 console.log(error);
+                throw new Error();
             }
         } else {
             res.redirect('/');
@@ -313,12 +332,12 @@ app.post("/add-post", (req, res) => {
             content: req.body.content,
             img_url: req.body.img_url,
             author_name: req.body.author_name,
-            mainTag: 'f1',
             createdBy: req.user._id
         });
         newPost.save((err) => {
             if (err) {
                 console.log(err);
+                throw new Error();
             } else {
                 res.redirect("/user-articles?returnMsg=postAdded")
             }
@@ -336,6 +355,7 @@ app.get("/pending-articles", (req, res) => {
                     res.render("pending-article", { foundPost: foundPost });
                 } else {
                     console.log(err);
+                    throw new Error();
                 }
             });
         } else {
@@ -378,6 +398,7 @@ app.get('/user-articles', async (req, res) => {
             res.render('user-articles', { foundPosts: foundPosts , user : req.user.name})
         } catch (error) {
             console.log(error);
+            throw new Error();
         }
     } else {
         res.redirect('/login')
@@ -395,6 +416,7 @@ app.get('/user-unpublished-article/:article_id', async (req, res) => {
             }
         } catch (error) {
             console.log(error);
+            throw new Error();
         }
     } else {
         res.redirect('/login')
@@ -409,6 +431,7 @@ app.post("/edit-post", (req, res) => {
             Post.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, content: req.body.content, img_url: req.body.img_url, author_name: req.body.author_name, carousel_id: req.body.carousel_id, carouselHeading: req.body.carouselHeading, tags: tagArray, status: 'Approved' }, (err) => {
                 if (err) {
                     console.log(err);
+                    throw new Error();
                 } else {
                     res.redirect("/articles-list?returnMsg=postPublished");
                 }
@@ -433,6 +456,7 @@ app.get('/edit-post/:article_id', async (req, res) => {
                 }
             } catch (error) {
                 console.log(error);
+                throw new Error();
             }
         } else {
             res.redirect('/');
@@ -442,9 +466,15 @@ app.get('/edit-post/:article_id', async (req, res) => {
     }
 });
 
+
 app.use((req, res, next) => {
     res.status(404).render("404");
 });
+
+app.use((err, req, res, next) => {
+    res.status(500).render('500');
+});
+
 
 connectDB().then(() => {
     console.log("DRC DB CONNECTED SUCCESFULLY");
@@ -452,4 +482,5 @@ connectDB().then(() => {
         console.log("DRC SERVER STARTED");
     });
 });
+
 

@@ -3,31 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#000000">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DRC</title>
+    <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="
     https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js
     "></script>
-    <title>Login</title>
-    <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/dropdown/index.min.js"></script>
 </head>
 
-<style>
-    :root {
-        font-family: 'Inter', sans-serif;
-    }
-
-    @supports (font-variation-settings: normal) {
-        :root {
-            font-family: 'Inter var', sans-serif;
-        }
-    }
-</style>
 
 <body class="antialiased bg-gray-50">
     <main class="w-full max-w-md mx-auto p-6">
-        <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm nonec:bg-gray-800 nonec:border-gray-700">
             <div id="wrong-pass-alert" style="display: none;" class="m-2 bg-red-500 text-sm text-white rounded-lg p-4" role="alert">
                 <span class="font-semibold flex items-center">
                     <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -40,21 +35,22 @@
             
 
             <div class="content-center mt-4 text-center">
-                <img class="mx-auto h-[3.875rem] w-[3.875rem] rounded-full"
+                <a href="/">
+                    <img class="mx-auto h-[3.875rem] w-[3.875rem] rounded-full"
                     src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" alt="logo">
+                </a>
                 <h1 class="text-2xl font-bold mt-3">DesiRacingCo</h1>
             </div>
 
 
-
-            <div class="p-4 sm:p-7">
+            <div class="p-6">
                 <div class="">
                     <h1 class="block text-2xl text-center">Sign in!</h1>
                 </div>
 
                 <div class="mt-5">
                     <button type="button"
-                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none nonec:bg-slate-900 nonec:border-gray-700 nonec:text-white nonec:hover:bg-gray-800 nonec:focus:outline-none nonec:focus:ring-1 nonec:focus:ring-gray-600">
                         <svg class="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                             <path
                                 d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z"
@@ -73,7 +69,7 @@
                     </button>
 
                     <div
-                        class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+                        class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 nonec:text-gray-500 nonec:before:border-gray-600 nonec:after:border-gray-600">
                         Or</div>
 
                     <!-- Form -->
@@ -93,22 +89,22 @@
                             <!-- Form Group -->
                             <div>
                                 <div class="flex justify-between items-center">
-                                    <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
+                                    <label for="password" class="block text-sm mb-2 nonec:text-white">Password</label>
                                     <a class="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                                         href="../examples/html/recover-account.html">Forgot password?</a>
                                 </div>
                                 <div class="relative">
                                     <input type="password" id="password" name="password"
-                                        class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                                        class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none nonec:bg-slate-900 nonec:border-gray-700 nonec:text-gray-400 nonec:focus:ring-gray-600"
                                         required aria-describedby="password-error">
                                 </div>
                             </div>
                             <!-- End Form Group -->
 
                             <!-- Checkbox -->
-                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            <p class="mt-2 text-sm text-gray-600 nonec:text-gray-400">
                                 Don't have an account yet?
-                                <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                <a class="text-blue-600 decoration-2 hover:underline font-medium nonec:focus:outline-none nonec:focus:ring-1 nonec:focus:ring-gray-600"
                                     href="/register">
                                     Sign up here
                                 </a>
@@ -116,7 +112,7 @@
                             <!-- End Checkbox -->
 
                             <button type="submit"
-                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Sign
+                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:pointer-events-none nonec:focus:outline-none nonec:focus:ring-1 nonec:focus:ring-gray-600">Sign
                                 in</button>
                         </div>
                     </form>

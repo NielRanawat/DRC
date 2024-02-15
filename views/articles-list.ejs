@@ -9,10 +9,10 @@
         <!-- Grid -->
 
         <div style="display: none;" id="toast-success"
-          class="flex mx-8 mb-8 md:mx-auto max-w-sm md:max-w-xl mt-2 items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+          class="flex mx-8 mb-8 md:mx-auto max-w-sm md:max-w-xl mt-2 items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow nonetext-gray-400 nonebg-gray-800"
           role="alert">
           <div
-            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg nonebg-green-800 nonetext-green-200">
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
               viewBox="0 0 20 20">
               <path
@@ -22,7 +22,7 @@
           </div>
           <div class="ms-3 text-sm font-normal">The post has been published!</div>
           <button type="button"
-            class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 nonetext-gray-500 nonehover:text-white nonebg-gray-800 nonehover:bg-gray-700"
             data-dismiss-target="#toast-success" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -33,10 +33,10 @@
         </div>
 
         <div style="display: none;" id="toast-danger"
-          class="flex mx-8 mb-8 md:mx-auto max-w-sm md:max-w-xl mt-2 items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+          class="flex mx-8 mb-8 md:mx-auto max-w-sm md:max-w-xl mt-2 items-center w-full p-4 mb-4 text-gray-500 bg-white rounded-lg shadow nonetext-gray-400 nonebg-gray-800"
           role="alert">
           <div
-            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg nonebg-red-800 nonetext-red-200">
             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
               viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,7 +46,7 @@
           </div>
           <div class="ms-3 text-sm font-normal">The post has been deleted.</div>
           <button type="button"
-            class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 nonetext-gray-500 nonehover:text-white nonebg-gray-800 nonehover:bg-gray-700"
             data-dismiss-target="#toast-danger" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -65,17 +65,17 @@
 
           <% foundPost.forEach(function(post){ %>
             <div
-              class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+              class="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl nonebg-slate-900 noneborder-gray-700 noneshadow-slate-700/[.7]">
               <div class="h-48 w-full flex flex-col justify-center items-center rounded-t-xl overflow-hidden">
                 <img class="w-full h-full object-cover" src="<%= post.img_url %>" alt="image article">
               </div>
 
 
               <div class="p-4 md:p-6">
-                <span class="block mb-1 text-xs font-semibold uppercase text-blue-600 dark:text-blue-500">
+                <span class="block mb-1 text-xs font-semibold uppercase text-blue-600 nonetext-blue-500">
                   By <%= post.author_name %>
                 </span>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-300 dark:hover:text-white">
+                <h3 class="text-lg font-semibold text-gray-800 nonetext-gray-300 nonehover:text-white">
                   <%= post.title %>
                 </h3>
                 <span class="block mt-3 mb-1 text-xs uppercase text-gray-600">
@@ -83,12 +83,12 @@
                 </span>
               </div>
               <div
-                class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
-                <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-amber-400 text-gray-50 shadow-sm hover:bg-amber-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 noneborder-gray-700 nonedivide-gray-700">
+                <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-es-xl bg-amber-400 text-gray-50 shadow-sm hover:bg-amber-500 disabled:opacity-50 disabled:pointer-events-none nonebg-slate-900 noneborder-gray-700 nonetext-white nonehover:bg-gray-800 nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                   href="/edit-post/<%= post._id %>">
                   Modify
                 </a>
-                <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-red-700 text-gray-50 shadow-sm hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-ee-xl bg-red-700 text-gray-50 shadow-sm hover:bg-red-800 disabled:opacity-50 disabled:pointer-events-none nonebg-slate-900 noneborder-gray-700 nonetext-white nonehover:bg-gray-800 nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                   href="/delete-article-confirmation/<%= post._id %>">
                   Delete
                 </a>

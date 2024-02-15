@@ -13,7 +13,7 @@
             <!-- Card -->
 
             <div
-              class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
               href="#">
               <div
                 class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[250px] md:h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
@@ -25,6 +25,10 @@
                   <% } else if (category==='motogp' ) { %>
                     <img class="w-full h-full absolute top-0 start-0 object-cover"
                       src="https://cloudfront-us-east-2.images.arcpublishing.com/reuters/3SZGCRCWOFJ2JK5KBMWTQN52TU.jpg"
+                      alt="cover image">
+                    <% } else if (category === 'imsp'){ %>
+                      <img class="w-full h-full absolute top-0 start-0 object-cover"
+                      src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Adrian_Sutil_2011_Malaysia_FP2.jpg"
                       alt="cover image">
                     <% } %>
 
@@ -46,11 +50,12 @@
                       <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
                         Explore MotoGP News
                       </h3>
+                      <% } else if (category === 'imsp') { %>
+                        <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
+                          Explore Indian Motorsport News
+                        </h3>
                       <% } %>
 
-                        <p class="mt-2 text-white/[.8]">
-                          For a lot of people these days, Measure What Matters.
-                        </p>
                 </div>
               </div>
             </div>
@@ -68,7 +73,7 @@
           <!-- Grid -->
           <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
             <h2 class="text-2xl font-bold md:text-4xl md:leading-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Trending</h2>
-            <p class="mt-1 text-gray-600 dark:text-gray-400">Stay in the know with insights from industry experts.</p>
+            <p class="mt-1 text-gray-600 nonetext-gray-400">Explore the trending news</p>
           </div>
           <div class="grid lg:grid-cols-2 gap-6">
             <!-- Card -->
@@ -77,7 +82,7 @@
               <% foundPost.forEach((post)=> { %>
                 <% if (count < 4) { %>
 
-                  <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                     href="/article/<%= post._id %>">
                     <div
                       class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
@@ -134,14 +139,14 @@
           <!-- Grid -->
           <div class="max-w-2xl  mb-10 lg:mb-14">
             <h2 class="text-2xl font-bold md:text-4xl md:leading-tight bg-gradient-to-r from-orange-400 to-rose-400 text-transparent bg-clip-text">More from <span class="uppercase"><%= category %></span></h2>
-            <p class="mt-1 text-gray-600 dark:text-gray-400">Stay in the know with insights from industry experts.</p>
+            <p class="mt-1 text-gray-600 nonetext-gray-400">More from the category.</p>
           </div>
           <div class="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
             <!-- Card -->
             <% for (let i=3; i < foundPost.length; i++) { %>
               <% const post=foundPost[i] %>
                   <div
-                    class="group rounded-xl overflow-hidden dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    class="group rounded-xl overflow-hidden nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                     href="#">
                     <div class="sm:flex">
                       <div class="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
@@ -152,10 +157,10 @@
 
                       <div class="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
                         <h3
-                          class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
+                          class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 nonetext-gray-300 nonegroup-hover:text-white">
                           <%= post.title %>
                         </h3>
-                        <p class="mt-3 text-gray-600 dark:text-gray-400">
+                        <p class="mt-3 text-gray-600 nonetext-gray-400">
                           <%- post.content.substr(0, 150) %>
                         </p>
                         <a href="/article/<%= post._id %>"

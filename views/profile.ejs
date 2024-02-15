@@ -12,47 +12,47 @@
     <% } else { %>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <% } %>
-        <div class="flex flex-col bg-white border border-t-4 border-t-green-600 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]">
+        <div class="flex flex-col bg-white border border-t-4 border-t-green-600 shadow-sm rounded-xl none:bg-slate-900 none:border-gray-700 none:border-t-blue-500 none:shadow-slate-700/[.7]">
             <div class="p-4 md:p-5">
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-semibold text-gray-800 none:text-white">
                 Publish a post
               </h3>
-              <p class="mt-2 text-gray-500 dark:text-gray-400">
+              <p class="mt-2 text-gray-500 none:text-gray-400">
                 Publish a new post
             </p>
-              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/add-post">
-                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Go 
+              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none none:text-blue-500 none:hover:text-blue-400 none:focus:outline-none none:focus:ring-1 none:focus:ring-gray-600" href="/add-post">
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 none:bg-gray-800 none:hover:bg-gray-700 none:focus:ring-gray-700 none:border-gray-700">Go 
                 </button>
               </a>
             </div>
           </div>
 
-          <div class="flex flex-col bg-white border border-t-4 border-t-amber-300 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]">
+          <div class="flex flex-col bg-white border border-t-4 border-t-amber-300 shadow-sm rounded-xl none:bg-slate-900 none:border-gray-700 none:border-t-blue-500 none:shadow-slate-700/[.7]">
             <div class="p-4 md:p-5">
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-semibold text-gray-800 none:text-white">
                 My articles
             </h3>
-              <p class="mt-2 text-gray-500 dark:text-gray-400">
+              <p class="mt-2 text-gray-500 none:text-gray-400">
                 Manage and view status of your articles.
               </p>
-              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/user-articles">
-                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Go 
+              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none none:text-blue-500 none:hover:text-blue-400 none:focus:outline-none none:focus:ring-1 none:focus:ring-gray-600" href="/user-articles">
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 none:bg-gray-800 none:hover:bg-gray-700 none:focus:ring-gray-700 none:border-gray-700">Go 
                 </button>
               </a>
             </div>
           </div>
 
           <% if(admin){ %>
-            <div class="flex flex-col bg-white border border-t-4 border-t-orange-600 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]">
+            <div class="flex flex-col bg-white border border-t-4 border-t-orange-600 shadow-sm rounded-xl none:bg-slate-900 none:border-gray-700 none:border-t-blue-500 none:shadow-slate-700/[.7]">
             <div class="p-4 md:p-5">
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-semibold text-gray-800 none:text-white">
                 Admin Panel
             </h3>
-              <p class="mt-2 text-gray-500 dark:text-gray-400">
+              <p class="mt-2 text-gray-500 none:text-gray-400">
                 Use admin portal to manage posts
               </p>
-              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/admin">
-                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Go 
+              <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none none:text-blue-500 none:hover:text-blue-400 none:focus:outline-none none:focus:ring-1 none:focus:ring-gray-600" href="/admin">
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 none:bg-gray-800 none:hover:bg-gray-700 none:focus:ring-gray-700 none:border-gray-700">Go 
                 </button>
               </a>
             </div>
@@ -60,16 +60,16 @@
 
           <% } %>
 
-          <div class="flex flex-col bg-white border border-t-4 border-t-blue-600 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]">
+          <div class="flex flex-col bg-white border border-t-4 border-t-blue-600 shadow-sm rounded-xl none:bg-slate-900 none:border-gray-700 none:border-t-blue-500 none:shadow-slate-700/[.7]">
             <div class="p-4 md:p-5">
-              <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 class="text-lg font-semibold text-gray-800 none:text-white">
                 Logout!
               </h3>
-              <p class="mt-2 text-gray-500 dark:text-gray-400">
+              <p class="mt-2 text-gray-500 none:text-gray-400">
                 Logout from your account
             </p>
-            <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/logout">
-                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Go 
+            <a class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none none:text-blue-500 none:hover:text-blue-400 none:focus:outline-none none:focus:ring-1 none:focus:ring-gray-600" href="/logout">
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-2 none:bg-gray-800 none:hover:bg-gray-700 none:focus:ring-gray-700 none:border-gray-700">Go 
                 </button>
               </a>
             </div>

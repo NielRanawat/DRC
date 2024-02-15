@@ -24,12 +24,12 @@
                                             <!-- Tooltip -->
                                             <div class="hs-tooltip inline-block [--trigger:hover] [--placement:bottom]">
                                                 <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                                                    <span class="font-semibold text-gray-800 dark:text-gray-200">
+                                                    <span class="font-semibold text-gray-800 nonetext-gray-200">
                                                         By <%= foundPost.author_name %>
                                                     </span>
 
                                                     <!-- Dropdown Card -->
-                                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-black"
+                                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl nonebg-black"
                                                         role="tooltip">
                                                         <!-- Body -->
                                                         <div class="p-4 sm:p-5">
@@ -61,7 +61,7 @@
 
                                                             <div>
                                                                 <button type="button"
-                                                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600">
                                                                     <svg class="flex-shrink-0 w-3.5 h-3.5"
                                                                         xmlns="http://www.w3.org/2000/svg" width="16"
                                                                         height="16" fill="currentColor"
@@ -84,13 +84,13 @@
 
                                             <ul class="text-xs text-gray-500">
                                                 <li
-                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600">
+                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
                                                     <%= foundPost.createdAt.toLocaleString('en-US', { month: 'short' ,
                                                         day: '2-digit' , year: 'numeric' }) %>
 
                                                 </li>
                                                 <li
-                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600">
+                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
                                                     5 min read
                                                 </li>
                                             </ul>
@@ -100,7 +100,7 @@
                                         <div>
 
                                             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                                class="py-2 px-3.5 me-2 inline-flex mb-2 text-sm font-medium text-blue-500 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                                class="py-2 px-3.5 me-2 inline-flex mb-2 text-sm font-medium text-blue-500 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 nonefocus:ring-gray-700 nonebg-gray-800 nonetext-gray-400 noneborder-gray-600 nonehover:text-white nonehover:bg-gray-700"
                                                 type="button">Share <svg class="w-5 h-5 ml-2 text-blue-500"
                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24">
@@ -111,12 +111,12 @@
 
                                             <!-- Dropdown menu -->
                                             <div id="dropdown"
-                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                                <ul class="py-3 text-sm text-gray-700 dark:text-gray-200"
+                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 nonebg-gray-700">
+                                                <ul class="py-3 text-sm text-gray-700 nonetext-gray-200"
                                                     aria-labelledby="dropdownDefaultButton">
                                                     <li style="font-size: 10px;" class="flex items-center">
                                                         <a id="shareButton"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" fill="currentColor"
                                                                 class="bi mr-2 bi-whatsapp" viewBox="0 0 16 16">
@@ -129,7 +129,7 @@
 
                                                     <li style="font-size: 10px;" class="flex items-center">
                                                         <a onclick="sharePage()"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" fill="currentColor"
                                                                 class="mr-2 bi bi-twitter-x" viewBox="0 0 16 16">
@@ -144,7 +144,7 @@
                                                     </p>
                                                     <li style="font-size: 10px;" class="flex items-center">
                                                         <a onclick="copyContent()"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" fill="currentColor" class="bi mr-2 bi-copy"
                                                                 viewBox="0 0 16 16">
@@ -205,12 +205,12 @@
             <div class="max-w-[65rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                 <!-- Grid -->
                 <div class="max-w-2xl mb-10 lg:mb-14">
-                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Explore More</h2>
+                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight nonetext-white">Explore More</h2>
                 </div>
 
                 <div class="grid lg:grid-cols-2 gap-6">
                     <!-- Card -->
-                    <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                         href="/category?name=f1">
                         <div
                             class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
@@ -239,7 +239,7 @@
                     <!-- End Card -->
 
                     <!-- Card -->
-                    <a class="group relative block rounded-xl dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
                         href="/category?name=motogp">
                         <div
                             class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">

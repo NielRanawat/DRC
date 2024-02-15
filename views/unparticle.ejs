@@ -27,12 +27,12 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                                             <!-- Tooltip -->
                                             <div class="hs-tooltip inline-block [--trigger:hover] [--placement:bottom]">
                                                 <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                                                    <span class="font-semibold text-gray-800 dark:text-gray-200">
+                                                    <span class="font-semibold text-gray-800 none:text-gray-200">
                                                         By <%= post.author_name %>
                                                     </span>
 
                                                     <!-- Dropdown Card -->
-                                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl dark:bg-black"
+                                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl none:bg-black"
                                                         role="tooltip">
 >
 
@@ -50,7 +50,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
 
                                             <ul class="text-xs text-gray-500">
                                                 <li
-                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600">
+                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full none:text-gray-400 none:before:bg-gray-600">
                                                     <%= (post.createdAt).toLocaleString('en-IN') %>
                                                 </li>
 
@@ -66,7 +66,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                         <!-- Content -->
                         <div class="space-y-5 md:space-y-8">
                             <div class="space-y-3">
-                                <h2 class="text-2xl mb-8 md:mb-12 font-bold md:text-3xl dark:text-white">
+                                <h2 class="text-2xl mb-8 md:mb-12 font-bold md:text-3xl none:text-white">
                                     <%= post.title %>
                                 </h2>
 
@@ -83,11 +83,11 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                             <div class="">
                                 <% if( source === 'adming'){ %>
                                     <a href="/pending-articles">
-                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Back to Approval page</button>
+                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 none:bg-blue-600 none:hover:bg-blue-700 focus:outline-none none:focus:ring-blue-800">Back to Approval page</button>
                                 </a>
                                 <% } else { %>
                                     <a href="/user-articles">
-                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Back to Articles page</button>
+                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 none:bg-blue-600 none:hover:bg-blue-700 focus:outline-none none:focus:ring-blue-800">Back to Articles page</button>
                                     </a>
                                 <% }  %>
                             </div>
