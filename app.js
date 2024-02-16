@@ -466,6 +466,13 @@ app.get('/edit-post/:article_id', async (req, res) => {
     }
 });
 
+app.get('/about-us' , (req,res) => {
+    if(req.isAuthenticated()){
+        res.render('about-us' , {user : req.user})
+    } else {
+        res.render('about-us' , {user : null})
+    }
+});
 
 app.use((req, res, next) => {
     res.status(404).render("404");
