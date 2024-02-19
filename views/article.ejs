@@ -10,6 +10,14 @@
         content="https://google.com" />
     <meta property="og:image"
         content="<%= foundPost.img_url%>" />
+
+    <!-- twitter og tag -->
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@desiracingco" />
+<meta name="twitter:title" content="<%= foundPost.title %>" />
+<meta name="twitter:description" content="<%- foundPost.content %>" />
+<meta name="twitter:image" content="<%= foundPost.img_url%>" />
+
     <title>DesiRacingCo</title>
     <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg"
         type="image/x-icon">
@@ -318,7 +326,7 @@
 
 
         <script>
-            let text = 'https://desiracingco.in/article/<%- foundPost._id %>';
+            let text = 'https://<%- domain %>/article/<%- foundPost._id %>';
             let textTitle = '<%- foundPost.title %>'
 
             const shareButton = document.getElementById('shareButton');

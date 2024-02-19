@@ -186,9 +186,9 @@ app.get('/article/:article_id', (req, res) => {
         if (!err) {
             if(foundPost != null) {
                 if (req.isAuthenticated()) {
-                    res.render("article", { foundPost: foundPost, loggedIn: true, user : req.user.name });
+                    res.render("article", { foundPost: foundPost, loggedIn: true, user : req.user.name , domain : process.env.DOMAIN });
                 } else {
-                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null });
+                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null , domain : process.env.DOMAIN });
                 }
             } else {
                 res.render('404');
