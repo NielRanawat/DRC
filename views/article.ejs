@@ -1,14 +1,18 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="theme-color" content="#000000">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:type" content="Test">
-    <meta property="og:title" content="The Rock Photo Studio in Florida">
-
+    <meta property="og:title" content="<%= foundPost.title %>" />
+    <meta property="og:url"
+        content="https://google.com" />
+    <meta property="og:image"
+        content="<%= foundPost.img_url%>" />
     <title>DesiRacingCo</title>
-    <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg"
+        type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="
     https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js
@@ -17,345 +21,346 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@preline/dropdown/index.min.js"></script>
-  </head>
+</head>
 
 
 
-    <%- include("partial/navbar") -%>
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js"></script>
+<%- include("partial/navbar") -%>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js"></script>
 
-        <body>
-            <section>
-                <!-- Blog Article -->
-                <div class="max-w-5xl px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-16 mx-auto">
-                    <div class="max-w-5xl">
-                        <!-- Avatar Media -->
-                        <div class="flex justify-between items-center mb-6">
-                            <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                                <div class="flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full "
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAXVBMVEWJk6T///+Fj6F/ip24vseCjZ+Nl6eWn66Ej6CaorGTnKv5+fqss77x8vS1u8XZ3OHT1tyhqbbAxc7h4+fLz9bm6Ov09fbl5+rs7vDFydGnrruvtcDX2uCeprPDx9CMoWWvAAAMLklEQVR4nN2d6baiOBSFcxOCEVCZ9OJU7/+YzeAsGc9Gub1/9FrVq0r5TEhyxrCfyZWuqlNdRlmxXCRxzOI4WSyLLCrrU7VKp/96NuWH76p6vYy5kJJzpTi7q/sjl1Lw+Lyuq92UDzEV4W5Tnju0J64xcdWBnqPNVJhTEO7yY9wOmwXtBVTK+JhPQYkmTKsoEZ50VykpkuMG/EBYwvSU+Y7dO6XKsJBAws2BijeIS46ERBH+rjkE7wYZNaAnwxDmiVAwvAukWOaQZwMQ7kouwXgDo+QlYHElEzZH4Ox8hzySJyuRsDnAp+ezlDgQGUmEzWHC8buKSxojgXB1ENPz9YzisPoGYfSB8bsxyijYCgklrK1HajAjqz9KuE0m2R+Mksn2c4TrD72Az+Ji/SHCin2Dr2dk1ScIj+JLfJ3EcXLCbTztDm+Tin3fRk/C8psDOEiUExKmy88voe+SS6+90Yew4t9aYp7Fuc+C40G4//4MvUrspyAs5jBDr5IFnDBN5jFDr+KJ68voSNiw724S71LM0aZyI9zMaYZeJd3WGyfCej5rzKOEk7nhQjhTQEdEB8IZ7RKvctk17IQzOKjp5XCEsxL+mzNgi/iPSjjjKTrIOlEthLNdZO4SFue/mTCfP6AV0UhY/QXAFtG49ZsImzmeZMYkTQc4A2H67Qf3kOEYbiBczMuaMIkvQggLNKDiUkohRPtfDo+n6u1FLeEe+RJyKXix3p+qbbNqtlW+XxcqNGNjXFK7LeoIgcsol/yQv68FqzxjQEjtgqoh3MGmkRSZfjGvDgI2VZQmIq4hXIAIZWIzcGpUkEdpVptxwhLzrTI+Wfg6nWLQt43bGaOEmJdQOYf8aszaOv4qjhIivo6Jg7trOj1gFjZXwgywwnHuMkHvOiGGkY9FpkYIN4DfU5594+47RExEjOTDjRACRjAgzNdFlulfPILz/r/W9OniE1Z4EMCfoN4D4W+EW/rXuPkxRwTwKIi3AOobIT0+YXMrTIrIExthTX7fA6fooH/kr5evE+iVkDyCMigl5KYjGZGbCSMqIT+TAAEnYh6ZCFf0V51aBUO3auSzkfFMeKAOodnt5STygYMf9IQN+cNDdvpXkQ+N4sncfiIkDyEkL57s41NPTpvHZyIPocRk15N3rKdt/5GQOoQmn56XEiLhk+ftgZA+hKhKF3LawOOb+ECYUdfptwNTsMiD+LCc3gl31B8O9BZ2Ir+J8p76ficsZ7GQXkQ+Wt0PNvfHov5sr6clktZURPlOmJMnRlii+bh+ca/MjZAcaYqBgHR3333nuhKSTXtOs5peRfal3Hb9KyF94mNrW8lb4u0XvxLSLV9s8wDy3nWzhBnoJwNu94Oom/5tUl0IyVbFi1FGF+yJBsKUPITKmn3lqX90Wz99IDzRXVy4I9sg8v7M5OmBkG76OibsuquiLzWHB0J6qEKgyuevItty19WUYX4vJtBNO3Z0wmFe9YRkL2lLiO6lkwLGMLoRkveelhAM+PMDiLUlV0LAhJjlGA6vTkdIX5hnSthvYR0hIm4vCBXzowIEGBjPLoQx/bOw9m+nLSLJJh4I6cd4BjeeQIVIXZCGIY5srXhoZFunPSKpr/vdGWQ3bE/eiJjMo46INKluR2wJl5DmTkswISRDuXsqRncjXj4Mu12kmMxT2REiluXus36hhICjcqd2E2Oo6knuWSZvEd0D36tdahhm0WqFCq0NAhyVO/F9S4g40XSCnmpAr053qmGwsgpOyRR6FWpi8UVLiPkohvUngiZpqx9Gd7NdBcg0uQpXCyFTBvCHXKTc+xzYVKCeiYmGgTae/tNQ9gXuV2eyYgjz9yJD8ZGfgCVXMmeoVauTwJxrfoGFnXzPQIeH4eMwuz6yLJCXjBw4fNRb+mqIoFVzas3IWTRPknTHMOo4M0hlDFxISZ+nC+jz8IItoR9ITYL++VmDy6uXDPuTkTL1O8FbHCwY7gR4ESnOhu8AkDCEs/RZBNcpoJzlVXi+Vio0lgjxAr9oEsJQnw3wiPyoSRiDlptp+qjEE42i8E9UhBTnvSvGr6WD5NLvdLNaTNRmJIHvh1cpr/wTekGZTgv0meZBcum6pv5ONYCsO9OcJ+xgIo8uHsZmys7n/Ay2LV6kRGbb/n+n7eze2hZQ+/BdXC5rfcwmrRcTN85u7UOkjT8qLkVRj72RTV1gO7iMfnvJ6k+07ZSSF1H+uxtGM1395mXB5SfaUPE90tdm+a6uwRBvd2DetRn6VIcmmSP9pXOUrIA+71lKNMC4xSwlU2DsaZ4Cxg9nqT5+iIoBz1J9DBgZuJid+jj+LDtZo9TnYmC96DNTn08DyomapyQur22euuS1QXIT56lLbiIkv3Se6gqDWsLV/5hwNeR5f/s5ptMlzxtwquGK40W/2e2Wq08xgnl/83S2jvBaZ+fuxmsC563eInzPl+JQN1PeHp42NaGJa58u2dc9hcUuFOq2V5vyZeBVoH2LgJ4wpPidiwJdRKLXtghxOg4tBkPrD+USm9dtU4jjf6hyCawh9b38DKDIe7V4qCH13S8U++wADqo8b2Tq94oroZ+NqJxvk8IqTbwQL6VYl44DPmMIa3jlLy+f0qVtxIXQZ5p+aQR7eUSsL5M0oC8GR1dt+2jnPhIvfTHcpykwXz1E7klTL71NnM1giewGFaLIcbbd2lZdCV3DF9heSSFyPGLemjzc+kS5eWu+PEc7uc3Tez2kZ68vaodZhM4uDzrS68tprZnBEDoO4ki/NpeKvy/u9Y9y2PdHe+45FK3DC7bDVNsJR/smOvS+hLdoCZO9j8f1PNPJq38pup9XqKxnN03/UmsvJWjvR4psxxNdD1rrIMK7XYXKtrNp+wjbBhHeCypUlqHg2l7Qtn8JbhwYLsuyb+jnbRvEuRCaO36berLbgjSfpDDK+JTyOanV526E79sVV5nsC/PdCObT6R8hfPm7PneU/AlC6x0lpntm/gKh/Z4ZU3HVXyB837N97nv6A4Qu9z0ZluI/QOh0Z5f+GpT5Ezreu6Z1gM+e8NEsvMnn/sPZEzrff6jz9cydcLxphc89pDMn9LmHVHNzFrRPEkWjtoXfXbKam7O+ENseUxqPLYW6lnh+dzoHFL/itYvHfn7fO511HUYkugGkv5rRvcz/Xm6dvS9xzaDCVI0+lqGtv8FuH7+nj38zyP3zk4++PcrgyTUQarwh30k1uajUnCgNv7rJ99JorOHgm1TJKsafSJrcnEbvki6OFXTdL13N6C5hi/mZ/Wfjs757Gb/gHNY9jKVFhcVDqOtVwT8+U9NCB2h5EpsPVHvPsiw+uqZudElt1st5rV5e3erF+AcDNWmmewr7QdLux/6ndU3J4kMR05zpHIDCfr2Ng6de3zeGawwWrFZn7QO4rAYusQhDaxwZT56dUeqTvJ2WO6doi26d7r+lmHTjqLUT1LWTkVs8yZQIrsRxstcxjw1f7Ng2zTFi1pgykJVblxZvGfkUc5w7rjHB1BDP6MbxAJ+rOTMFM91NHPeop+bUe/1GcUbecLErjXw+ZqpHXFe/MV6+Na5BL+TG1pXHYRu8ySdyXXFL1pSUBX0gm4hJ8/co7rNFecXmd9bCFSXVmgLZ7BNr/Y9ceE0Vz+wD7Sn1EZIf8qDpWkWxQy2er0vTN7/id9SV9yIuxaLceFFu64K7lBqq2NeH4p9BcnTLQu6aJGX1r8Oa3pzKpZS2d3xQgHchIEemMhykXjCllEkR5dVqDDRdbfN/2aIrE3X8QM4CTsFBWUCRTzWg6htECZYU2ToqyzJaH7PDMmGiaxelXOE6vjCPe1ieU5OEVK5e6qGVCipiloG+odBMLr1ROo04C/UohOeqRR/rSNa90OEhIUI23uoQWIDsq/ZcT7BdSPmGTfEBRkW0sYkZlWFF1h6il4yTc0abbML3kcuMbHcCsmJX0TRtENt9NAL4DjB5v8FdDwx8qI4NqMzm7VFarDovPKkilFsEmLt9KjCztbUxDkCPCDQ7Pc0PTiaQQa11mW2gMR94/n0VJaE9ZZQUyRF9YyuesNUuz2LfCdsunPExzDVg0VQ1FLtNee4sP6sV0f4NKfg52kziVP6ZjrDXrqqPCya7tsGdzfTEpTovgJBscdxXkwbpPlAHk66qU11GWbFcJHHM4jhZLIssKuvTuO0P1n/Heal9uLqX3wAAAABJRU5ErkJggg=="
-                                        alt="Avatar">
-                                </div>
+    <body>
+        <section>
+            <!-- Blog Article -->
+            <div class="max-w-5xl px-6 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-16 mx-auto">
+                <div class="max-w-5xl">
+                    <!-- Avatar Media -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full "
+                                    src="data:image/png;base64,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"
+                                    alt="Avatar">
+                            </div>
 
-                                <div class="grow">
-                                    <div class="flex justify-between items-center gap-x-2">
-                                        <div>
-                                            <!-- Tooltip -->
-                                            <div class="hs-tooltip inline-block [--trigger:hover] [--placement:bottom]">
-                                                <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
-                                                    <span class="font-semibold text-gray-800 nonetext-gray-200">
-                                                        By <%= foundPost.author_name %>
-                                                    </span>
+                            <div class="grow">
+                                <div class="flex justify-between items-center gap-x-2">
+                                    <div>
+                                        <!-- Tooltip -->
+                                        <div class="hs-tooltip inline-block [--trigger:hover] [--placement:bottom]">
+                                            <div class="hs-tooltip-toggle sm:mb-1 block text-start cursor-pointer">
+                                                <span class="font-semibold text-gray-800 nonetext-gray-200">
+                                                    By <%= foundPost.author_name %>
+                                                </span>
 
-                                                    <!-- Dropdown Card -->
-                                                    <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl nonebg-black"
-                                                        role="tooltip">
-                                                        <!-- Body -->
-                                                        <div class="p-4 sm:p-5">
-                                                            <div
-                                                                class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-                                                                <div class="flex-shrink-0">
-                                                                    <img class="h-8 w-8 rounded-full "
-                                                                        src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                                                                        alt="Image Description">
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Body -->
-
-                                                        <!-- Footer -->
+                                                <!-- Dropdown Card -->
+                                                <div class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 max-w-xs cursor-default bg-gray-900 divide-y divide-gray-700 shadow-lg rounded-xl nonebg-black"
+                                                    role="tooltip">
+                                                    <!-- Body -->
+                                                    <div class="p-4 sm:p-5">
                                                         <div
-                                                            class="flex justify-between items-center px-4 py-3 sm:px-5">
-                                                            <ul class="text-xs space-x-3">
-                                                                <li class="inline-block">
-                                                                    <span class="font-semibold text-gray-200">56</span>
-                                                                    <span class="text-gray-400">articles</span>
-                                                                </li>
-                                                                <li class="inline-block">
-                                                                    <span class="font-semibold text-gray-200">1k+</span>
-                                                                    <span class="text-gray-400">followers</span>
-                                                                </li>
-                                                            </ul>
-
-                                                            <div>
-                                                                <button type="button"
-                                                                    class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600">
-                                                                    <svg class="flex-shrink-0 w-3.5 h-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" fill="currentColor"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                                    </svg>
-                                                                    Follow
-                                                                </button>
+                                                            class="mb-2 flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+                                                            <div class="flex-shrink-0">
+                                                                <img class="h-8 w-8 rounded-full "
+                                                                    src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                                                                    alt="Image Description">
                                                             </div>
+
                                                         </div>
-                                                        <!-- End Footer -->
                                                     </div>
-                                                    <!-- End Dropdown Card -->
+                                                    <!-- End Body -->
+
+                                                    <!-- Footer -->
+                                                    <div class="flex justify-between items-center px-4 py-3 sm:px-5">
+                                                        <ul class="text-xs space-x-3">
+                                                            <li class="inline-block">
+                                                                <span class="font-semibold text-gray-200">56</span>
+                                                                <span class="text-gray-400">articles</span>
+                                                            </li>
+                                                            <li class="inline-block">
+                                                                <span class="font-semibold text-gray-200">1k+</span>
+                                                                <span class="text-gray-400">followers</span>
+                                                            </li>
+                                                        </ul>
+
+                                                        <div>
+                                                            <button type="button"
+                                                                class="py-1.5 px-2.5 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600">
+                                                                <svg class="flex-shrink-0 w-3.5 h-3.5"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                                                </svg>
+                                                                Follow
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Footer -->
                                                 </div>
+                                                <!-- End Dropdown Card -->
                                             </div>
-                                            <!-- End Tooltip -->
+                                        </div>
+                                        <!-- End Tooltip -->
 
-                                            <ul class="text-xs text-gray-500">
-                                                <li
-                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
-                                                    <%= foundPost.createdAt.toLocaleString('en-US', { month: 'short' ,
-                                                        day: '2-digit' , year: 'numeric' }) %>
+                                        <ul class="text-xs text-gray-500">
+                                            <li
+                                                class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
+                                                <%= foundPost.createdAt.toLocaleString('en-US', { month: 'short' ,
+                                                    day: '2-digit' , year: 'numeric' }) %>
 
+                                            </li>
+                                            <li
+                                                class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
+                                                <span id="timeToRead"></span> min read
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Button Group -->
+                                    <div>
+
+                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                                            class="py-2 px-3.5 me-2 inline-flex mb-2 text-sm font-medium text-blue-500 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 nonefocus:ring-gray-700 nonebg-gray-800 nonetext-gray-400 noneborder-gray-600 nonehover:text-white nonehover:bg-gray-700"
+                                            type="button">Share <svg class="w-5 h-5 ml-2 text-blue-500"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                                    d="m8 10.9 7-3.2m-7 5.4 7 3.2M8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm12 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm0-11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdown"
+                                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 nonebg-gray-700">
+                                            <ul class="py-3 text-sm text-gray-700 nonetext-gray-200"
+                                                aria-labelledby="dropdownDefaultButton">
+                                                <li style="font-size: 10px;" class="flex items-center">
+                                                    <a id="shareButton"
+                                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                            fill="currentColor" class="bi mr-2 bi-whatsapp"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+                                                        </svg>
+                                                        <span>Share on WhatsApp</span>
+                                                    </a>
                                                 </li>
-                                                <li
-                                                    class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
-                                                    <span id="timeToRead"></span> min read
+
+                                                <li style="font-size: 10px;" class="flex items-center">
+                                                    <a onclick="sharePage()"
+                                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                            fill="currentColor" class="mr-2 bi bi-twitter-x"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                                                        </svg>
+                                                        <span>Share on X</span>
+                                                    </a>
+                                                </li>
+                                                <p id="link" style="display: none;">https://desiracingco.in/article/
+                                                    <%= foundPost._id %>
+                                                </p>
+                                                <li style="font-size: 10px;" class="flex items-center">
+                                                    <a onclick="copyContent()"
+                                                        class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                            fill="currentColor" class="bi mr-2 bi-copy"
+                                                            viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                                        </svg>
+                                                        <span id="copied">Copy Link</span>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
 
-                                        <!-- Button Group -->
-                                        <div>
-
-                                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                                class="py-2 px-3.5 me-2 inline-flex mb-2 text-sm font-medium text-blue-500 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 nonefocus:ring-gray-700 nonebg-gray-800 nonetext-gray-400 noneborder-gray-600 nonehover:text-white nonehover:bg-gray-700"
-                                                type="button">Share <svg class="w-5 h-5 ml-2 text-blue-500"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                                        d="m8 10.9 7-3.2m-7 5.4 7 3.2M8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm12 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm0-11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
-                                                </svg>
-                                            </button>
-
-                                            <!-- Dropdown menu -->
-                                            <div id="dropdown"
-                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 nonebg-gray-700">
-                                                <ul class="py-3 text-sm text-gray-700 nonetext-gray-200"
-                                                    aria-labelledby="dropdownDefaultButton">
-                                                    <li style="font-size: 10px;" class="flex items-center">
-                                                        <a id="shareButton"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                height="18" fill="currentColor"
-                                                                class="bi mr-2 bi-whatsapp" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
-                                                            </svg>
-                                                            <span>Share on WhatsApp</span>
-                                                        </a>
-                                                    </li>
-
-                                                    <li style="font-size: 10px;" class="flex items-center">
-                                                        <a onclick="sharePage()"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                height="18" fill="currentColor"
-                                                                class="mr-2 bi bi-twitter-x" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
-                                                            </svg>
-                                                            <span>Share on X</span>
-                                                        </a>
-                                                    </li>
-                                                    <p id="link" style="display: none;">https://desiracingco.in/article/
-                                                        <%= foundPost._id %>
-                                                    </p>
-                                                    <li style="font-size: 10px;" class="flex items-center">
-                                                        <a onclick="copyContent()"
-                                                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 nonehover:bg-gray-600 nonehover:text-white">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                height="18" fill="currentColor" class="bi mr-2 bi-copy"
-                                                                viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
-                                                            </svg>
-                                                            <span id="copied">Copy Link</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- End Avatar Media -->
+                    </div>
+                    <!-- End Avatar Media -->
 
-                        <!-- Content -->
-                        <div class="space-y-5 md:space-y-8">
-                            <div class="space-y-3">
-                                <h2 class="text-2xl bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text mb-8 md:mb-12 font-bold md:text-3xl">
-                                    <%= foundPost.title %>
-                                </h2>
+                    <!-- Content -->
+                    <div class="space-y-5 md:space-y-8">
+                        <div class="space-y-3">
+                            <h2
+                                class="text-2xl bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text mb-8 md:mb-12 font-bold md:text-3xl">
+                                <%= foundPost.title %>
+                            </h2>
 
-                                <figure">
-                                    <img class="w-[40rem] rounded-xl" src="<%= foundPost.img_url %>"
-                                        alt="Article Image">
-                                    </figure>
+                            <figure">
+                                <img class="w-[40rem] rounded-xl" src="<%= foundPost.img_url %>" alt="Article Image">
+                                </figure>
 
-                                    <div id="dynamicContent" class="text-xl articleContent my-12 text-gray-800 ">
-                                        <%- foundPost.content %>
-                                    </div>
-
-
+                                <div id="dynamicContent" class="text-xl articleContent my-12 text-gray-800 ">
+                                    <%- foundPost.content %>
+                                </div>
 
 
-                                    <div>
-                                        <span class="text-sm block mb-2">Tags:</span>
-                                        <% foundPost.tags.forEach(function(tag){ %>
-                                            <a
-                                                class="m-1 uppercase border border-teal-500 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-teal-500">
-                                                <%= tag %>
-                                            </a>
-                                            <% }) %>
 
-                                    </div>
-                            </div>
-                            <!-- End Content -->
+
+                                <div>
+                                    <span class="text-sm block mb-2">Tags:</span>
+                                    <% foundPost.tags.forEach(function(tag){ %>
+                                        <a
+                                            class="m-1 uppercase border border-teal-500 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-teal-500">
+                                            <%= tag %>
+                                        </a>
+                                        <% }) %>
+
+                                </div>
+                        </div>
+                        <!-- End Content -->
+                    </div>
+                </div>
+
+                <!-- End Sticky Share Group -->
+        </section>
+
+
+        <div class="max-w-[65rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+            <!-- Grid -->
+            <div class="max-w-2xl mb-10 lg:mb-14">
+                <h2 class="text-2xl font-bold md:text-4xl md:leading-tight nonetext-white">Explore More</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Card -->
+                <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
+                    href="/category?name=f1">
+                    <div
+                        class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
+                        <img class="w-full h-full absolute top-0 start-0  object-cover"
+                            src="https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-02/nba-plain--5a35d13f-c0ee-4740-bb0d-357b329fd4db.png?itok=R6Y5e-bq"
+                            alt="Image Description">
+                    </div>
+
+                    <div class="absolute top-0 inset-x-0 z-10">
+                        <div class="p-4 flex flex-col h-full sm:p-6">
+
                         </div>
                     </div>
 
-                    <!-- End Sticky Share Group -->
-            </section>
-
-
-            <div class="max-w-[65rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-                <!-- Grid -->
-                <div class="max-w-2xl mb-10 lg:mb-14">
-                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight nonetext-white">Explore More</h2>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-6">
-                    <!-- Card -->
-                    <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
-                        href="/category?name=f1">
-                        <div
-                            class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
-                            <img class="w-full h-full absolute top-0 start-0  object-cover"
-                                src="https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-02/nba-plain--5a35d13f-c0ee-4740-bb0d-357b329fd4db.png?itok=R6Y5e-bq"
-                                alt="Image Description">
+                    <div class="absolute bottom-0 inset-x-0 z-10">
+                        <div class="flex flex-col h-full p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
+                                Latest from Formula 1
+                            </h3>
+                            <p class="mt-2 text-white/[.8]">
+                                Explore the latest and most exciting news
+                            </p>
                         </div>
+                    </div>
+                </a>
+                <!-- End Card -->
 
-                        <div class="absolute top-0 inset-x-0 z-10">
-                            <div class="p-4 flex flex-col h-full sm:p-6">
+                <!-- Card -->
+                <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
+                    href="/category?name=motogp">
+                    <div
+                        class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
+                        <img class="w-full h-full absolute top-0 start-0  object-cover"
+                            src="https://vroom.media/wp-content/uploads/motogp-4k-hd-ibc-tv.jpg"
+                            alt="Image Description">
+                    </div>
 
-                            </div>
+                    <div class="absolute top-0 inset-x-0 z-10">
+                        <div class="p-4 flex flex-col h-full sm:p-6">
+
                         </div>
+                    </div>
 
-                        <div class="absolute bottom-0 inset-x-0 z-10">
-                            <div class="flex flex-col h-full p-4 sm:p-6">
-                                <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
-                                    Latest from Formula 1
-                                </h3>
-                                <p class="mt-2 text-white/[.8]">
-                                    Explore the latest and most exciting news
-                                </p>
-                            </div>
+                    <div class="absolute bottom-0 inset-x-0 z-10">
+                        <div class="flex flex-col h-full p-4 sm:p-6">
+                            <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
+                                Latest from MotoGP
+                            </h3>
+                            <p class="mt-2 text-white/[.8]">
+                                Explore the latest and most exciting news
+                            </p>
                         </div>
-                    </a>
-                    <!-- End Card -->
-
-                    <!-- Card -->
-                    <a class="group relative block rounded-xl nonefocus:outline-none nonefocus:ring-1 nonefocus:ring-gray-600"
-                        href="/category?name=motogp">
-                        <div
-                            class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[350px] before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
-                            <img class="w-full h-full absolute top-0 start-0  object-cover"
-                                src="https://vroom.media/wp-content/uploads/motogp-4k-hd-ibc-tv.jpg"
-                                alt="Image Description">
-                        </div>
-
-                        <div class="absolute top-0 inset-x-0 z-10">
-                            <div class="p-4 flex flex-col h-full sm:p-6">
-
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-0 inset-x-0 z-10">
-                            <div class="flex flex-col h-full p-4 sm:p-6">
-                                <h3 class="text-lg sm:text-3xl font-semibold text-white group-hover:text-white/[.8]">
-                                    Latest from MotoGP
-                                </h3>
-                                <p class="mt-2 text-white/[.8]">
-                                    Explore the latest and most exciting news
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- End Card -->
-                </div>
-                <!-- End Grid -->
+                    </div>
+                </a>
+                <!-- End Card -->
             </div>
+            <!-- End Grid -->
+        </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Get the article content
-                    var articleContent = document.getElementById('dynamicContent').innerText;            
-                    // Count the total number of words
-                    var wordCount = articleContent.split(/\s+/).length;
-            
-                    // Average reading speed (adjust as needed)
-                    var wordsPerMinute = 200;
-            
-                    // Calculate reading time in minutes
-                    var readingTime = Math.ceil(wordCount / wordsPerMinute);
-            
-                    // Display the reading time dynamically
-                    var readingTimeElement = document.getElementById('timeToRead').innerHTML = readingTime;
-                });
-            </script>
-            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the article content
+                var articleContent = document.getElementById('dynamicContent').innerText;
+                // Count the total number of words
+                var wordCount = articleContent.split(/\s+/).length;
 
-            <script>
-                let text = 'https://desiracingco.in/article/<%- foundPost._id %>';
-                let textTitle = '<%- foundPost.title %>'
+                // Average reading speed (adjust as needed)
+                var wordsPerMinute = 200;
 
-                const shareButton = document.getElementById('shareButton');
-                shareButton.addEventListener('click', () => {
-                    const shareText = textTitle + '\n\nCheck out this interesting article from DesiRacingCo!';
-                    const shareUrl = text;
-                    // Create the WhatsApp share URL
-                    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A%0A${encodeURIComponent(shareUrl)}`;
-                    // Open WhatsApp with the share URL
-                    window.location.href = whatsappUrl;
-                });
+                // Calculate reading time in minutes
+                var readingTime = Math.ceil(wordCount / wordsPerMinute);
 
-                function sharePage() {
-                    const url = text;
-                    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle + "\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
-                    return false;
-                };
+                // Display the reading time dynamically
+                var readingTimeElement = document.getElementById('timeToRead').innerHTML = readingTime;
+            });
+        </script>
 
-                const copyContent = async () => {
-                    try {
-                        await navigator.clipboard.writeText(text);
-                        document.getElementById('copied').innerHTML = "Copied!"
-                        setTimeout(() => {
-                            document.getElementById('copied').innerHTML = "Copy Link"
-                        }, 3000);
-                    } catch (err) {
-                    }
+
+        <script>
+            let text = 'https://desiracingco.in/article/<%- foundPost._id %>';
+            let textTitle = '<%- foundPost.title %>'
+
+            const shareButton = document.getElementById('shareButton');
+            shareButton.addEventListener('click', () => {
+                const shareText = textTitle + '\n\nCheck out this interesting article from DesiRacingCo!';
+                const shareUrl = text;
+                // Create the WhatsApp share URL
+                const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A%0A${encodeURIComponent(shareUrl)}`;
+                // Open WhatsApp with the share URL
+                window.location.href = whatsappUrl;
+            });
+
+            function sharePage() {
+                const url = text;
+                window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle + "\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
+                return false;
+            };
+
+            const copyContent = async () => {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    document.getElementById('copied').innerHTML = "Copied!"
+                    setTimeout(() => {
+                        document.getElementById('copied').innerHTML = "Copy Link"
+                    }, 3000);
+                } catch (err) {
                 }
-            </script>
+            }
+        </script>
 
-            <script>
-                // Get all img elements inside the dynamicContent div
-                const imgElements = document.querySelectorAll('#dynamicContent img');
-                const pElements = document.querySelectorAll('#dynamicContent p');
+        <script>
+            // Get all img elements inside the dynamicContent div
+            const imgElements = document.querySelectorAll('#dynamicContent img');
+            const pElements = document.querySelectorAll('#dynamicContent p');
 
-                pElements.forEach(p => {
-                    p.classList.add('my-6');
-                });
-                // Loop through each img element and add Tailwind CSS classes
-                imgElements.forEach(img => {
-                    img.classList.add('rounded-xl', 'w-[40rem]', 'my-8');
-                });
-            </script>
+            pElements.forEach(p => {
+                p.classList.add('my-6');
+            });
+            // Loop through each img element and add Tailwind CSS classes
+            imgElements.forEach(img => {
+                img.classList.add('rounded-xl', 'w-[40rem]', 'my-8');
+            });
+        </script>
 
-            <%- include("partial/footer") -%>
+        <%- include("partial/footer") -%>
