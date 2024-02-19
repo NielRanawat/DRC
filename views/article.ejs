@@ -90,7 +90,7 @@
                                                 </li>
                                                 <li
                                                     class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full nonetext-gray-400 nonebefore:bg-gray-600">
-                                                    5 min read
+                                                    <span id="timeToRead"></span> min read
                                                 </li>
                                             </ul>
                                         </div>
@@ -166,7 +166,7 @@
                         <!-- Content -->
                         <div class="space-y-5 md:space-y-8">
                             <div class="space-y-3">
-                                <h2 class="text-2xl mb-8 md:mb-12 font-bold md:text-3xl">
+                                <h2 class="text-2xl bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text mb-8 md:mb-12 font-bold md:text-3xl">
                                     <%= foundPost.title %>
                                 </h2>
 
@@ -268,6 +268,25 @@
                 </div>
                 <!-- End Grid -->
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Get the article content
+                    var articleContent = document.getElementById('dynamicContent').innerText;            
+                    // Count the total number of words
+                    var wordCount = articleContent.split(/\s+/).length;
+            
+                    // Average reading speed (adjust as needed)
+                    var wordsPerMinute = 200;
+            
+                    // Calculate reading time in minutes
+                    var readingTime = Math.ceil(wordCount / wordsPerMinute);
+            
+                    // Display the reading time dynamically
+                    var readingTimeElement = document.getElementById('timeToRead').innerHTML = readingTime;
+                });
+            </script>
+            
 
             <script>
                 let text = 'https://desiracingco.in/article/<%- foundPost._id %>';

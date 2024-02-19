@@ -22,7 +22,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 600000
+        expires: 2592000 //30 days
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
@@ -65,7 +65,7 @@ const postSchema = new mongoose.Schema({
     author_name: { type: String, require: true },
     carouselHeading: { type: String, require: true, default: null },
     carousel_id: { type: Number, require: true, default: null },
-    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp' , 'none'] , default : 'none' }, //this functionality is not implemented yet don't touch it
+    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp' , 'none'] , default : 'none' },
     tags: [],
     status: { type: String, require: true, default: 'Pending', enum: ['Pending', 'Approved', 'Rejected'] },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
@@ -150,7 +150,7 @@ app.get("/", function (req, res) {
                         carousel3found = true;
                     }
                 });
-                res.render("home", { foundPost: foundPost, loggedIn: true, user: req.user.name, carousel1: carousel1, carousel2: carousel2, carousel3: carousel3 });
+                res.render("home", { foundPost: foundPost, loggedIn: true, user : req.user.name, carousel1: carousel1, carousel2: carousel2, carousel3: carousel3 });
             } else {
                 let carousel1 = 0;
                 let carousel1found = false;
@@ -186,7 +186,7 @@ app.get('/article/:article_id', (req, res) => {
         if (!err) {
             if(foundPost != null) {
                 if (req.isAuthenticated()) {
-                    res.render("article", { foundPost: foundPost, loggedIn: true, user: req.user.name });
+                    res.render("article", { foundPost: foundPost, loggedIn: true, user : req.user.name });
                 } else {
                     res.render("article", { foundPost: foundPost, loggedIn: false, user: null });
                 }
@@ -215,7 +215,7 @@ app.get("/admin", (req, res) => {
 
 app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('profile', { user: req.user.name, admin: req.user.isAdmin });
+        res.render('profile', { user : req.user.name, admin: req.user.isAdmin });
     } else {
         res.redirect('/login');
     }
@@ -382,9 +382,9 @@ app.post("/approve-post", (req, res) => {
 
 
 app.get('/category?', async (req, res) => {
-    const foundArticles = await Post.find({ status: 'Approved', tags: req.query.name }).sort({ createdAt: -1 });
+    const foundArticles = await Post.find({ status: 'Approved', mainTag: req.query.name }).sort({ createdAt: -1 });
     if (req.isAuthenticated()) {
-        res.render("category", { foundPost: foundArticles, loggedIn: true, user: req.user.name, category: req.query.name });
+        res.render("category", { foundPost: foundArticles, loggedIn: true, user : req.user.name, category: req.query.name });
     } else {
         res.render("category", { foundPost: foundArticles, loggedIn: false, user: null, category: req.query.name });
     }
@@ -428,7 +428,7 @@ app.post("/edit-post", (req, res) => {
         if (req.user.isAdmin) {
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
-            Post.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, content: req.body.content, img_url: req.body.img_url, author_name: req.body.author_name, carousel_id: req.body.carousel_id, carouselHeading: req.body.carouselHeading, tags: tagArray, status: 'Approved' }, (err) => {
+            Post.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, content: req.body.content, mainTag : req.body.mainTag, img_url: req.body.img_url, author_name: req.body.author_name, carousel_id: req.body.carousel_id, carouselHeading: req.body.carouselHeading, tags: tagArray, status: 'Approved' }, (err) => {
                 if (err) {
                     console.log(err);
                     throw new Error();
@@ -468,7 +468,7 @@ app.get('/edit-post/:article_id', async (req, res) => {
 
 app.get('/about-us' , (req,res) => {
     if(req.isAuthenticated()){
-        res.render('about-us' , {user : req.user})
+        res.render('about-us' , {user : req.user.name})
     } else {
         res.render('about-us' , {user : null})
     }
