@@ -6,17 +6,8 @@
     <meta name="theme-color" content="#000000">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="<%= foundPost.title %>" />
-    <meta property="og:url"
-        content="https://google.com" />
     <meta property="og:image"
         content="<%= foundPost.img_url%>" />
-
-    <!-- twitter og tag -->
-    <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@desiracingco" />
-<meta name="twitter:title" content="<%= foundPost.title %>" />
-<meta name="twitter:description" content="<%- foundPost.content %>" />
-<meta name="twitter:image" content="<%= foundPost.img_url%>" />
 
     <title>DesiRacingCo</title>
     <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg"
@@ -204,7 +195,7 @@
                     <div class="space-y-5 md:space-y-8">
                         <div class="space-y-3">
                             <h2
-                                class="text-2xl bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text mb-8 md:mb-12 font-bold md:text-3xl">
+                                class="text-2xl text-black mb-8 md:mb-12 font-bold md:text-3xl">
                                 <%= foundPost.title %>
                             </h2>
 
@@ -331,10 +322,9 @@
 
             const shareButton = document.getElementById('shareButton');
             shareButton.addEventListener('click', () => {
-                const shareText = textTitle + '\n\nCheck out this interesting article from DesiRacingCo!';
                 const shareUrl = text;
                 // Create the WhatsApp share URL
-                const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareText)}%0A%0A${encodeURIComponent(shareUrl)}`;
+                const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareUrl)}`;
                 // Open WhatsApp with the share URL
                 window.location.href = whatsappUrl;
             });
@@ -361,13 +351,19 @@
             // Get all img elements inside the dynamicContent div
             const imgElements = document.querySelectorAll('#dynamicContent img');
             const pElements = document.querySelectorAll('#dynamicContent p');
+            const aElements = document.querySelectorAll('#dynamicContent a');
 
             pElements.forEach(p => {
-                p.classList.add('my-6');
+                p.classList.add('my-6' ,'text-justify');
             });
             // Loop through each img element and add Tailwind CSS classes
             imgElements.forEach(img => {
-                img.classList.add('rounded-xl', 'w-[40rem]', 'my-8');
+                img.style= '';
+                img.classList.add('rounded-xl', 'h-[19rem]', 'h-[19rem]' ,'md:w-[45rem]','md:h-[30rem]', 'my-8');
+            });
+
+            aElements.forEach(a => {
+                a.classList.add('hover:underline', 'text-blue-500');
             });
         </script>
 
