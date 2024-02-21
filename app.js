@@ -5,10 +5,13 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
+var randomstring = require("randomstring");
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const domain = process.env.DOMAIN;
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,6 +50,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, require: true },
     email: { type: String, require: true },
     name: { type: String, require: true },
+    verified : {type : Boolean , require : true , default : false},
     isAdmin: { type: Boolean, require: true, default: false },
     password: String
 });
@@ -65,7 +69,7 @@ const postSchema = new mongoose.Schema({
     author_name: { type: String, require: true },
     carouselHeading: { type: String, require: true, default: null },
     carousel_id: { type: Number, require: true, default: null },
-    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp' , 'none'] , default : 'none' },
+    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp', 'none'], default: 'none' },
     tags: [],
     status: { type: String, require: true, default: 'Pending', enum: ['Pending', 'Approved', 'Rejected'] },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
@@ -73,11 +77,50 @@ const postSchema = new mongoose.Schema({
     timestamps: true
 });
 
+const tokenSchema = new mongoose.Schema({
+    userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true , unique : true},
+    token: { type: String, require: true },
+    token_reason: { type: String, require: true, enum: ['email_validation', 'forgot_password'] },
+}
+    , {
+        timestamps: true
+    });
+
+tokenSchema.index({ createdAt: 1 }, { expireAfterSeconds: 43200 });
 
 const Post = new mongoose.model("Post", postSchema);
+const Token = new mongoose.model("Token", tokenSchema);
+
+
+async function sendEmail(userEmail, subject, body) {
+    try {
+        let mailTransporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.MAIL_ID,
+                pass: process.env.MAIL_PASS
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+
+        let details = {
+            from: process.env.MAIL_ID,
+            to: userEmail,
+            subject: subject,
+            text: body
+        };
+
+        await mailTransporter.sendMail(details);
+    } catch (error) {
+        console.error("Error sending email:", error);
+        throw new Error("Error sending email");
+    }
+}
 
 app.get("/register", function (req, res) {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         res.redirect('/');
     } else {
         res.render("register");
@@ -88,18 +131,51 @@ app.post("/register", function (req, res) {
     User.register({ username: req.body.username, email: req.body.username, name: req.body.name }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            if(err.name === 'UserExistsError'){
+            if (err.name === 'UserExistsError') {
                 res.redirect("/register?userExists=1");
             } else {
                 throw new Error();
             }
         } else {
             passport.authenticate("local")(req, res, function () {
-                res.redirect("/");
+                const token = randomstring.generate({
+                    length: 38,
+                    charset: 'alphanumeric'
+                });
+                const newToken = new Token({
+                    userID : req.user._id,
+                    token : token,
+                    token_reason : 'email_validation'
+                });
+
+                newToken.save(function(err){
+                    if(!err){
+                        res.redirect("/?newUser=1");
+                        const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
+                        const userEmail = req.body.username;
+                        const emailSubject = "Verify Email - DRC Account";
+                        const emailBody = `Hi ${req.user.name}!\n\nWelcome to DRC community! We are thrilled to have you on board.\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to reply to this email.\n\nTeam DRC`;
+        
+                        sendEmail(userEmail, emailSubject, emailBody)
+                            .then(successMessage => {
+                                //message sent successfully
+                            })
+                            .catch(errorMessage => {
+                                console.error(errorMessage);
+                                throw new Error()
+                            });
+                    } else {
+                        console.log(err);
+                        throw new Error();
+                    }
+                })
+                
             });
         }
     });
 });
+
+
 
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/",
@@ -126,6 +202,32 @@ app.get("/logout", (req, res) => {
     });
 });
 
+app.get('/verify/email_validation' , async (req,res) => {
+    if(req.isAuthenticated()){
+        try {
+            const foundToken = await Token.findOne({token : req.query.token_id , token_reason : req.query.token_reason });
+            if (foundToken != null){
+                const loggedInID = req.user._id.toString();
+                const foundTokenUserID = foundToken.userID.toString();
+                if (loggedInID === foundTokenUserID){
+                    const updatedUser = await User.findOneAndUpdate({_id : foundToken.userID} , {verified : true});
+                    const deleteToken = await Token.findOneAndDelete({token : req.query.token_id});
+                    res.render('email-validation-response' , {response : true})
+                } else {
+                    res.render('404');
+                }
+            } else {
+                res.render('email-validation-response' , {response : false})
+            }
+        } catch (error) {
+            console.log(error);
+            throw new Error();
+        }
+    } else {
+        res.redirect('/login');
+    }
+});
+
 app.get("/", function (req, res) {
     Post.find({ status: 'Approved' }).sort({ createdAt: -1 }).exec((err, foundPost) => {
         if (!err) {
@@ -150,7 +252,7 @@ app.get("/", function (req, res) {
                         carousel3found = true;
                     }
                 });
-                res.render("home", { foundPost: foundPost, loggedIn: true, user : req.user.name, carousel1: carousel1, carousel2: carousel2, carousel3: carousel3 });
+                res.render("home", { foundPost: foundPost, loggedIn: true, user: req.user.name, carousel1: carousel1, carousel2: carousel2, carousel3: carousel3 });
             } else {
                 let carousel1 = 0;
                 let carousel1found = false;
@@ -184,11 +286,11 @@ app.get("/", function (req, res) {
 app.get('/article/:article_id', (req, res) => {
     Post.findOne({ _id: req.params.article_id }, function (err, foundPost) {
         if (!err) {
-            if(foundPost != null) {
+            if (foundPost != null) {
                 if (req.isAuthenticated()) {
-                    res.render("article", { foundPost: foundPost, loggedIn: true, user : req.user.name , domain : process.env.DOMAIN });
+                    res.render("article", { foundPost: foundPost, loggedIn: true, user: req.user.name, domain: process.env.DOMAIN });
                 } else {
-                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null , domain : process.env.DOMAIN });
+                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null, domain: process.env.DOMAIN });
                 }
             } else {
                 res.render('404');
@@ -215,7 +317,7 @@ app.get("/admin", (req, res) => {
 
 app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('profile', { user : req.user.name, admin: req.user.isAdmin });
+        res.render('profile', { user: req.user.name, admin: req.user.isAdmin });
     } else {
         res.redirect('/login');
     }
@@ -223,7 +325,7 @@ app.get('/profile', async (req, res) => {
 
 app.get('/add-post', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('add-post' , {user : req.user.name});
+        res.render('add-post', { user: req.user.name });
     } else {
         res.redirect("/login");
     }
@@ -232,7 +334,7 @@ app.get('/add-post', (req, res) => {
 app.get("/articles-list", (req, res) => {
     if (req.isAuthenticated()) {
         if (req.user.isAdmin) {
-            Post.find({status : 'Approved'}).sort({ createdAt: -1 }).exec((err, foundPost) => {
+            Post.find({ status: 'Approved' }).sort({ createdAt: -1 }).exec((err, foundPost) => {
                 if (err) {
                     console.error(err);
                     throw new Error();
@@ -248,11 +350,11 @@ app.get("/articles-list", (req, res) => {
     }
 });
 
-app.post('/reject-post' , async (req,res) => {
-    if(req.isAuthenticated()){
-        if(req.user.isAdmin){
+app.post('/reject-post', async (req, res) => {
+    if (req.isAuthenticated()) {
+        if (req.user.isAdmin) {
             try {
-                const updatePost = await Post.findOneAndUpdate({_id : req.body.article_id , status : 'Pending'} , {status : 'Rejected'});
+                const updatePost = await Post.findOneAndUpdate({ _id: req.body.article_id, status: 'Pending' }, { status: 'Rejected' });
                 res.redirect('/pending-articles?returnMsg=postRejected');
             } catch (error) {
                 console.log(error);
@@ -309,7 +411,7 @@ app.get('/view-pending-article?', async (req, res) => {
             try {
                 const foundArticle = await Post.findOne({ _id: req.query.article_id, status: 'Pending' });
                 if (foundArticle != null) {
-                    res.render("unparticle", { post: foundArticle , source : 'admin' })
+                    res.render("unparticle", { post: foundArticle, source: 'admin' })
                 } else {
                     res.render('404');
                 }
@@ -384,7 +486,7 @@ app.post("/approve-post", (req, res) => {
 app.get('/category?', async (req, res) => {
     const foundArticles = await Post.find({ status: 'Approved', mainTag: req.query.name }).sort({ createdAt: -1 });
     if (req.isAuthenticated()) {
-        res.render("category", { foundPost: foundArticles, loggedIn: true, user : req.user.name, category: req.query.name });
+        res.render("category", { foundPost: foundArticles, loggedIn: true, user: req.user.name, category: req.query.name });
     } else {
         res.render("category", { foundPost: foundArticles, loggedIn: false, user: null, category: req.query.name });
     }
@@ -395,7 +497,7 @@ app.get('/user-articles', async (req, res) => {
     if (req.isAuthenticated()) {
         try {
             const foundPosts = await Post.find({ createdBy: req.user._id }).populate('createdBy').exec();
-            res.render('user-articles', { foundPosts: foundPosts , user : req.user.name})
+            res.render('user-articles', { foundPosts: foundPosts, user: req.user.name })
         } catch (error) {
             console.log(error);
             throw new Error();
@@ -408,9 +510,9 @@ app.get('/user-articles', async (req, res) => {
 app.get('/user-unpublished-article/:article_id', async (req, res) => {
     if (req.isAuthenticated()) {
         try {
-            const foundPost = await Post.findOne({ _id : req.params.article_id , createdBy : req.user._id  });
-            if(foundPost != null){
-                res.render('unparticle', { post : foundPost ,source : 'user'});
+            const foundPost = await Post.findOne({ _id: req.params.article_id, createdBy: req.user._id });
+            if (foundPost != null) {
+                res.render('unparticle', { post: foundPost, source: 'user' });
             } else {
                 res.render('404');
             }
@@ -428,7 +530,7 @@ app.post("/edit-post", (req, res) => {
         if (req.user.isAdmin) {
             const gotTagString = req.body.tags;
             const tagArray = gotTagString.split(',');
-            Post.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, content: req.body.content, mainTag : req.body.mainTag, img_url: req.body.img_url, author_name: req.body.author_name, carousel_id: req.body.carousel_id, carouselHeading: req.body.carouselHeading, tags: tagArray, status: 'Approved' }, (err) => {
+            Post.findOneAndUpdate({ _id: req.body.id }, { title: req.body.title, content: req.body.content, mainTag: req.body.mainTag, img_url: req.body.img_url, author_name: req.body.author_name, carousel_id: req.body.carousel_id, carouselHeading: req.body.carouselHeading, tags: tagArray, status: 'Approved' }, (err) => {
                 if (err) {
                     console.log(err);
                     throw new Error();
@@ -466,11 +568,11 @@ app.get('/edit-post/:article_id', async (req, res) => {
     }
 });
 
-app.get('/about-us' , (req,res) => {
-    if(req.isAuthenticated()){
-        res.render('about-us' , {user : req.user.name})
+app.get('/about-us', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('about-us', { user: req.user.name })
     } else {
-        res.render('about-us' , {user : null})
+        res.render('about-us', { user: null })
     }
 });
 
