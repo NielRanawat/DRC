@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, require: true },
     email: { type: String, require: true },
     name: { type: String, require: true },
-    verified : {type : Boolean , require : true , default : false},
+    verified: { type: Boolean, require: true, default: false },
     isAdmin: { type: Boolean, require: true, default: false },
     password: String
 });
@@ -78,7 +78,7 @@ const postSchema = new mongoose.Schema({
 });
 
 const tokenSchema = new mongoose.Schema({
-    userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true , unique : true},
+    userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
     token: { type: String, require: true },
     token_reason: { type: String, require: true, enum: ['email_validation', 'forgot_password'] },
 }
@@ -127,7 +127,7 @@ app.get("/register", function (req, res) {
     }
 });
 
-app.post("/register", function (req, res) {
+app.post("/register", async function (req, res) {
     User.register({ username: req.body.username, email: req.body.username, name: req.body.name }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
@@ -143,19 +143,19 @@ app.post("/register", function (req, res) {
                     charset: 'alphanumeric'
                 });
                 const newToken = new Token({
-                    userID : req.user._id,
-                    token : token,
-                    token_reason : 'email_validation'
+                    userID: req.user._id,
+                    token: token,
+                    token_reason: 'email_validation'
                 });
 
-                newToken.save(function(err){
-                    if(!err){
+                newToken.save(function (err) {
+                    if (!err) {
                         res.redirect("/?newUser=1");
                         const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
                         const userEmail = req.body.username;
                         const emailSubject = "Verify Email - DRC Account";
-                        const emailBody = `Hi ${req.user.name}!\n\nWelcome to DRC community! We are thrilled to have you on board.\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to reply to this email.\n\nTeam DRC`;
-        
+                        const emailBody = `Hi ${req.user.name}!\n\nWelcome to DRC community! We are thrilled to have you on board.\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
+
                         sendEmail(userEmail, emailSubject, emailBody)
                             .then(successMessage => {
                                 //message sent successfully
@@ -168,8 +168,8 @@ app.post("/register", function (req, res) {
                         console.log(err);
                         throw new Error();
                     }
-                })
-                
+                });
+
             });
         }
     });
@@ -202,22 +202,22 @@ app.get("/logout", (req, res) => {
     });
 });
 
-app.get('/verify/email_validation' , async (req,res) => {
-    if(req.isAuthenticated()){
+app.get('/verify/email_validation', async (req, res) => {
+    if (req.isAuthenticated()) {
         try {
-            const foundToken = await Token.findOne({token : req.query.token_id , token_reason : req.query.token_reason });
-            if (foundToken != null){
+            const foundToken = await Token.findOne({ token: req.query.token_id, token_reason: req.query.token_reason });
+            if (foundToken != null) {
                 const loggedInID = req.user._id.toString();
                 const foundTokenUserID = foundToken.userID.toString();
-                if (loggedInID === foundTokenUserID){
-                    const updatedUser = await User.findOneAndUpdate({_id : foundToken.userID} , {verified : true});
-                    const deleteToken = await Token.findOneAndDelete({token : req.query.token_id});
-                    res.render('email-validation-response' , {response : true})
+                if (loggedInID === foundTokenUserID) {
+                    const updatedUser = await User.findOneAndUpdate({ _id: foundToken.userID }, { verified: true });
+                    const deleteToken = await Token.findOneAndDelete({ token: req.query.token_id });
+                    res.render('email-validation-response', { response: true })
                 } else {
                     res.render('404');
                 }
             } else {
-                res.render('email-validation-response' , {response : false})
+                res.render('email-validation-response', { response: false })
             }
         } catch (error) {
             console.log(error);
@@ -225,6 +225,138 @@ app.get('/verify/email_validation' , async (req,res) => {
         }
     } else {
         res.redirect('/login');
+    }
+});
+
+app.get('/email_validation/resend?', async (req, res) => {
+    if (req.isAuthenticated()) {
+        if (req.user.verified) {
+            res.redirect('/')
+        } else {
+            const loggedInID = req.user._id.toString();
+            const gotUserID = req.query.userID.toString();
+            if (loggedInID == gotUserID) {
+                const deleteToken = await Token.findOneAndDelete({ userID: req.user._id });
+                const token = randomstring.generate({
+                    length: 38,
+                    charset: 'alphanumeric'
+                });
+                const newToken = new Token({
+                    userID: req.user._id,
+                    token: token,
+                    token_reason: 'email_validation'
+                });
+
+                newToken.save(function (err) {
+                    if (!err) {
+                        res.redirect("/profile/card?returnMsg=emailResent");
+                        const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
+                        const userEmail = req.user.email;
+                        const emailSubject = "Re: Verify Email - DRC Account";
+                        const emailBody = `Hi ${req.user.name}!\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
+
+                        sendEmail(userEmail, emailSubject, emailBody)
+                            .then(successMessage => {
+                                //message sent successfully
+                            })
+                            .catch(errorMessage => {
+                                console.error(errorMessage);
+                                throw new Error()
+                            });
+                    } else {
+                        console.log(err);
+                        throw new Error();
+                    }
+                });
+            }
+        }
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/forgot-password', async (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+    } else {
+        res.render('forgot-password');
+    }
+});
+
+app.post('/forgot-password', async (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+    } else {
+        const foundUser = await User.findOne({ email: req.body.email });
+        if (foundUser != null) {
+            const deleteToken = await Token.findOneAndDelete({ userID: foundUser._id });
+            const token = randomstring.generate({
+                length: 38,
+                charset: 'alphanumeric'
+            });
+            const newToken = new Token({
+                userID: foundUser._id,
+                token: token,
+                token_reason: 'forgot_password'
+            });
+
+            newToken.save(function (err) {
+                if (!err) {
+                    res.redirect("/forgot-password?returnMsg=emailSent");
+                    const link = `https://${domain}/verify/reset-password?token_id=${token}&token_reason=forgot_password`
+                    const userEmail = foundUser.email;
+                    const emailSubject = "Reset Password - DRC Account";
+                    const emailBody = `Hi ${foundUser.name}!\n\nPlease click on the following link to reset your password:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
+
+                    sendEmail(userEmail, emailSubject, emailBody)
+                        .then(successMessage => {
+                            //message sent successfully
+                        })
+                        .catch(errorMessage => {
+                            console.error(errorMessage);
+                            throw new Error()
+                        });
+                } else {
+                    console.log(err);
+                    throw new Error();
+                }
+            });
+        } else {
+            res.redirect("/forgot-password?returnMsg=emailSent");
+        }
+    }
+});
+
+app.get('/verify/reset-password', async (req, res) => {
+    try {
+        const foundToken = await Token.findOne({ token: req.query.token_id, token_reason: req.query.token_reason });
+        if (foundToken != null) {
+            res.render('reset-password', { token: foundToken.token });
+        } else {
+            res.render('email-validation-response', { response: false })
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error();
+    }
+});
+
+app.post('/reset-password' , async (req,res) => {
+    try {
+        const foundToken = await Token.findOne({token : req.body.token});
+        if (foundToken != null){
+            const foundUser = await User.findOne({_id : foundToken.userID});
+            foundUser.setPassword(req.body.password1 , async function(){
+                await foundUser.save();
+                const deleteToken = await Token.findOneAndDelete({token : req.body.token});
+                res.redirect("/forgot-password?returnMsg=passwordResetted");
+            });
+        } else {
+            res.render('email-validation-response', { response: false })
+        }
+    } catch (error) {
+        console.log(error);
+        throw new Error();
     }
 });
 
@@ -323,9 +455,21 @@ app.get('/profile', async (req, res) => {
     }
 });
 
+app.get('/profile/card', async (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('profile-card', { user: req.user.name, profile: req.user });
+    } else {
+        res.redirect('/login');
+    }
+});
+
 app.get('/add-post', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('add-post', { user: req.user.name });
+        if (req.user.verified) {
+            res.render('add-post', { user: req.user.name });
+        } else {
+            res.redirect('/profile/card?returnMsg=emailUnverified');
+        }
     } else {
         res.redirect("/login");
     }
@@ -388,6 +532,7 @@ app.post("/delete-post", (req, res) => {
     }
 });
 
+
 app.get('/delete-article-confirmation/:article_id', async (req, res) => {
     if (req.isAuthenticated()) {
         if (req.user.isAdmin) {
@@ -429,21 +574,25 @@ app.get('/view-pending-article?', async (req, res) => {
 
 app.post("/add-post", (req, res) => {
     if (req.isAuthenticated()) {
-        const newPost = new Post({
-            title: req.body.title,
-            content: req.body.content,
-            img_url: req.body.img_url,
-            author_name: req.body.author_name,
-            createdBy: req.user._id
-        });
-        newPost.save((err) => {
-            if (err) {
-                console.log(err);
-                throw new Error();
-            } else {
-                res.redirect("/user-articles?returnMsg=postAdded")
-            }
-        });
+        if (req.user.verified) {
+            const newPost = new Post({
+                title: req.body.title,
+                content: req.body.content,
+                img_url: req.body.img_url,
+                author_name: req.body.author_name,
+                createdBy: req.user._id
+            });
+            newPost.save((err) => {
+                if (err) {
+                    console.log(err);
+                    throw new Error();
+                } else {
+                    res.redirect("/user-articles?returnMsg=postAdded")
+                }
+            });
+        } else {
+            res.redirect('/profile/card?returnMsg=emailUnverified');
+        }
     } else {
         res.redirect("/login");
     }

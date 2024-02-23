@@ -6,7 +6,10 @@
 <!-- Card Blog -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Grid -->
-    <h1 class="font-bold mt-3 mb-16 text-4xl">Hi <%= user %>!</h1>
+    <h1 class="font-bold mt-3 text-4xl">Hi <%= user %>!</h1>
+    <p class="my-2 mb-16 font-semibold text-base text-blue-500 underline"><a href="/profile/card">
+      Manage your account
+    </a></p>
     <% if(admin){ %>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <% } else { %>
