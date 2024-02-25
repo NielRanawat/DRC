@@ -1,7 +1,11 @@
 <%- include("partial/header") -%>
 
   <%- include("partial/navbar") -%>
-
+<script>
+            function replaceWithPlaceholder(image) {
+    image.src = 'https://placehold.co/600x400?text=No+Cover+Image';
+}
+</script>
     <body>
       <style>
         .white-text {
@@ -160,7 +164,7 @@
                       <div class="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                         <img
                           class="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-                          src="<%= post.img_url %>" alt="article-image">
+                          src="<%= post.img_url %>" alt="article-image" onerror="replaceWithPlaceholder(this)">
                       </div>
 
                       <div class="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
@@ -274,6 +278,8 @@
               document.getElementById('toast-success').style.display = 'none';
             }, 12000);
           }
+
+
 
         });
 

@@ -110,7 +110,7 @@ async function sendEmail(userEmail, subject, body) {
             from: process.env.MAIL_ID,
             to: userEmail,
             subject: subject,
-            text: body
+            html: body
         };
 
         await mailTransporter.sendMail(details);
@@ -155,7 +155,21 @@ app.post("/register", async function (req, res) {
                         const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
                         const userEmail = req.body.username;
                         const emailSubject = "Verify Email - DRC Account";
-                        const emailBody = `Hi ${req.user.name}!\n\nWelcome to DRC community! We are thrilled to have you on board.\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
+                        const emailBody = `<img style="border-radius : 30px; margin-top : 1rem; margin-bottom : 2rem" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
+                        <h4>Hey ${req.user.name}!</h4>
+                        <p>Welcome to DRC community! We are thrilled to have you on board.
+                      </p>
+                            <p >Please click on the following link to verify your email address:</p>
+                            <a href="${link}">Click here to verify.</a>
+                        </p>
+                        <p style="font-weight : bold;">Note : This link is valid only for 12 hours.</p>
+                        <p>By verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.
+                        </p>
+                        <p>If you have any questions or need assistance, feel free to contact us at <span style="color : blue">desiracingco@gmail.com.</span>
+                      </p>
+                        <p>THIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY TO IT</p>
+                        <p>Team DRC</p><p style="display : none">${link}</p>
+                        `
 
                         sendEmail(userEmail, emailSubject, emailBody)
                             .then(successMessage => {
@@ -254,8 +268,19 @@ app.get('/email_validation/resend?', async (req, res) => {
                         const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
                         const userEmail = req.user.email;
                         const emailSubject = "Re: Verify Email - DRC Account";
-                        const emailBody = `Hi ${req.user.name}!\n\nPlease click on the following link to verify your email address:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nBy verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
 
+                        const emailBody = `<img style="border-radius : 30px; margin-top : 1rem;" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
+                        <h4>Dear ${req.user.name},</h4>
+                            <p>Please click on the following link to verify your email address:</p>
+                            <a href="${link}">Click here to verify.</a>
+                        </p>
+                        <p style="font-weight : bold;">Note : This link is valid only for 12 hours.</p>
+                        <p>By verifying your email, you ensure that you receive important updates, notifications, and can fully participate in our platform.
+                        </p>
+                        <p>If you have any questions or need assistance, feel free to contact us at <span style="color : blue">desiracingco@gmail.com.</span>
+                      </p>
+                        <p>THIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY TO IT</p>
+                        <p>Team DRC</p><p style="display : none">${link}</p>`
                         sendEmail(userEmail, emailSubject, emailBody)
                             .then(successMessage => {
                                 //message sent successfully
@@ -307,8 +332,19 @@ app.post('/forgot-password', async (req, res) => {
                     const link = `https://${domain}/verify/reset-password?token_id=${token}&token_reason=forgot_password`
                     const userEmail = foundUser.email;
                     const emailSubject = "Reset Password - DRC Account";
-                    const emailBody = `Hi ${foundUser.name}!\n\nPlease click on the following link to reset your password:\n\n${link}\n\nNote : This link is valid only for 12 hours.\n\nIf you have any questions or need assistance, feel free to contact us at desiracingco@gmail.com.\n\nTHIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY\n\nTeam DRC`;
-
+                    const emailBody = `<img style="border-radius : 30px; margin-top : 1rem;" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
+                    <h4>Dear ${foundUser.name},</h4>
+                  
+                        <p>Please click on the following link to reset your password:
+                  </p>
+                        <a href="${link}">Click here to verify.</a>
+                    </p>
+                    <p style="font-weight : bold;">Note : This link is valid only for 12 hours.</p>
+                    <p>If you have any questions or need assistance, feel free to contact us at <span style="color : blue">desiracingco@gmail.com.</span>
+                  </p>
+                    <p>THIS IS A SYSTEM GENERATED MAIL. PLEASE DO NOT REPLY TO IT</p>
+                    <p>Team DRC</p>
+                    <p style="display : none">${link}</p>`
                     sendEmail(userEmail, emailSubject, emailBody)
                         .then(successMessage => {
                             //message sent successfully
@@ -342,14 +378,14 @@ app.get('/verify/reset-password', async (req, res) => {
     }
 });
 
-app.post('/reset-password' , async (req,res) => {
+app.post('/reset-password', async (req, res) => {
     try {
-        const foundToken = await Token.findOne({token : req.body.token});
-        if (foundToken != null){
-            const foundUser = await User.findOne({_id : foundToken.userID});
-            foundUser.setPassword(req.body.password1 , async function(){
+        const foundToken = await Token.findOne({ token: req.body.token });
+        if (foundToken != null) {
+            const foundUser = await User.findOne({ _id: foundToken.userID });
+            foundUser.setPassword(req.body.password1, async function () {
                 await foundUser.save();
-                const deleteToken = await Token.findOneAndDelete({token : req.body.token});
+                const deleteToken = await Token.findOneAndDelete({ token: req.body.token });
                 res.redirect("/forgot-password?returnMsg=passwordResetted");
             });
         } else {
