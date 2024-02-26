@@ -12,11 +12,10 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const domain = process.env.DOMAIN;
+const path = require('path');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-const path = require('path');
-const { type } = require("os");
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Initializing session and passport
@@ -155,8 +154,7 @@ app.post("/register", async function (req, res) {
                         const link = `https://${domain}/verify/email_validation?token_id=${token}&token_reason=email_validation`
                         const userEmail = req.body.username;
                         const emailSubject = "Verify Email - DRC Account";
-                        const emailBody = `<img style="border-radius : 30px; margin-top : 1rem; margin-bottom : 2rem" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
-                        <h4>Hey ${req.user.name}!</h4>
+                        const emailBody = `<h4>Hey ${req.user.name}!</h4>
                         <p>Welcome to DRC community! We are thrilled to have you on board.
                       </p>
                             <p >Please click on the following link to verify your email address:</p>
@@ -269,8 +267,7 @@ app.get('/email_validation/resend?', async (req, res) => {
                         const userEmail = req.user.email;
                         const emailSubject = "Re: Verify Email - DRC Account";
 
-                        const emailBody = `<img style="border-radius : 30px; margin-top : 1rem;" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
-                        <h4>Dear ${req.user.name},</h4>
+                        const emailBody = `<h4>Dear ${req.user.name},</h4>
                             <p>Please click on the following link to verify your email address:</p>
                             <a href="${link}">Click here to verify.</a>
                         </p>
@@ -332,8 +329,7 @@ app.post('/forgot-password', async (req, res) => {
                     const link = `https://${domain}/verify/reset-password?token_id=${token}&token_reason=forgot_password`
                     const userEmail = foundUser.email;
                     const emailSubject = "Reset Password - DRC Account";
-                    const emailBody = `<img style="border-radius : 30px; margin-top : 1rem;" src="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg" width=60 alt='logo' />
-                    <h4>Dear ${foundUser.name},</h4>
+                    const emailBody = `<h4>Dear ${foundUser.name},</h4>
                   
                         <p>Please click on the following link to reset your password:
                   </p>
