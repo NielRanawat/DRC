@@ -174,7 +174,7 @@
                   <!-- Card -->
     <a class="group null:focus:outline-none null:focus:ring-1 null:focus:ring-gray-600" href="/article/<%= post._id %>">
       <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="<%= post.img_url %>" alt="Cover Image">
+        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" onerror="replaceWithPlaceholder(this)" src="<%= post.img_url %>" alt="Cover Image">
         <span class="absolute top-0 end-0 rounded-se-xl rounded-es-xl text-xs font-medium bg-blue-600 text-white py-1.5 px-3 null:bg-gray-900">
           <% if(post.mainTag === 'f1'){ %>
             F1

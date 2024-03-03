@@ -31,7 +31,7 @@
 
                         <div class="sm:col-span-9">
                             <input required autocomplete="off" value="<%= foundPost.title %>" name="title"
-                                id="af-submit-application-email" type="text"
+                                id="af-submit-application-email" type="text" minlength="15" maxlength="150"
                                 class="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none none:bg-slate-900 none:border-gray-700 none:text-gray-400 none:focus:ring-gray-600">
                         </div>
                         <!-- End Col -->
@@ -99,6 +99,7 @@
                                 <option value="f1">Formula 1</option>
                                 <option value="motogp">Moto GP</option>
                                 <option value="imsp">Indian Motorsport</option>
+                                <option value="others">Others</option>
                             </select>
                         </div>
                         <!-- End Col -->

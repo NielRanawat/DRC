@@ -30,9 +30,6 @@
             image.src = 'https://placehold.co/600x400?text=No+Cover+Image';
         }
 
-        function replaceWithDivPlaceholder(image) {
-            image.src = '/images/ubl-error.svg';
-        }
     </script>
 </head>
 
@@ -372,12 +369,12 @@
             const aElements = document.querySelectorAll('#dynamicContent a');
 
             pElements.forEach(p => {
-                p.classList.add('my-6', 'text-justify');
+                p.classList.add('my-4', 'text-justify');
             });
             // Loop through each img element and add Tailwind CSS classes
             imgElements.forEach(img => {
                 img.style = '';
-                img.classList.add('rounded-xl', 'w-[28rem]', 'md:w-[40.5rem]', 'my-10');
+                img.classList.add('rounded-xl', 'w-[28rem]', 'md:w-[40.5rem]', 'mt-3', 'mb-6');
                 img.setAttribute('onerror', 'replaceWithDivPlaceholder(this)');
 
             });
@@ -390,23 +387,24 @@
             const tableElements = document.querySelectorAll('table');
 
             tableElements.forEach(table => {
-                table.style.marginTop = '1rem'
-                table.style.border = '0.5px solid rgb(102, 102, 102)';
-                table.style.borderCollapse = 'collapse'; // Optional: If you want to collapse borders
+                // Add classes to the table
+                table.classList.add("my-4", "border", "border-gray-200", "border-collapse");
+
                 // You can also apply styles to th and td elements inside the table
                 const thElements = table.querySelectorAll('th');
                 const tdElements = table.querySelectorAll('td');
 
                 thElements.forEach(th => {
-                    th.style.border = '0.5px solid rgb(102, 102, 102)';
-                    th.style.padding = '8px';
+                    // Add classes to th elements
+                    th.classList.add("border", "border-gray-200", "p-3");
                 });
 
                 tdElements.forEach(td => {
-                    td.style.border = '0.5px solid rgb(102, 102, 102)';
-                    td.style.padding = '8px';
+                    // Add classes to td elements
+                    td.classList.add("border", "border-gray-200", "p-2");
                 });
             });
+
 
         </script>
 

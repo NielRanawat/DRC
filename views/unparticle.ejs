@@ -81,7 +81,7 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
 
                             </div>
                             <div class="">
-                                <% if( source === 'adming'){ %>
+                                <% if( source === 'admin'){ %>
                                     <a href="/pending-articles">
                                     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 none:bg-blue-600 none:hover:bg-blue-700 focus:outline-none none:focus:ring-blue-800">Back to Approval page</button>
                                 </a>
@@ -101,15 +101,46 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                 // Get all img elements inside the dynamicContent div
                 const imgElements = document.querySelectorAll('#dynamicContent img');
                 const pElements = document.querySelectorAll('#dynamicContent p');
-
+                const aElements = document.querySelectorAll('#dynamicContent a');
+    
                 pElements.forEach(p => {
-                    p.classList.add('my-6');
+                    p.classList.add('my-4', 'text-justify');
                 });
-
                 // Loop through each img element and add Tailwind CSS classes
                 imgElements.forEach(img => {
-                    img.classList.add('rounded-xl' , 'w-[40rem]' , 'my-8');
+                    img.style = '';
+                    img.classList.add('rounded-xl', 'w-[28rem]', 'md:w-[40.5rem]', 'mt-3', 'mb-6');
+                    img.setAttribute('onerror', 'replaceWithDivPlaceholder(this)');
+    
                 });
+    
+                aElements.forEach(a => {
+                    a.classList.add('hover:underline', 'text-blue-500');
+                });
+    
+                // Assuming you have an array of table elements
+                const tableElements = document.querySelectorAll('table');
+    
+                tableElements.forEach(table => {
+                    // Add classes to the table
+                    table.classList.add("my-4", "border", "border-gray-200", "border-collapse");
+    
+                    // You can also apply styles to th and td elements inside the table
+                    const thElements = table.querySelectorAll('th');
+                    const tdElements = table.querySelectorAll('td');
+    
+                    thElements.forEach(th => {
+                        // Add classes to th elements
+                        th.classList.add("border", "border-gray-200", "p-3");
+                    });
+    
+                    tdElements.forEach(td => {
+                        // Add classes to td elements
+                        td.classList.add("border", "border-gray-200", "p-2");
+                    });
+                });
+    
+    
             </script>
 </body>
             <%- include("partial/footer") -%>

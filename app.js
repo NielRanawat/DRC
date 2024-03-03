@@ -68,7 +68,7 @@ const postSchema = new mongoose.Schema({
     author_name: { type: String, require: true },
     carouselHeading: { type: String, require: true, default: null },
     carousel_id: { type: Number, require: true, default: null },
-    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp', 'none'], default: 'none' },
+    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp', 'others' ,'none'], default: 'none' },
     tags: [],
     status: { type: String, require: true, default: 'Pending', enum: ['Pending', 'Approved', 'Rejected'] },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
