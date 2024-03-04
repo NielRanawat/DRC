@@ -180,8 +180,10 @@
             F1
           <% } else if (post.mainTag === 'motogp'){ %>
             MotoGP
-          <% } else { %>
+          <% } else if (post.mainTag === 'imsp') { %>
             Indian Motorsport
+          <% } else { %>
+            Others
           <% } %>
         </span>
       </div>
