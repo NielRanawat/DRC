@@ -124,7 +124,19 @@
                             <div class="inline-block">
                                 <label class="inline-block text-sm font-medium text-gray-500 mt-2.5">
                                     Is Heading?
+                                    <button data-tooltip-target="tooltip-default-3" type="button"><i class="ri-information-2-line"></i></button>
                                 </label>
+
+                                <div id="tooltip-default-3" role="tooltip" class="absolute max-w-xs z-10 invisible inline-block px-3 mr-3 py-2 text-sm font-medium text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm  rounded-lg shadow-sm opacity-0 tooltip">
+                                    <p class="text-base mb-2">Info</p>
+                                    <ul class="max-w-xl text-xs">
+                                        <li>
+                                            Please select 'Yes' if you would like to feature this article on the main cards at the front. 
+                                        </li>
+                                    </ul>  
+                                    
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                             </div>
                         </div>
                         <!-- End Col -->
@@ -144,12 +156,25 @@
                                 <label style="display: none;" id="cHead"
                                     class="inline-block text-sm font-medium text-gray-500 mt-2.5">
                                     Carousel Heading
+                                    <button data-tooltip-target="tooltip-default-2" type="button">
+                                        <i class="ri-information-2-line"></i>
+                                    </button>
                                 </label>
                             </div>
+
+                            <div id="tooltip-default-2" role="tooltip" class="absolute max-w-xs z-10 invisible inline-block px-3 mr-3 py-2 text-sm font-medium text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm  rounded-lg shadow-sm opacity-0 tooltip">
+                                <p class="text-base mb-1">Info</p>
+                                <ul class="max-w-xl text-xs">
+                                    <li>This short heading will be prominently featured on the main cards at the front, ensuring clarity and engagement. Max 80 letters allowed</li>
+                                </ul>  
+                                  
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                            
                         </div>
 
                         <div class="sm:col-span-9">
-                            <input style="display: none;" autocomplete="off" name="carouselHeading" type="text"
+                            <input style="display: none;" autocomplete="off" name="carouselHeading" type="text" maxlength="80"
                                 class="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none none:bg-slate-900 none:border-gray-700 none:text-gray-400 none:focus:ring-gray-600">
                         </div>
 
@@ -158,13 +183,25 @@
                                 <label style="display: none;" id="c_id"
                                     class="inline-block text-sm font-medium text-gray-500 mt-2.5">
                                     Carousel ID
+                                    <button data-tooltip-target="tooltip-default-1" type="button">
+                                        <i class="ri-information-2-line"></i>
+                                    </button>
                                 </label>
+                            </div>
+                            <div id="tooltip-default-1" role="tooltip" class="absolute max-w-xs z-10 invisible inline-block px-3 mr-3 py-2 text-sm font-medium text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm  rounded-lg shadow-sm opacity-0 tooltip">
+                                <p class="text-base mb-1">Info</p>
+                                <ul class="max-w-xl text-xs">
+                                    <li>Please indicate the position of your article with a value of 1, 2, or 3. This corresponds to the placement of the article on the main cards at the front, with 1 representing the leftmost position.</li>                                    
+                                </ul>  
+                                  
+                                <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
                         </div>
                         <!-- End Col -->
 
                         <div class="sm:col-span-9">
-                            <input style="display: none;" autocomplete="off" name="carousel_id" type="text"
+                            <input style="display: none;" pattern="^[1-3]$"
+                            autocomplete="off" name="carousel_id" type="text" oninvalid="this.setCustomValidity('Please enter 1,2 or 3')" oninput="setCustomValidity('')"
                                 class="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none none:bg-slate-900 none:border-gray-700 none:text-gray-400 none:focus:ring-gray-600">
                         </div>
                         <!-- End Col -->
@@ -207,12 +244,16 @@
         <!-- End Card Section -->
 
 
-        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-
+        <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
         <script>
             CKEDITOR.replace('editor1', {
                 extraPlugins: 'image',
                 height: 400,
+                uiColor: '#FCFCFC',
+                allowedContent :
+    'h1 h2 h3 p blockquote strong em;' +
+    'a[!href];' +
+    'img(left,right)[!src,alt];'
             });
         </script>
 

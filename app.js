@@ -11,8 +11,29 @@ const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require('mongoose-findorcreate');
 const domain = process.env.DOMAIN;
 const path = require('path');
+const { error, log } = require("console");
+
+
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
+
+// passport.deserializeUser(function (obj, done) {
+//     done(null, obj);
+// });
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id)
+});
+
+passport.deserializeUser(function (id, done) {
+     User.findById(id, function (err, user) { done(err, user); }); 
+});
+
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,8 +67,9 @@ const connectDB = async () => {
 };
 
 const userSchema = new mongoose.Schema({
-    username: { type: String, require: true },
-    email: { type: String, require: true },
+    username: { type: String, require: true, unique: true, },
+    authType: { type: String, require: true, enum: ['local', 'google'] },
+    email: { type: String, require: true, unique: true },
     name: { type: String, require: true },
     verified: { type: Boolean, require: true, default: false },
     isAdmin: { type: Boolean, require: true, default: false },
@@ -55,7 +77,28 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
+
 const User = new mongoose.model("User", userSchema);
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+},
+    function (accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ username: profile.id }, { email: profile.emails[0].value, name: profile.displayName, authType: "google", verified: true }, function (err, user, created) {
+            if (err) {
+                // throw new Error();
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });
+    }
+));
+
+
+
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -68,7 +111,7 @@ const postSchema = new mongoose.Schema({
     author_name: { type: String, require: true },
     carouselHeading: { type: String, require: true, default: null },
     carousel_id: { type: Number, require: true, default: null },
-    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp', 'others' ,'none'], default: 'none' },
+    mainTag: { type: String, require: true, enum: ['f1', 'motogp', 'imsp', 'others', 'none'], default: 'none' },
     tags: [],
     status: { type: String, require: true, default: 'Pending', enum: ['Pending', 'Approved', 'Rejected'] },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
@@ -127,14 +170,22 @@ app.get("/register", function (req, res) {
     }
 });
 
+app.get('/auth/google',
+    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'], prompt: 'select_account' }));
+
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/register?userExists=1' }),
+    function (req, res) {
+        res.redirect('/');
+    });
+
 app.post("/register", async function (req, res) {
-    User.register({ username: req.body.username, email: req.body.username, name: req.body.name }, req.body.password, function (err, user) {
+    User.register({ username: req.body.username, email: req.body.username, name: req.body.name, authType: 'local' }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            if (err.name === 'UserExistsError') {
+            if (err.name === 'UserExistsError' || err.code == '11000' || err.code == '11001') {
                 res.redirect("/register?userExists=1");
             } else {
-                throw new Error();
+                console.log(err);
             }
         } else {
             passport.authenticate("local")(req, res, function () {
@@ -190,11 +241,21 @@ app.post("/register", async function (req, res) {
 
 
 
-app.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login?wrongcredential=1"
-}), function (req, res) {
+app.post("/login", function (req, res, next) {
+    passport.authenticate("local", function (err, user, info) {
+        if (err) { return next(err); }
+        if (!user) {
+            // Failed login attempt
+            return res.redirect(`/login?wrongcredential=1&email=${req.body.username}`);
+        }
+        // Successful login attempt
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            return res.redirect("/");
+        });
+    })(req, res, next);
 });
+
 
 app.get('/login', (req, res) => {
     if (req.isAuthenticated()) {
@@ -311,7 +372,7 @@ app.post('/forgot-password', async (req, res) => {
         res.redirect('/');
     } else {
         const foundUser = await User.findOne({ email: req.body.email });
-        if (foundUser != null) {
+        if (foundUser != null && foundUser.authType != 'google') {
             const deleteToken = await Token.findOneAndDelete({ userID: foundUser._id });
             const token = randomstring.generate({
                 length: 38,
@@ -355,7 +416,7 @@ app.post('/forgot-password', async (req, res) => {
                 }
             });
         } else {
-            res.redirect("/forgot-password?returnMsg=emailSent");
+            res.redirect(`/forgot-password?returnMsg=emailSent&email=${req.body.email}`);
         }
     }
 });
@@ -448,14 +509,20 @@ app.get("/", function (req, res) {
     });
 });
 
-app.get('/article/:article_id', (req, res) => {
-    Post.findOne({ _id: req.params.article_id }, function (err, foundPost) {
+app.get('/article/:article_id', async (req, res) => {
+    Post.findOne({ _id: req.params.article_id }, async function (err, foundPost) {
         if (!err) {
             if (foundPost != null) {
-                if (req.isAuthenticated()) {
-                    res.render("article", { foundPost: foundPost, loggedIn: true, user: req.user.name, domain: process.env.DOMAIN });
-                } else {
-                    res.render("article", { foundPost: foundPost, loggedIn: false, user: null, domain: process.env.DOMAIN });
+                try {
+                    const foundCatPosts = await Post.find({mainTag : foundPost.mainTag}).sort({ createdAt : -1 }).limit(8).exec();
+                    if (req.isAuthenticated()) {
+                        res.render("article", { foundPost: foundPost, catPost : foundCatPosts ,loggedIn: true, user: req.user.name, domain: process.env.DOMAIN });
+                    } else {
+                        res.render("article", { foundPost: foundPost, catPost : foundCatPosts ,loggedIn: false, user: null, domain: process.env.DOMAIN });
+                    }
+                } catch (error) {
+                    console.log(error);
+                    throw new Error();
                 }
             } else {
                 res.render('404');
@@ -689,10 +756,11 @@ app.get('/user-articles', async (req, res) => {
     }
 });
 
-app.get('/user-unpublished-article/:article_id', async (req, res) => {
+app.get('/user-unpublished-article?', async (req, res) => {
     if (req.isAuthenticated()) {
         try {
-            const foundPost = await Post.findOne({ _id: req.params.article_id, createdBy: req.user._id });
+            const userID = (req.user._id).toString();
+            const foundPost = await Post.findOne({ _id: req.query.article_id, createdBy: userID });
             if (foundPost != null) {
                 res.render('unparticle', { post: foundPost, source: 'user' });
             } else {

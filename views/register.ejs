@@ -22,7 +22,7 @@
 <body class="bg-gray-50">
     <main class="w-full max-w-md mx-auto p-6">
         <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm nonec:bg-gray-800 nonec:border-gray-700">
-            <div id="email-exist-alert" style="display: none;" class="m-2 bg-red-500 text-sm text-white rounded-lg p-4" role="alert">
+            <div id="email-existd-alert" style="display: none;" class="m-2 bg-red-500 text-sm text-white rounded-lg p-4" role="alert">
                 <span class="font-semibold flex items-center">
                     <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
@@ -31,6 +31,37 @@
                     </svg>
                     Email already registered!</span>
             </div>
+
+
+            <div id="email-exist-alert" style="display: none;" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+              
+                <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                  <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                      <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                          <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="w-6 text-red-400 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(237,0,0,1)"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path></svg>
+                          </div>
+                          <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 class="text-xl mb-2 font-semibold leading-6 text-gray-900" id="modal-title">Email already registered!</h3>
+                            <div class="mt-2">
+                              <p class="text-base text-gray-500">Looks like your email is already associated with an account. Please login to continue</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button type="button" class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"><a href="/login">
+                          Login
+                        </a></button>
+                        <button onclick="closePopup(this)" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             
 
             <div class="content-center mt-4 text-center">
@@ -48,7 +79,8 @@
                 </div>
 
                 <div class="mt-5">
-                    <!-- <button type="button"
+                    <a href="/auth/google">
+                        <button type="button"
                         class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none nonec:bg-slate-900 nonec:border-gray-700 nonec:text-white nonec:hover:bg-gray-800 nonec:focus:outline-none nonec:focus:ring-1 nonec:focus:ring-gray-600">
                         <svg class="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                             <path
@@ -66,10 +98,11 @@
                         </svg>
                         Sign in with Google
                     </button>
+                    </a>
 
                     <div
                         class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 nonec:text-gray-500 nonec:before:border-gray-600 nonec:after:border-gray-600">
-                        Or</div> -->
+                        Or</div>
 
                     <!-- Form -->
                     <form action="/register" method="POST">
@@ -135,14 +168,12 @@
             // Show the alert
             var alertDiv = document.getElementById('email-exist-alert');
             alertDiv.style.display="block";
-    
-            // Hide the alert after 5 seconds with a smooth animation
-            setTimeout(function () {
-                alertDiv.style.display="none"
-            }, 5000);
         }
     });
     
+    function closePopup(){
+      document.getElementById('email-exist-alert').style.display = 'none';
+    }
     </script>
 </body>
 

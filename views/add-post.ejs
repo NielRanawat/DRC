@@ -2,7 +2,6 @@
 
 <%- include("partial/navbar") -%>
 
-    <body>
 
         <!-- Card Section -->
         <h1 class="text-3xl text-center font-bold mt-12">Publish a post</h1>
@@ -57,14 +56,27 @@
                                 <label for="af-submit-application-current-company"
                                     class="inline-block text-sm font-medium text-gray-500 mt-2.5">
                                     Post Body
+                                    <button data-tooltip-target="tooltip-default" type="button"><i class="ri-information-line"></i></button>
+
                                 </label>
+                            </div>
+                            <div id="tooltip-default" role="tooltip" class="absolute max-w-xs z-10 invisible inline-block px-3 mr-3 py-2 text-sm font-medium text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm  rounded-lg shadow-sm opacity-0 tooltip">
+                                <p class="text-base text-center my-2">Info</p>
+                                <ul class="max-w-xl text-xs">
+                                    <li class="mb-1">• Ensure that the content you create for the blog is original and does not directly replicate or closely mimic existing copyrighted material.</li>
+                                    <li class="mb-1">• Do not copy and paste the entire content from word,docx or any other file as it can result in formatting issues.</li>
+                                    <li class="mb-1">• If using content from the public domain, confirm its public domain status and provide appropriate acknowledgment.</li>
+                                    <li class="mb-1">• Steer clear of copying and pasting content from other sources without proper attribution. Plagiarism is both unethical and against our content guidelines.</li>  
+                                </ul>  
+                                  
+                                <div class="tooltip-arrow" data-popper-arrow></div>
                             </div>
                         </div>
                         <!-- End Col -->
 
                         <div class="sm:col-span-9">
                             <div>
-                                <textarea required autocomplete="off" name="content" id="editor1"></textarea>
+                                <textarea name="content" id="editor1"></textarea>
                             </div>
                         </div>
                         <!-- End Col -->
@@ -115,14 +127,19 @@
         </div>
         <!-- End Card Section -->
 
-
-        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-
+        <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
         <script>
             CKEDITOR.replace('editor1', {
                 extraPlugins: 'image',
                 height: 400,
+                uiColor: '#FCFCFC',
+                allowedContent :
+    'h1 h2 h3 p blockquote strong em;' +
+    'a[!href];' +
+    'img(left,right)[!src,alt];'
             });
         </script>
 
-    </body>
+
+<%- include("partial/footer") -%>
+
