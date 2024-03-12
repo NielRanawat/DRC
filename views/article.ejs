@@ -224,22 +224,24 @@
   
           <div class="space-y-6">
             <!-- Media -->
-            <% catPost.forEach((post) => { %>
-                <a class="group flex items-center gap-x-6" href="/article/<%= post._id %>">
-                    <div class="grow">
-                      <span class="text-sm text-justify font-bold text-gray-800 group-hover:text-blue-600 null:text-gray-200 null:group-hover:text-blue-500">
-                        <%= post.title %>
-                      </span>
-                    </div>
-        
-                    <div class="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-                      <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="<%= post.img_url %>" alt="image">
-                    </div>
-                  </a>
-            <% }) %>
+            <% if (catPost.length > 0) { %>
+                <% catPost.forEach((post) => { %>
+                    <a class="group flex items-center gap-x-6" href="/article/<%= post._id %>">
+                        <div class="grow">
+                          <span class="text-sm text-justify font-bold text-gray-800 group-hover:text-white null:text-gray-200 null:group-hover:text-blue-500">
+                            <%= post.title %>
+                          </span>
+                        </div>
             
-            <!-- End Media -->
-
+                        <div class="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
+                          <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="<%= post.img_url %>" alt="image">
+                        </div>
+                      </a>
+                <% }) %>
+            <% } else { %>
+                <h2 class="my-3 text-xl">Oops! No news found.</h2>
+            <% } %>
+            
           </div>
         </div>
       </div>
@@ -378,12 +380,17 @@
             const h3Elements = document.querySelectorAll('#dynamicContent h3');
             const strongElements = document.querySelectorAll('#dynamicContent strong');
             const ulElements = document.querySelectorAll('#dynamicContent ul');
+            const captionElements = document.querySelectorAll('#dynamicContent caption')
 
 ulElements.forEach(ul => {
     ul.style = '';
 
     ul.classList.add('list-disc', 'ml-3');
 });
+captionElements.forEach(caption => {
+    caption.style = '';
+    caption.classList.add('caption-bottom' ,'text-sm', 'mt-2')
+})
             strongElements.forEach(strong => {
                 strong.classList.add('my-3', 'text-justify', 'text-xl', 'md:text-2xl');
             });
@@ -425,8 +432,9 @@ ulElements.forEach(ul => {
 
             tableElements.forEach(table => {
                 table.style=''
+                table.align=''
                 // Add classes to the table
-                table.classList.add("my-4", "border", "border-gray-200", "border-collapse");
+                table.classList.add("my-5", "border", "border-gray-200", "border-collapse");
 
                 // You can also apply styles to th and td elements inside the table
                 const thElements = table.querySelectorAll('th');
@@ -434,13 +442,20 @@ ulElements.forEach(ul => {
 
                 thElements.forEach(th => {
                     // Add classes to th elements
-                    th.classList.add("border", "border-gray-200", "p-3");
+                    th.style=''
+
+                    th.classList.add("border", "border-gray-300", "p-4",'text-sm');
                 });
 
                 tdElements.forEach(td => {
                     // Add classes to td elements
-                    td.classList.add("border", "border-gray-200", "p-2");
+                    td.style=''
+                    td.classList.add("border", "border-gray-300", "p-3" , 'text-sm');
                 });
+                const firstTr = table.querySelector('tr:first-child');
+    if (firstTr) {
+        firstTr.classList.add('font-semibold', 'bg-gray-200' , 'text-sm');
+    }
             });
 
 
