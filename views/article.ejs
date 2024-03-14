@@ -29,6 +29,41 @@
         }
 
     </script>
+    <script>
+        let text = 'https://<%- domain %>/article/<%- foundPost._id %>';
+        let textTitle = `<%- foundPost.title %>`
+
+
+        const copyContent = async () => {
+            try {
+                await navigator.clipboard.writeText(text);
+                document.getElementById('copied').innerHTML = "Copied!"
+                setTimeout(() => {
+                    document.getElementById('copied').innerHTML = "Copy Link"
+                }, 3000);
+            } catch (err) {
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const shareButton = document.getElementById('shareButton');
+    shareButton.addEventListener('click', () => {
+        const shareUrl = text;
+        // Create the WhatsApp share URL
+        const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareUrl)}`;
+        // Open WhatsApp with the share URL
+        window.location.href = whatsappUrl;
+    });
+});
+
+
+        async function sharePage() {
+            const url = text;
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle + "\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
+            return false;
+        };
+
+    </script>
 </head>
 
 
@@ -226,17 +261,22 @@
             <!-- Media -->
             <% if (catPost.length > 0) { %>
                 <% catPost.forEach((post) => { %>
-                    <a class="group flex items-center gap-x-6" href="/article/<%= post._id %>">
-                        <div class="grow">
-                          <span class="text-sm text-justify font-bold text-gray-800 group-hover:text-white null:text-gray-200 null:group-hover:text-blue-500">
-                            <%= post.title %>
-                          </span>
-                        </div>
-            
-                        <div class="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-                          <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="<%= post.img_url %>" alt="image">
-                        </div>
-                      </a>
+                    <% if((post._id).toString() == (foundPost._id).toString()){ %>
+                        <% return; %>
+                        
+                    <% } else { %>
+                        <a class="group flex items-center gap-x-6" href="/article/<%= post._id %>">
+                            <div class="grow">
+                              <span class="text-sm text-justify font-bold text-gray-800 group-hover:text-white null:text-gray-200 null:group-hover:text-blue-500">
+                                <%= post.title %>
+                              </span>
+                            </div>
+                
+                            <div class="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
+                              <img class="size-full absolute top-0 start-0 object-cover rounded-lg" src="<%= post.img_url %>" alt="image">
+                            </div>
+                          </a>
+                    <% } %>
                 <% }) %>
             <% } else { %>
                 <h2 class="my-3 text-xl">Oops! No news found.</h2>
@@ -339,36 +379,7 @@
         </script>
 
 
-        <script>
-            let text = 'https://<%- domain %>/article/<%- foundPost._id %>';
-            let textTitle = '<%- foundPost.title %>'
-
-            const shareButton = document.getElementById('shareButton');
-            shareButton.addEventListener('click', () => {
-                const shareUrl = text;
-                // Create the WhatsApp share URL
-                const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(shareUrl)}`;
-                // Open WhatsApp with the share URL
-                window.location.href = whatsappUrl;
-            });
-
-            function sharePage() {
-                const url = text;
-                window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(textTitle + "\n\nCheck out this interesting article from DesiRacingCo!") + '%0A&url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=600');
-                return false;
-            };
-
-            const copyContent = async () => {
-                try {
-                    await navigator.clipboard.writeText(text);
-                    document.getElementById('copied').innerHTML = "Copied!"
-                    setTimeout(() => {
-                        document.getElementById('copied').innerHTML = "Copy Link"
-                    }, 3000);
-                } catch (err) {
-                }
-            }
-        </script>
+        
 
         <script>
             // Get all img elements inside the dynamicContent div
@@ -381,7 +392,14 @@
             const strongElements = document.querySelectorAll('#dynamicContent strong');
             const ulElements = document.querySelectorAll('#dynamicContent ul');
             const captionElements = document.querySelectorAll('#dynamicContent caption')
+            const blockQuoteElements = document.querySelectorAll('#dynamicContent blockquote')
 
+
+            blockQuoteElements.forEach(block => {
+    block.style = '';
+
+    block.classList.add('p-5','my-6' , 'border-s-4', 'border-gray-300', 'bg-gray-50');
+});
 ulElements.forEach(ul => {
     ul.style = '';
 

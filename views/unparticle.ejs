@@ -102,28 +102,73 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
                 const imgElements = document.querySelectorAll('#dynamicContent img');
                 const pElements = document.querySelectorAll('#dynamicContent p');
                 const aElements = document.querySelectorAll('#dynamicContent a');
+                const h1Elements = document.querySelectorAll('#dynamicContent h1');
+                const h2Elements = document.querySelectorAll('#dynamicContent h2');
+                const h3Elements = document.querySelectorAll('#dynamicContent h3');
+                const strongElements = document.querySelectorAll('#dynamicContent strong');
+                const ulElements = document.querySelectorAll('#dynamicContent ul');
+                const captionElements = document.querySelectorAll('#dynamicContent caption')
+                const blockQuoteElements = document.querySelectorAll('#dynamicContent blockquote')
+    
+    
+                blockQuoteElements.forEach(block => {
+        block.style = '';
+    
+        block.classList.add('p-5','my-6' , 'border-s-4', 'border-gray-300', 'bg-gray-50');
+    });
+    ulElements.forEach(ul => {
+        ul.style = '';
+    
+        ul.classList.add('list-disc', 'ml-3');
+    });
+    captionElements.forEach(caption => {
+        caption.style = '';
+        caption.classList.add('caption-bottom' ,'text-sm', 'mt-2')
+    })
+                strongElements.forEach(strong => {
+                    strong.classList.add('my-3', 'text-justify', 'text-xl', 'md:text-2xl');
+                });
+    
+                h1Elements.forEach(h1 => {
+                    h1.classList.add('my-1', 'text-justify', 'text-xl', 'md:text-2xl');
+                });
+    
+                h2Elements.forEach(h2 => {
+                    h2.classList.add('my-1', 'text-justify', 'text-xl', 'md:text-2xl');
+                });
+    
+                h3Elements.forEach(h3 => {
+                    h3.classList.add('my-1', 'text-justify', 'text-xl', 'md:text-2xl');
+                });
     
                 pElements.forEach(p => {
-                    p.classList.add('my-4', 'text-justify');
+                    if (p.innerHTML.trim() === '&nbsp;') {
+            p.remove();
+        } else {
+            p.classList.add('my-3','md:my-4' ,'text-justify', 'text-[18px]', 'md:text-lg');
+    
+        }
                 });
                 // Loop through each img element and add Tailwind CSS classes
                 imgElements.forEach(img => {
                     img.style = '';
-                    img.classList.add('rounded-xl', 'w-[28rem]', 'md:w-[40.5rem]', 'mt-3', 'mb-6');
+                    img.classList.add('rounded-xl', 'w-[28rem]', 'md:w-[40.5rem]', 'my-5' ,'shadow-md');
                     img.setAttribute('onerror', 'replaceWithDivPlaceholder(this)');
     
                 });
     
                 aElements.forEach(a => {
-                    a.classList.add('hover:underline', 'text-blue-500');
+                    a.classList.add('hover:underline', 'text-blue-600');
                 });
     
                 // Assuming you have an array of table elements
                 const tableElements = document.querySelectorAll('table');
     
                 tableElements.forEach(table => {
+                    table.style=''
+                    table.align=''
                     // Add classes to the table
-                    table.classList.add("my-4", "border", "border-gray-200", "border-collapse");
+                    table.classList.add("my-5", "border", "border-gray-200", "border-collapse");
     
                     // You can also apply styles to th and td elements inside the table
                     const thElements = table.querySelectorAll('th');
@@ -131,13 +176,20 @@ https://cdn.jsdelivr.net/npm/flowbite@2.2.1/dist/flowbite.min.js
     
                     thElements.forEach(th => {
                         // Add classes to th elements
-                        th.classList.add("border", "border-gray-200", "p-3");
+                        th.style=''
+    
+                        th.classList.add("border", "border-gray-300", "p-4",'text-sm');
                     });
     
                     tdElements.forEach(td => {
                         // Add classes to td elements
-                        td.classList.add("border", "border-gray-200", "p-2");
+                        td.style=''
+                        td.classList.add("border", "border-gray-300", "p-3" , 'text-sm');
                     });
+                    const firstTr = table.querySelector('tr:first-child');
+        if (firstTr) {
+            firstTr.classList.add('font-semibold', 'bg-gray-200' , 'text-sm');
+        }
                 });
     
     
